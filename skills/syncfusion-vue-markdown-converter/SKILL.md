@@ -3,7 +3,7 @@ name: syncfusion-vue-markdown-converter
 description: Implement the Syncfusion Vue Markdown Converter to convert Markdown text into clean HTML. Use this when converting Markdown to HTML in Vue, integrating a live Markdown preview, configuring GFM or line break options, or working with MarkdownConverter.toHtml() and MarkdownConverterOptions. This skill covers the @syncfusion/ej2-markdown-converter package and Markdown Editor integration with side-by-side HTML preview.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
   category: "File Viewers & Editors"
 ---
 

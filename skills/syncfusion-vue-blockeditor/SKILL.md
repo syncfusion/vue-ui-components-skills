@@ -3,7 +3,7 @@ name: syncfusion-vue-blockeditor
 description: Implement Syncfusion Vue BlockEditor component for block-based content editing with rich text, images, tables, and interactive blocks. Use this skill ALWAYS when user needs block editor, notion-style editor, content blocks, rich text blocks, document editor with blocks, modular content editor, or mentions @syncfusion/ej2-vue-blockeditor, BlockEditor, block-based editing, content management editor. Covers all 14 block types, 5 content types, drag-and-drop, menus, methods, events, and Composition API patterns.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Syncfusion Vue BlockEditor Component

@@ -18,16 +18,28 @@ Syncfusion provides a comprehensive icon library with pre-designed, font-based i
 
 ### Using npm
 
-Install the icon package:
+You can install either the icons package or the theme package:
 
 ```bash
 npm install @syncfusion/ej2-icons@latest
+
+/* or */
+
+npm install @syncfusion/ej2-material3-theme@latest
 ```
 
 Import icon styles in your Vue component:
 
 ```vue
+/* src/App.css */
+/* Syncfusion theme package icon styles */
 <style>
+@import "../node_modules/@syncfusion/ej2-material3-theme/styles/icons/material3.css";
+</style>
+
+/* or */
+<style>
+/* Syncfusion components package icon styles */
 @import "../node_modules/@syncfusion/ej2-icons/styles/material3.css";
 </style>
 ```
@@ -87,10 +99,11 @@ export default {
 </script>
 
 <style>
-@import '@syncfusion/ej2-material3-theme/material3.css';
-@import '@syncfusion/ej2-icons/styles/material3.css';
+@import '@syncfusion/ej2-material3-theme/styles/button/index.css';
 </style>
 ```
+
+> All components have dependencies on the base. Therefore, when you reference the index file for any component, the base and all dependent styles, including icon styles, are automatically included.
 
 ### Custom Icon Font-Size
 

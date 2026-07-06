@@ -3,7 +3,7 @@ name: syncfusion-vue-ribbon
 description: Implement the Syncfusion Vue Ribbon component for creating Office-style command interfaces with tabs, groups, and items. ALWAYS use this skill when user mentions: ribbon control, ribbon UI, Office-style interface, command bar with tabs, tabbed toolbar, ribbon menu, grouped commands, MS Office interface, ribbon navigation, ribbon items (buttons, dropdowns, galleries), file menu, backstage view, contextual tabs, ribbon layouts (classic/simplified), collapsible groups, ribbon gallery, or needs Office-like application UI immediately.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Syncfusion Vue Ribbon Component

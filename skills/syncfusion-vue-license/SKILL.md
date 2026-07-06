@@ -3,7 +3,7 @@ name: syncfusion-vue-license
 description: Use this skill when the user asks about Syncfusion Vue licensing, license keys, license registration, license validation errors, trial licenses, or license troubleshooting. This skill provides comprehensive guidance on generating, registering, and managing Syncfusion license keys for Vue applications, including edition-based and platform-based licensing models, registration methods, CI/CD integration, and resolving common licensing errors.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
   category: "Licensing"
 ---
 

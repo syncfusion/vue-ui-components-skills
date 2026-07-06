@@ -3,7 +3,7 @@ name: syncfusion-vue-common
 description: Common utilities and features for Syncfusion Vue components. Use this skill when the user needs to implement animations, drag-and-drop, state persistence, RTL support, localization, globalization, security, templates, and advanced features for Syncfusion Vue components.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
   category: "Common Features"
 ---
 
@@ -57,14 +57,14 @@ Syncfusion Vue components include comprehensive common utilities and features th
 
 ## Quick Start
 
-### Install Syncfusion Vue Package
+### Install Syncfusion Vue component package and theme package
 
 ```bash
 # Install a Syncfusion component package
-npm install @syncfusion/ej2-vue-calendars@latest --save
+npm install @syncfusion/ej2-vue-calendars@latest @syncfusion/ej2-material-theme@latest --save
 
 # Install multiple packages
-npm install @syncfusion/ej2-vue-grids@latest @syncfusion/ej2-vue-charts@latest --save
+npm install @syncfusion/ej2-vue-grids@latest @syncfusion/ej2-vue-charts@latest @syncfusion/ej2-material-theme@latest --save
 ```
 
 > **Note:** The `@syncfusion/ej2-base` package is a dependency for all Syncfusion components and will be automatically installed when you install any Syncfusion Vue package. You don't need to explicitly add it to your `package.json` file.
@@ -119,8 +119,7 @@ provide('grid', [Page]);
 
 <style>
 /* Import theme CSS */
-@import "../node_modules/@syncfusion/ej2-base/styles/material.css";
-@import "../node_modules/@syncfusion/ej2-vue-grids/styles/material.css";
+@import "../node_modules/@syncfusion/ej2-material-theme/styles/grid/index.css";
 </style>
 ```
 

@@ -3,7 +3,7 @@ name: syncfusion-vue-diagram
 description: Implement interactive diagrams, flowcharts, BPMN, UML, and organizational charts using Syncfusion Vue Diagram. Use this when working with diagram components, including nodes, connectors, shapes, layouts, ports, labels, symbol palettes, serialization, and export. Covers BPMN workflows, UML diagrams, swimlanes, and data visualization flows.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
   category: "Data Visualization"
 ---
 

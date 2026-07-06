@@ -3,7 +3,7 @@ name: syncfusion-vue-kanban
 description: "Implements the Syncfusion Vue Kanban component for column-based task board UIs with drag-and-drop, swimlanes, WIP constraints, and virtual scrolling. Use this when building sprint boards, kanban boards, workflow trackers, or any column-based task management UI. Covers data binding (local and remote), cards, columns, dialog, events, and accessibility."
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
   category: "Data Visualization"
 ---
 

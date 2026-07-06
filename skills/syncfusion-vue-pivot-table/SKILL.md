@@ -3,7 +3,7 @@ name: syncfusion-vue-pivot-table
 description: Use this skill when users ask how to implement Syncfusion PivotView pivot tables in Vue. Trigger for Vue pivot grid/OLAP analysis, measures/dimensions, data binding, drill-down/drill-through, grouping, filtering, calculated fields, conditional formatting, exports, or pivot charts. Vue-only, not React/Angular/Blazor.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
   category: "Grids"
 ---
 

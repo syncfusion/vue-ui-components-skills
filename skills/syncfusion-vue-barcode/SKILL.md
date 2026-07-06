@@ -3,7 +3,7 @@ name: syncfusion-vue-barcode
 description: Create and customize barcode, QR code, and Data Matrix components using Syncfusion Vue Barcode Generator. Use this skill when implementing barcode generation, QR code creation, Data Matrix codes, export functionality, and barcode styling. Covers Syncfusion's BarcodeGenerator, QRCodeGenerator, and DataMatrixGenerator components for Vue applications (Composition API and Options API).
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
   category: "Data Visualization"
 ---
 

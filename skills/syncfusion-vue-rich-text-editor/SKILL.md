@@ -3,7 +3,7 @@ name: syncfusion-vue-rich-text-editor
 description: "Implements the Syncfusion Vue Rich Text Editor (ejs-richtexteditor) supporting both HTML (WYSIWYG) and Markdown editing modes via the editorMode API from @syncfusion/ej2-vue-richtexteditor. Use this skill for toolbar customization, image upload, paste cleanup, inline editing, AI assistant integration, slash menu, emoji picker, and mention support in Vue applications."
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
   category: "File Viewers & Editors"
 ---
 

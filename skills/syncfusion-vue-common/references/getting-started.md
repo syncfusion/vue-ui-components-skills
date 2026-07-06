@@ -22,7 +22,7 @@ The **Composition API** is the modern approach for Vue 3 applications, using `<s
 #### Step 2: Install Syncfusion Package
 
 ```bash
-npm install @syncfusion/ej2-vue-grids@latest --save
+npm install @syncfusion/ej2-vue-grids@latest @syncfusion/ej2-material3-theme@latest --save
 ```
 
 #### Step 3: Import and Use Component
@@ -55,15 +55,7 @@ const data = [
 </script>
 
 <style>
-@import "../node_modules/@syncfusion/ej2-base/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-buttons/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-calendars/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-dropdowns/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-inputs/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-navigations/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-popups/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-splitbuttons/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-vue-grids/styles/material3.css";
+@import "../node_modules/@syncfusion/ej2-material3-theme/styles/grid/index.css";
 </style>
 ```
 ---
@@ -108,8 +100,7 @@ export default {
 </script>
 
 <style>
-@import "../node_modules/@syncfusion/ej2-base/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-vue-grids/styles/material3.css";
+@import "../node_modules/@syncfusion/ej2-material3-theme/styles/grid/index.css";
 </style>
 ```
 
@@ -124,7 +115,7 @@ export default {
 #### Step 2: Install Syncfusion Package
 
 ```bash
-npm install @syncfusion/ej2-vue-grids@latest --save
+npm install @syncfusion/ej2-vue-grids@latest @syncfusion/ej2-material3-theme@latest --save
 ```
 
 #### Step 3: Component Usage
@@ -163,8 +154,7 @@ export default {
 </script>
 
 <style>
-@import "~@syncfusion/ej2-base/styles/material.css";
-@import "~@syncfusion/ej2-vue-grids/styles/material.css";
+@import "~@syncfusion/ej2-material3-theme/styles/grid/index.css";
 </style>
 ```
 
@@ -184,8 +174,7 @@ npm install sass sass-loader --save-dev
 
 ```vue
 <style lang="scss">
-@import "~@syncfusion/ej2-base/styles/material.scss";
-@import "~@syncfusion/ej2-vue-grids/styles/material.scss";
+@use "~@syncfusion/ej2-material3-theme/styles/grid/index.scss" as *;
 
 /* Custom SCSS variables */
 $primary-color: #3f51b5;
@@ -207,7 +196,7 @@ Nuxt 3 is a powerful meta-framework for Vue 3 with server-side rendering (SSR) s
 ### Step 2: Install Syncfusion Package
 
 ```bash
-npm install @syncfusion/ej2-vue-grids --save
+npm install @syncfusion/ej2-vue-grids @syncfusion/ej2-material3-theme@latest --save
 ```
 
 ### Step 3: Configure Transpilation
@@ -250,9 +239,7 @@ const data = [
 </script>
 
 <style>
-@import "./node_modules/@syncfusion/ej2-base/styles/material3.css";
-@import "./node_modules/@syncfusion/ej2-buttons/styles/material3.css";
-@import "./node_modules/@syncfusion/ej2-vue-grids/styles/material3.css";
+@import "./node_modules/@syncfusion/ej2-material3-theme/styles/grid/index.css";
 </style>
 ```
 
@@ -267,7 +254,7 @@ Quasar is a Vue-based framework for building responsive applications.
 ### Step 2: Install Syncfusion Package
 
 ```bash
-npm install @syncfusion/ej2-vue-grids --save
+npm install @syncfusion/ej2-vue-grids @syncfusion/ej2-material3-theme@latest --save
 ```
 
 ### Step 3: Use in Quasar Component
@@ -296,8 +283,7 @@ const data = [
 </script>
 
 <style>
-@import "../node_modules/@syncfusion/ej2-base/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-vue-grids/styles/material3.css";
+@import "../node_modules/@syncfusion/ej2-material3-theme/styles/grid/index.css";
 </style>
 ```
 

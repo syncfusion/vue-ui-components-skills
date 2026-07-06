@@ -3,7 +3,7 @@ name: syncfusion-vue-scheduler
 description: Implement event scheduling, calendar views, and appointment management using Syncfusion Vue Scheduler component. Use this skill when working with calendars, event scheduling, appointment booking systems, resource management, timeline views, recurring events, drag-and-drop event handling, or any scenario involving time-based event visualization and management in Vue applications. Trigger for scheduler implementations, calendar integrations, booking systems, meeting planners, task schedulers, or resource allocation tools.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Syncfusion Vue Scheduler

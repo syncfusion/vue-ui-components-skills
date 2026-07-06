@@ -3,7 +3,7 @@ name: syncfusion-vue-chat-ui
 description: Implement the Syncfusion Vue Chat UI component for Vue chat interfaces, messaging applications, conversational UI, chat widgets, real-time messaging, user-to-user communication, bot integrations, customer support chat, collaborative messaging, instant messaging features, chat rooms, or when user mentions "chat ui", "chat component", "messaging interface", "conversation view", or @syncfusion/ej2-vue-interactive-chat package.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Syncfusion Vue Chat UI Component

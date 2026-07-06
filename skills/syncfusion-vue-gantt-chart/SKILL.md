@@ -3,7 +3,7 @@ name: syncfusion-vue-gantt-chart
 description: "Implement Syncfusion Vue Gantt Chart (@syncfusion/ej2-vue-gantt) for Vue 2 and Vue 3. Use this when building project scheduling interfaces with task timelines, dependencies, and resource management. Covers data binding, task scheduling, columns, filtering, editing, Excel/PDF export, critical path, and resource allocation. Supports ejs-gantt and GanttComponent."
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Implementing Syncfusion Vue Gantt Chart

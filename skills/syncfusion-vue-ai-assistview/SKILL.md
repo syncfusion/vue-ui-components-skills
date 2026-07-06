@@ -3,7 +3,7 @@ name: syncfusion-vue-ai-assistview
 description: Implement the Syncfusion Vue AI AssistView component. Use this skill whenever the user needs to create conversational AI interfaces, chatbots, prompt-response systems, or integrate AI services like OpenAI, Gemini, or Claude into Vue applications. Includes setup, prompt management, suggestions, customization, event handling, templates, markdown responses, and AI service integration.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Syncfusion Vue AI AssistView Component

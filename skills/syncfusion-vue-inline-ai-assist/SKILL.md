@@ -3,7 +3,7 @@ name: syncfusion-vue-inline-ai-assist
 description: Implement the Syncfusion Vue Inline AI Assist component for AI-powered text processing. Use this skill when implementing inline AI assistance, prompt-response interactions, custom command popups, response actions, event handling, or when you need to integrate AI-powered features directly into Vue applications for text editing, summarization, or content manipulation workflows.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Syncfusion Vue Inline AI Assist Component

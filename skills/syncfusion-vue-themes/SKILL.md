@@ -3,7 +3,7 @@ name: syncfusion-vue-themes
 description: Use this skill when users need to apply themes, customize appearance, switch dark mode, use CSS variables, configure icons, or modify visual styling for Syncfusion Vue components. Covers icon library, size modes, and Theme Studio integration.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
   category: "Theming and Appearance"
 ---
 
@@ -58,14 +58,20 @@ Syncfusion Vue components provide comprehensive theming support with modern, cus
 - Font customization across all components
 - Theme Studio for custom theme creation
 
+### Migrating Styles from Component Packages to Theme Packages
+📄 **Read:** [references/migration-styles.md](references/migration-styles.md)
+- Migrate from component packages to theme packages
+- SCSS & CSS Reference migration to theme packages
+- Automatic dependency inclusion via index files
+
 ## Quick Start
 
 ### Install and Apply a Theme
 
-**Step 1: Install Syncfusion Vue Package**
+**Step 1: Install Syncfusion Vue Package and theme package**
 
 ```bash
-npm install @syncfusion/ej2-vue-buttons --save
+npm install @syncfusion/ej2-vue-buttons @syncfusion/ej2-tailwind3-theme@latest --save
 ```
 
 **Step 2: Import Theme CSS**
@@ -74,8 +80,7 @@ npm install @syncfusion/ej2-vue-buttons --save
 
 ```css
 /* src/App.vue - <style> section */
-@import "../node_modules/@syncfusion/ej2-base/styles/tailwind3.css";
-@import "../node_modules/@syncfusion/ej2-buttons/styles/tailwind3.css";
+@import "../node_modules/@syncfusion/ej2-tailwind3-theme/styles/button/index.css";
 ```
 
 **Option 2: Use CDN**
@@ -185,10 +190,11 @@ Or per-component:
 
 ### Pattern 4: Use Optimized CSS for Faster Loading
 
+```css
 ```vue
 <style>
 /* Lite version without bigger mode styles */
-@import "@syncfusion/ej2/tailwind3-lite.css";
+@import "@syncfusion/ej2-tailwind3-theme/styles/tailwind3-lite.css";
 </style>
 ```
 
@@ -196,13 +202,27 @@ Or per-component:
 
 **Install icons package:**
 
+You can install either the icons package or the theme package:
+
 ```bash
-npm install @syncfusion/ej2-icons
+npm install @syncfusion/ej2-icons@latest
+
+/* or */
+
+npm install @syncfusion/ej2-tailwind3-theme@latest
 ```
 
 **Import icon styles:**
 
-```vue
+```css
+/* Syncfusion theme package icon styles */
+<style>
+@import "../node_modules/@syncfusion/ej2-tailwind3-theme/styles/icons/tailwind3.css";
+</style>
+
+/* or */
+
+/* Syncfusion components package icon styles */
 <style>
 @import "../node_modules/@syncfusion/ej2-icons/styles/tailwind3.css";
 </style>

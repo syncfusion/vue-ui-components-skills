@@ -3,7 +3,7 @@ name: syncfusion-vue-speech-to-text
 description: Implement the Syncfusion Vue Speech-to-Text component. Instructions for integrating voice input, real-time transcription, language configuration, programmatic control, event handling, UI customization, browser compatibility, and security considerations for microphone-enabled applications.
 metadata:
   author: "Syncfusion Inc"
-  version: "33.1.44"
+  version: "34.1.29"
 ---
 
 # Syncfusion Vue Speech-to-Text Component
