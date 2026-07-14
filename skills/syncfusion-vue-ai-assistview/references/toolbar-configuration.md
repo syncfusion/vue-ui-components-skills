@@ -9,6 +9,7 @@ Configure toolbars in different areas of the AI AssistView component to control 
 - [ToolbarItemModel Reference](#toolbaritemmodel-reference)
 - [Prompt Toolbar](#prompt-toolbar)
 - [Response Toolbar](#response-toolbar)
+- [Regenerate Responses](#regenerate-responses)
 - [Footer Toolbar](#footer-toolbar)
 - [Complete Examples](#complete-examples)
 - [Best Practices](#best-practices)
@@ -262,6 +263,134 @@ const responseToolbarSettings = {
     }
   ]
 };
+```
+
+## Regenerate Responses
+
+The AI AssistView supports regenerate functionality, allowing users to request alternative AI responses for an existing prompt. The navigation buttons with `previous` and `next` buttons are rendered along with a response counter (e.g., `1 / 3`) allowing users to navigate between all regenerated responses for the prompt.
+
+> The navigation UI appears automatically once more than one response is available for a prompt either re-generated or preloaded using the `regeneratedResponses` property in prompts collection.
+
+### Adding Regenerate Item
+
+You can enable the regenerate button by adding the `e-assist-regenerate` icon to the `items` collection of the `responseToolbarSettings` property.
+
+#### Adding regenerated response
+
+When regenerated, it triggers the `promptRequest` event with the existing prompt, enabling you to call your preferred AI service again and update the response using the `addPromptResponse` method.
+
+```vue
+<template>
+  <div id='container' style="height: 350px; width: 650px; margin: 0 auto;">
+    <br>
+    <ejs-aiassistview id='aiAssistView' :prompts="promptsData" :response-toolbar-settings="responseToolbarSettings" :prompt-request="onPromptRequest" ref="aiassist"></ejs-aiassistview>
+  </div>
+</template>
+
+<script setup>
+import { AIAssistViewComponent as EjsAiassistview } from "@syncfusion/ej2-vue-interactive-chat";
+import { ref } from "vue";
+
+let aiassist = ref(null);
+
+const promptsData = [
+  {
+    prompt: "What is AI?",
+    response: "AI stands for Artificial Intelligence, enabling machines to mimic human intelligence for tasks such as learning, problem-solving, and decision-making."
+  }
+];
+
+const regenerateResponses = [
+  "AI, or Artificial Intelligence, refers to the simulation of human intelligence in machines programmed to think and learn like humans.",
+  "Artificial Intelligence is the development of computer systems capable of performing tasks that typically require human intelligence.",
+  "AI is a branch of computer science focused on building machines that can perform tasks requiring human-like intelligence."
+];
+
+const responseToolbarSettings = {
+  items: [
+    { type: 'Button', iconCss: 'e-icons e-assist-copy', tooltip: 'Copy' },
+    { type: 'Button', iconCss: 'e-icons e-assist-like', tooltip: 'Like' },
+    { type: 'Button', iconCss: 'e-icons e-assist-dislike', tooltip: 'Need Improvement' },
+    { type: 'Button', iconCss: 'e-icons e-assist-regenerate', tooltip: 'Regenerate' }
+  ]
+};
+
+const onPromptRequest = (args) => {
+  setTimeout(() => {
+    const isRegenerate = promptsData.some((p) => p.prompt === args.prompt);
+    const response = isRegenerate
+      ? regenerateResponses[Math.floor(Math.random() * regenerateResponses.length)]
+      : 'For real-time prompt processing, connect the AIAssistView component to your preferred AI service, such as OpenAI or Azure Cognitive Services.';
+    aiassist.value.ej2Instances.addPromptResponse(response);
+  }, 1000);
+};
+</script>
+
+<style>
+@import "../node_modules/@syncfusion/ej2-base/styles/tailwind3.css";
+@import "../node_modules/@syncfusion/ej2-inputs/styles/tailwind3.css";
+@import "../node_modules/@syncfusion/ej2-navigations/styles/tailwind3.css";
+@import "../node_modules/@syncfusion/ej2-notifications/styles/tailwind3.css";
+@import "../node_modules/@syncfusion/ej2-interactive-chat/styles/tailwind3.css";
+</style>
+
+```
+
+### Pre-loading Regenerated Responses
+
+You can use the `regeneratedResponses` property in the `prompts` property collection to pre-load multiple responses for a prompt at the initial render, without requiring the user to trigger the regenerate action. Users can navigate between the pre-loaded responses using the `previous` and `next` buttons in the response navigation UI.
+
+```vue
+<template>
+  <div id='container' style="height: 350px; width: 650px; margin: 0 auto;">
+    <br>
+    <ejs-aiassistview id='aiAssistView' :prompts="promptsData" :response-toolbar-settings="responseToolbarSettings" :prompt-request="onPromptRequest" ref="aiassist"></ejs-aiassistview>
+  </div>
+</template>
+
+<script setup>
+import { AIAssistViewComponent as EjsAiassistview } from "@syncfusion/ej2-vue-interactive-chat";
+import { ref } from "vue";
+
+let aiassist = ref(null);
+
+const promptsData = [
+  {
+    prompt: "What is AI?",
+    response: "AI stands for Artificial Intelligence, enabling machines to mimic human intelligence for tasks such as learning, problem-solving, and decision-making.",
+    regeneratedResponses: [
+      "AI, or Artificial Intelligence, refers to the simulation of human intelligence in machines programmed to think and learn like humans.",
+      "Artificial Intelligence is the development of computer systems capable of performing tasks that typically require human intelligence.",
+      "AI is a branch of computer science focused on building machines that can perform tasks requiring human-like intelligence."
+    ]
+  }
+];
+
+const responseToolbarSettings = {
+  items: [
+    { type: 'Button', iconCss: 'e-icons e-assist-copy', tooltip: 'Copy' },
+    { type: 'Button', iconCss: 'e-icons e-assist-like', tooltip: 'Like' },
+    { type: 'Button', iconCss: 'e-icons e-assist-dislike', tooltip: 'Need Improvement' },
+    { type: 'Button', iconCss: 'e-icons e-assist-regenerate', tooltip: 'Regenerate' }
+  ]
+};
+
+const onPromptRequest = (args) => {
+  setTimeout(() => {
+    let defaultResponse = 'For real-time prompt processing, connect the AIAssistView component to your preferred AI service, such as OpenAI or Azure Cognitive Services.';
+    aiassist.value.ej2Instances.addPromptResponse(defaultResponse);
+  }, 1000);
+};
+</script>
+
+<style>
+@import "../node_modules/@syncfusion/ej2-base/styles/tailwind3.css";
+@import "../node_modules/@syncfusion/ej2-inputs/styles/tailwind3.css";
+@import "../node_modules/@syncfusion/ej2-navigations/styles/tailwind3.css";
+@import "../node_modules/@syncfusion/ej2-notifications/styles/tailwind3.css";
+@import "../node_modules/@syncfusion/ej2-interactive-chat/styles/tailwind3.css";
+</style>
+
 ```
 
 ## Footer Toolbar

@@ -7,7 +7,6 @@
   - [Drag Handle Configuration](#drag-handle-configuration)
 - [Paste Cleanup](#paste-cleanup)
   - [PasteCleanupSettings](#pastecleanupsettings)
-  - [Allowed Styles](#allowed-styles)
   - [Denied Tags](#denied-tags)
   - [Keep Format Options](#keep-format-options)
   - [Plain Text Mode](#plain-text-mode)
@@ -144,7 +143,6 @@ const blockEditor = ref(null);
 const pasteCleanupSettings = ref({
   keepFormat: true,
   deniedTags: ['script', 'style', 'iframe'],
-  allowedStyles: ['color', 'font-weight', 'font-style', 'text-decoration'],
   deniedAttrs: ['class', 'id', 'onclick'],
   plainText: false
 });
@@ -156,56 +154,6 @@ const editorValue = ref([
     content: [
       {
         text: 'Paste formatted content here to see cleanup in action',
-        type: 'Text'
-      }
-    ]
-  }
-]);
-</script>
-```
-
-### Allowed Styles
-
-Specify which inline styles are allowed when pasting:
-
-```vue
-<template>
-  <div>
-    <ejs-blockeditor
-      ref="blockEditor"
-      :value="editorValue"
-      :pasteCleanupSettings="pasteCleanupSettings"
-      :height="500"
-    />
-  </div>
-</template>
-
-<script setup>
-import { ref } from 'vue';
-import { BlockEditorComponent as EjsBlockeditor } from '@syncfusion/ej2-vue-blockeditor';
-
-const blockEditor = ref(null);
-
-const pasteCleanupSettings = ref({
-  keepFormat: true,
-  allowedStyles: [
-    'color',
-    'background-color',
-    'font-weight',
-    'font-style',
-    'text-decoration',
-    'font-size',
-    'font-family'
-  ]
-});
-
-const editorValue = ref([
-  {
-    id: 'block1',
-    type: 'Paragraph',
-    content: [
-      {
-        text: 'Paste content with allowed styles',
         type: 'Text'
       }
     ]
@@ -298,7 +246,6 @@ const keepFormat = ref(true);
 
 const pasteCleanupSettings = ref({
   keepFormat: true,
-  allowedStyles: ['color', 'font-weight', 'font-style']
 });
 
 const editorValue = ref([
@@ -813,7 +760,6 @@ const dragEnabled = ref(true);
 const pasteCleanupSettings = ref({
   keepFormat: true,
   deniedTags: ['script', 'style', 'iframe', 'object'],
-  allowedStyles: ['color', 'font-weight', 'font-style', 'text-decoration', 'background-color'],
   deniedAttrs: ['onclick', 'onload', 'onerror'],
   plainText: false
 });

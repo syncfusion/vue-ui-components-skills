@@ -1,6 +1,6 @@
 ---
 name: syncfusion-vue-ai-assistview
-description: Implement the Syncfusion Vue AI AssistView component. Use this skill whenever the user needs to create conversational AI interfaces, chatbots, prompt-response systems, or integrate AI services like OpenAI, Gemini, or Claude into Vue applications. Includes setup, prompt management, suggestions, customization, event handling, templates, markdown responses, and AI service integration.
+description: Implement the Syncfusion Vue AI AssistView component. Use this skill whenever the user needs to create conversational AI interfaces, chatbots, prompt-response systems, or integrate AI services like OpenAI, Gemini, or Claude into Vue applications. Includes setup, prompt management, suggestions, customization, event handling, templates, markdown responses, AI service integration, chain of thoughts visualization, generative UI with dynamic tools, text-to-speech audio conversion.
 metadata:
   author: "Syncfusion Inc"
   version: "34.1.29"
@@ -87,6 +87,26 @@ Choose the reference that matches your task:
 - Setting up multiple views with `views` property
 - Advanced template patterns and best practices
 
+### Chain of Thoughts & Reasoning Blocks
+📄 **Read:** [references/chain-of-thoughts.md](references/chain-of-thoughts.md)
+- Enabling thinking blocks with `AssistThinking` module
+- Visualizing AI reasoning process with thinking blocks
+- Configuring stages with status indicators (completed, inprogress, failed)
+- Adding inline context items with editable badges
+- Customizing thinking blocks with templates
+- Configuring timeline stage item templates
+- Streaming reasoning blocks in real-time
+
+### Generative UI & Dynamic Components
+📄 **Read:** [references/generative-ui.md](references/generative-ui.md)
+- Registering custom tools with `registerToolUI` method
+- Creating interactive UI components within AI responses
+- Configuring tool templates and handler functions
+- Adding tool blocks to responses via `addPromptResponse`
+- Integrating dynamic gauges, cards, and custom tools
+- Configuring AI service for structured JSON responses
+- Tool props and component interaction patterns
+
 ### Rendering Markdown & Rich Content
 📄 **Read:** [references/markdown-and-responses.md](references/markdown-and-responses.md)
 - Rendering markdown in AI responses
@@ -132,6 +152,15 @@ Choose the reference that matches your task:
 - Browser compatibility and permissions
 - Real-time transcript display
 
+### Text-to-Speech Conversion
+📄 **Read:** [references/text-to-speech.md](references/text-to-speech.md)
+- Enabling audio playback with `e-assist-audio` toolbar item
+- Built-in Text-to-Speech functionality using Web Speech API
+- Customizing speech with `textToSpeechSettings` (language, pitch, rate, volume)
+- Configuring voice selection and language support
+- Browser compatibility and voice availability
+- Handling audio playback controls and status feedback
+
 ### File Attachments
 📄 **Read:** [references/attachments.md](references/attachments.md)
 - Enable file upload with `enableAttachments` property
@@ -139,6 +168,7 @@ Choose the reference that matches your task:
 - File validation (allowedFileTypes, maxFileSize, maximumCount)
 - Attachment events (beforeUpload, uploadSuccess, uploadFailure, removed, click)
 - Working with attached files in prompts
+- Custom attachment templates (attachmentTemplate)
 - Upload security and best practices
 
 ### Multi-View Navigation

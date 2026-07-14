@@ -320,7 +320,7 @@ const imageBlockSettings = ref({
   path: '/images/',
   maxFileSize: 5000000, // 5MB in bytes
   allowedTypes: ['.jpg', '.jpeg', '.png', '.gif', '.webp'],
-  saveFormat: 'Base64', // or 'Blob'
+  saveFormat: 'Blob', // or 'Base64'
   enableResize: true,
   minWidth: '100px',
   minHeight: '100px',

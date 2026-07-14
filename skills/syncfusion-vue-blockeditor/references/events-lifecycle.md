@@ -427,7 +427,6 @@ const blockEditor = ref(null);
 const pasteCleanupSettings = ref({
   keepFormat: true,
   deniedTags: ['script', 'style'],
-  allowedStyles: ['color', 'font-weight', 'font-style']
 });
 
 const editorValue = ref([

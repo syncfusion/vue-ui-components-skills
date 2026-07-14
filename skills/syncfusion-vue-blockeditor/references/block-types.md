@@ -338,7 +338,7 @@ const codeSettings = {
 **BlockType:** `'Image'`
 
 **Properties:**
-- `src` (string, required): Image URL or base64
+- `src` (string, required): Image URL or blob
 - `width` (string | number, optional): Display width
 - `height` (string | number, optional): Display height
 - `altText` (string, optional): Alternative text

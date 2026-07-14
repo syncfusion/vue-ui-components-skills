@@ -6,6 +6,7 @@
 - [Enabling Attachments](#enabling-attachments)
 - [Attachment Settings](#attachment-settings)
 - [File Validation](#file-validation)
+- [Attachment Templates](#attachment-templates)
 - [Upload Configuration](#upload-configuration)
 - [Attachment Events](#attachment-events)
 - [Working with Attached Files](#working-with-attached-files)
@@ -435,6 +436,41 @@ const onPromptRequest = (args) => {
   border-radius: 4px;
 }
 </style>
+```
+## Attachment Templates
+
+### attachmentTemplate Property
+
+Control how attachments appear inside message bubbles after sending.
+
+### Template Example
+
+```vue
+<template>
+  <ejs-aiassistview
+    :enable-attachments="true"
+    :attachment-settings="attachmentSettings"
+  />
+</template>
+
+<script setup>
+import { AIAssistViewComponent as EjsAiassistview } from "@syncfusion/ej2-vue-interactive-chat";
+
+const attachmentTemplate = (context) => {
+  return `
+    <div class="e-attached-file-temp">
+      <div class="attached-file-name">${context.selectedFile.name}</div>
+      <div class="attached-file-type">${context.selectedFile.type}</div>
+    </div>
+  `;
+};
+
+const attachmentSettings = {
+  saveUrl: "https://services.syncfusion.com/js/production/api/FileUploader/Save",
+  removeUrl: "https://services.syncfusion.com/js/production/api/FileUploader/Remove",
+  attachmentTemplate: attachmentTemplate,
+};
+</script>
 ```
 
 ## Upload Configuration

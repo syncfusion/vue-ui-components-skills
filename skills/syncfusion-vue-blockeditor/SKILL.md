@@ -1,6 +1,6 @@
 ---
 name: syncfusion-vue-blockeditor
-description: Implement Syncfusion Vue BlockEditor component for block-based content editing with rich text, images, tables, and interactive blocks. Use this skill ALWAYS when user needs block editor, notion-style editor, content blocks, rich text blocks, document editor with blocks, modular content editor, or mentions @syncfusion/ej2-vue-blockeditor, BlockEditor, block-based editing, content management editor. Covers all 14 block types, 5 content types, drag-and-drop, menus, methods, events, and Composition API patterns.
+description: Implement Syncfusion Vue BlockEditor component for block-based content editing with rich text, images, tables, and interactive blocks. Use this skill ALWAYS when user needs block editor, notion-style editor, content blocks, rich text blocks, document editor with blocks, modular content editor, or mentions @syncfusion/ej2-vue-blockeditor, BlockEditor, block-based editing, content management editor, collaborative editing, real-time collaboration. Covers all 14 block types, 5 content types, drag-and-drop, menus, methods, events, real-time collaborative editing with Yjs support, user presence and remote cursors, version history, and Composition API patterns.
 metadata:
   author: "Syncfusion Inc"
   version: "34.1.29"
@@ -126,13 +126,24 @@ The Vue BlockEditor component provides:
 ### Features & Configuration
 📄 **Read:** [references/features-configuration.md](references/features-configuration.md)
 - Drag and drop: `enableDragAndDrop`
-- Paste cleanup: `pasteCleanupSettings` (allowedStyles, deniedTags, keepFormat, plainText)
+- Paste cleanup: `pasteCleanupSettings` (deniedTags, keepFormat, plainText)
 - Undo/redo: `undoRedoStack` (default: 30)
 - Keyboard shortcuts: `keyConfig` customization
 - Read-only mode: `readOnly`
 - Persistence: `enablePersistence`
 - Custom styling: `cssClass`
 - Height/width: `height`, `width`
+
+### Collaborative Editing
+📄 **Read:** [references/collaborative-editing.md](references/collaborative-editing.md)
+- Real-time collaborative editing with Yjs CRDT framework
+- Yjs providers (y-websocket, y-webrtc, y-indexeddb, Hocuspocus, Liveblocks, PartyKit)
+- `collaborationSettings` configuration (adapter, provider, enableAwareness, versionHistory)
+- User presence and remote cursors with `enableAwareness`
+- User identification with `users` array and `currentUserId`
+- Version history with snapshots, restore, compare, export/import
+- Collaboration-aware undo/redo operations
+- Best practices for development and production deployment
 
 ### Accessibility & Globalization
 📄 **Read:** [references/accessibility-globalization.md](references/accessibility-globalization.md)
