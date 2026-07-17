@@ -40,7 +40,6 @@ const block = {
   blockType: 'Paragraph',
   content: [
     {
-      id: 'content-1',
       contentType: 'Text',
       content: 'This is a paragraph block'
     }

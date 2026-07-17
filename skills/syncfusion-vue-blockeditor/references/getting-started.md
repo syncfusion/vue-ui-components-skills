@@ -95,60 +95,21 @@ The BlockEditor requires CSS imports for the component and its dependencies. Syn
 - **Tailwind** - Tailwind CSS theme
 - **Material 3** - Material Design 3
 
-### Import CSS in Component
+## CSS Imports
 
-Add CSS imports to your component's `<style>` section (recommended approach):
+Install the theme package that matches your application. This example uses `Tailwind 3`:
 
-```vue
-<style>
-@import '../node_modules/@syncfusion/ej2-base/styles/material.css';
-@import '../node_modules/@syncfusion/ej2-popups/styles/material.css';
-@import '../node_modules/@syncfusion/ej2-buttons/styles/material.css';
-@import '../node_modules/@syncfusion/ej2-splitbuttons/styles/material.css';
-@import '../node_modules/@syncfusion/ej2-navigations/styles/material.css';
-@import '../node_modules/@syncfusion/ej2-dropdowns/styles/material.css';
-@import '../node_modules/@syncfusion/ej2-inputs/styles/material.css';
-@import '../node_modules/@syncfusion/ej2-blockeditor/styles/material.css';
-</style>
+```bash
+npm install @syncfusion/ej2-tailwind3-theme
 ```
 
-### Alternative: Global CSS Import
+Add the following stylesheet in `src/App.vue`
 
-Or import in `src/main.js` for global availability:
-
-```javascript
-import { createApp } from 'vue';
-import App from './App.vue';
-
-// Import Syncfusion CSS
-import '@syncfusion/ej2-base/styles/material.css';
-import '@syncfusion/ej2-popups/styles/material.css';
-import '@syncfusion/ej2-buttons/styles/material.css';
-import '@syncfusion/ej2-splitbuttons/styles/material.css';
-import '@syncfusion/ej2-navigations/styles/material.css';
-import '@syncfusion/ej2-dropdowns/styles/material.css';
-import '@syncfusion/ej2-inputs/styles/material.css';
-import '@syncfusion/ej2-blockeditor/styles/material.css';
-
-createApp(App).mount('#app');
+```css
+@import '../node_modules/@syncfusion/ej2-tailwind3-theme/styles/blockeditor/index.css';
 ```
 
-### Using Different Themes
-
-To use a different theme, replace `material` with your preferred theme name:
-
-```vue
-<style>
-@import '../node_modules/@syncfusion/ej2-base/styles/bootstrap5.css';
-@import '../node_modules/@syncfusion/ej2-popups/styles/bootstrap5.css';
-@import '../node_modules/@syncfusion/ej2-buttons/styles/bootstrap5.css';
-@import '../node_modules/@syncfusion/ej2-splitbuttons/styles/bootstrap5.css';
-@import '../node_modules/@syncfusion/ej2-navigations/styles/bootstrap5.css';
-@import '../node_modules/@syncfusion/ej2-dropdowns/styles/bootstrap5.css';
-@import '../node_modules/@syncfusion/ej2-inputs/styles/bootstrap5.css';
-@import '../node_modules/@syncfusion/ej2-blockeditor/styles/bootstrap5.css';
-</style>
-```
+Replace `tailwind3` with your preferred theme name (`material3`, `bootstrap5`, `fabric`, `fluent2`, etc) install the corresponding package, and use the same theme name in the CSS import path.
 
 ## Component Registration
 
@@ -252,7 +213,6 @@ const blocks = [
     properties: { level: 1 },
     content: [
       {
-        id: 'heading-content',
         contentType: ContentType.Text,
         content: 'Welcome to BlockEditor'
       }
@@ -263,7 +223,6 @@ const blocks = [
     blockType: 'Paragraph',
     content: [
       {
-        id: 'intro-content',
         contentType: ContentType.Text,
         content: 'The BlockEditor enables users to create, format, and organize content using various block types. Type / to see available commands.'
       }

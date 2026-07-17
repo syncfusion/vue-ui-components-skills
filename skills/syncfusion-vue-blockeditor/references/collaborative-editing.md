@@ -22,8 +22,18 @@ Before enabling collaboration, install the `yjs` library and a Yjs provider. See
 
 Inject the `Collaboration` module into the Block Editor before use.
 
-```typescript
-BlockEditor.Inject(Collaboration);
+```vue
+<template>
+  <ejs-blockeditor></ejs-blockeditor>
+</template>
+
+<script setup>
+import { BlockEditorComponent as EjsBlockeditor, Collaboration } from '@syncfusion/ej2-vue-blockeditor';
+import { provide } from 'vue';
+
+// Provide required modules to EJ2 BlockEditor via Vue's provide/inject system
+provide('blockeditor', [Collaboration]);
+</script>
 ```
 
 ## Yjs Providers
@@ -74,10 +84,10 @@ Create an adapter that provides the Yjs runtime and the shared fragment to the B
 ```typescript
 import * as Y from 'yjs';
 
-const adapter = new YjsAdapter({
+const adapter: YjsAdapter = {
     yRuntime: Y,
     yXmlFragment: yFragment
-});
+};
 ```
 
 ### Step 3: Configure a Provider
@@ -108,42 +118,72 @@ const provider = new WebrtcProvider('document-room-id', yDoc);
 
 Pass the adapter and provider to the Block Editor through the `collaborationSettings` property.
 
-```html
+```vue
 <template>
-  <div id='container'>
-    <ejs-blockeditor :collaborationSettings="collaborationSettings"></ejs-blockeditor>
-  </div>
+    <ejs-blockeditor  :collaborationSettings="collaborationSettings"></ejs-blockeditor>
 </template>
 
 <script setup>
-import { BlockEditorComponent as EjsBlockeditor } from '@syncfusion/ej2-vue-blockeditor';
+import { BlockEditorComponent as EjsBlockeditor, Collaboration  } from "@syncfusion/ej2-vue-blockeditor";
+import { provide, markRaw } from 'vue';
+import * as Y from 'yjs';
+import { type YjsAdapter } from '@syncfusion/ej2-vue-blockeditor';
+import { WebsocketProvider } from 'y-websocket';
+
+// Create a shared Yjs document for collaborative editing
+const yDoc = new Y.Doc();
+const yFragment = yDoc.getXmlFragment('blockeditor');
+
+// Create adapter that provides Yjs runtime and shared fragment
+const adapter: YjsAdapter = {
+    yRuntime: Y,
+    yXmlFragment: yFragment
+};
+
+// Create WebSocket provider for real-time synchronization
+const provider = new WebsocketProvider(
+    'wss://your-server-url',
+    'document-room-id',
+    yDoc
+);
+provide('blockeditor', [Collaboration]);
 
 const collaborationSettings = {
-    adapter: adapter,
-    provider: provider
+    adapter: markRaw({
+            yRuntime: markRaw(adapter.yRuntime),
+            yXmlFragment: markRaw(adapter.yXmlFragment),
+        }),
+    provider: provider,
+    enableAwareness: true,
 };
+
 </script>
+
 ```
 
 ## User Presence and Remote Cursors
 
 The Block Editor can display remote cursors, text selection overlays, and user details on hover. To enable these user presence features, set `enableAwareness` to `true` in `collaborationSettings` property.
 
-```html
+```vue
 <template>
-  <div id='container'>
-    <ejs-blockeditor :collaborationSettings="collaborationSettings"></ejs-blockeditor>
-  </div>
+  <ejs-blockeditor :collaborationSettings="collaborationSettings"></ejs-blockeditor>
 </template>
 
 <script setup>
-import { BlockEditorComponent as EjsBlockeditor } from '@syncfusion/ej2-vue-blockeditor';
+import { BlockEditorComponent as EjsBlockeditor, Collaboration } from '@syncfusion/ej2-vue-blockeditor';
+import { provide, markRaw } from 'vue';
 
 const collaborationSettings = {
-    adapter: adapter,
+    adapter: markRaw({
+        yRuntime: markRaw(adapter.yRuntime),
+        yXmlFragment: markRaw(adapter.yXmlFragment),
+    }),
     provider: provider,
     enableAwareness: true
 };
+
+provide('blockeditor', [Collaboration]);
 </script>
 ```
 
@@ -159,15 +199,14 @@ The following properties are available when configuring users via the `users` pr
 | `user` | `string` | Display name shown on remote cursors and presence indicators. |
 | `avatarBgColor` | `string` | Hex color used for this user's remote cursor and selection highlight. |
 
-```html
+```vue
 <template>
-  <div id='container'>
-    <ejs-blockeditor :users="users" :currentUserId="currentUserId"></ejs-blockeditor>
-  </div>
+  <ejs-blockeditor :users="users" :currentUserId="currentUserId"></ejs-blockeditor>
 </template>
 
 <script setup>
-import { BlockEditorComponent as EjsBlockeditor } from '@syncfusion/ej2-vue-blockeditor';
+import { BlockEditorComponent as EjsBlockeditor, Collaboration } from '@syncfusion/ej2-vue-blockeditor';
+import { provide } from 'vue';
 
 const users = [{
     id: 'user-1',
@@ -176,6 +215,7 @@ const users = [{
 }];
 
 const currentUserId = 'user-1';
+provide('blockeditor', [Collaboration]);
 </script>
 ```
 
@@ -183,7 +223,7 @@ const currentUserId = 'user-1';
 
 Retrieve all currently connected users.
 
-```html
+```vue
 <template>
   <div id='container'>
     <ejs-blockeditor ref="editor"></ejs-blockeditor>
@@ -216,8 +256,17 @@ Only changes made by the current user are included in that user's undo history. 
 
 Inject the `VersionHistory` module and configure the `versionHistory` property under `collaborationSettings` property.
 
-```typescript
-BlockEditor.Inject(VersionHistory);
+```vue
+<template>
+  <ejs-blockeditor/>
+</template>
+
+<script setup>
+import { BlockEditorComponent as EjsBlockeditor, Collaboration, VersionHistory } from '@syncfusion/ej2-vue-blockeditor';
+import { provide } from 'vue';
+
+provide('blockeditor', [Collaboration, VersionHistory]);
+</script>
 ```
 
 Create a custom storage implementation:
@@ -232,26 +281,31 @@ export class CustomVersionStorage implements IVersionStorage {}
 
 Configure collaboration settings with version history:
 
-```html
+```vue
 <template>
-  <div id='container'>
-    <ejs-blockeditor :collaborationSettings="collaborationSettings"></ejs-blockeditor>
-  </div>
+    <ejs-blockeditor 
+      :collaborationSettings="collaborationSettings"
+    ></ejs-blockeditor>
 </template>
 
 <script setup>
-import { BlockEditorComponent as EjsBlockeditor, VersionHistory } from '@syncfusion/ej2-vue-blockeditor';
+import { BlockEditorComponent as EjsBlockeditor, Collaboration, VersionHistory } from '@syncfusion/ej2-vue-blockeditor';
+import { provide, markRaw } from 'vue';
 
 const myStorage = new CustomVersionStorage(`blockeditor-${uniqueId}`);
 
 const collaborationSettings = {
-    adapter: adapter,
+    adapter: markRaw({
+        yRuntime: markRaw(adapter.yRuntime),
+        yXmlFragment: markRaw(adapter.yXmlFragment),
+    }),
     provider: provider,
     versionHistory: {
         storage: myStorage,
         snapshotInterval: 3000
     }
 };
+provide('blockeditor', [Collaboration, VersionHistory]);
 </script>
 ```
 
@@ -357,15 +411,14 @@ You can respond to version history events through the version history settings.
 
 Triggered when a new snapshot is created.
 
-```html
+```vue
 <template>
-  <div id='container'>
     <ejs-blockeditor :collaborationSettings="collaborationSettings"></ejs-blockeditor>
-  </div>
 </template>
 
 <script setup>
-import { BlockEditorComponent as EjsBlockeditor } from '@syncfusion/ej2-vue-blockeditor';
+import { BlockEditorComponent as EjsBlockeditor, Collaboration, VersionHistory } from '@syncfusion/ej2-vue-blockeditor';
+import { provide } from 'vue';
 
 const collaborationSettings = {
   versionHistory: {
@@ -375,6 +428,7 @@ const collaborationSettings = {
     }
   }
 };
+provide('blockeditor', [Collaboration, VersionHistory]);
 </script>
 ```
 
@@ -382,15 +436,14 @@ const collaborationSettings = {
 
 Triggered when a snapshot is restored.
 
-```html
+```vue
 <template>
-  <div id='container'>
-    <ejs-blockeditor :collaborationSettings="collaborationSettings"></ejs-blockeditor>
-  </div>
+  <ejs-blockeditor :collaborationSettings="collaborationSettings"></ejs-blockeditor>
 </template>
 
 <script setup>
-import { BlockEditorComponent as EjsBlockeditor } from '@syncfusion/ej2-vue-blockeditor';
+import { BlockEditorComponent as EjsBlockeditor, Collaboration, VersionHistory } from '@syncfusion/ej2-vue-blockeditor';
+import { provide } from 'vue';
 
 const collaborationSettings = {
   versionHistory: {
@@ -403,6 +456,7 @@ const collaborationSettings = {
     }
   }
 };
+provide('blockeditor', [Collaboration, VersionHistory]);
 </script>
 ```
 

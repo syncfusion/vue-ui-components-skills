@@ -157,6 +157,12 @@ The Vue BlockEditor component provides:
 
 ## Quick Start Example
 
+Install the theme package that matches your application. This example uses `Tailwind 3`:
+
+```bash
+npm install @syncfusion/ej2-tailwind3-theme
+```
+
 ```vue
 <template>
   <div>
@@ -215,13 +221,6 @@ const onBlockChanged = (args) => {
 </script>
 
 <style>
-@import '../node_modules/@syncfusion/ej2-base/styles/material.css';
-@import '../node_modules/@syncfusion/ej2-popups/styles/material.css';
-@import '../node_modules/@syncfusion/ej2-buttons/styles/material.css';
-@import '../node_modules/@syncfusion/ej2-splitbuttons/styles/material.css';
-@import '../node_modules/@syncfusion/ej2-navigations/styles/material.css';
-@import '../node_modules/@syncfusion/ej2-dropdowns/styles/material.css';
-@import '../node_modules/@syncfusion/ej2-inputs/styles/material.css';
-@import '../node_modules/@syncfusion/ej2-blockeditor/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-tailwind3-theme/styles/blockeditor/index.css';
 </style>
 ```
