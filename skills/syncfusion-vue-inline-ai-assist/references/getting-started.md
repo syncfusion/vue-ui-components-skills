@@ -49,19 +49,17 @@ All these base packages provide styling and functionality support.
 
 ## CSS Theme Imports
 
+To install the material3 theme package, use the following command:
+
+```bash
+npm install @syncfusion/ej2-material3-theme --save
+```
+
 Import the required Syncfusion CSS themes in your component's `<style>` section or globally. The Tailwind3-based Material theme is recommended:
 
 ```vue
 <style>
-@import "../node_modules/@syncfusion/ej2-base/styles/tailwind3.css";
-@import "../node_modules/@syncfusion/ej2-inputs/styles/tailwind3.css";
-@import "../node_modules/@syncfusion/ej2-buttons/styles/tailwind3.css";
-@import "../node_modules/@syncfusion/ej2-navigations/styles/tailwind3.css";
-@import "../node_modules/@syncfusion/ej2-notifications/styles/tailwind3.css";
-@import "../node_modules/@syncfusion/ej2-popups/styles/tailwind3.css";
-@import "../node_modules/@syncfusion/ej2-dropdowns/styles/tailwind3.css";
-@import "../node_modules/@syncfusion/ej2-splitbuttons/styles/tailwind3.css";
-@import "../node_modules/@syncfusion/ej2-interactive-chat/styles/tailwind3.css";
+@import "../node_modules/@syncfusion/ej2-material3-theme/styles/inline-ai-assist/index.css";
 </style>
 ```
 

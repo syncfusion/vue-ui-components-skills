@@ -54,9 +54,7 @@ const onPromptRequest = (args) => {
 </script>
 
 <style>
-@import "../../node_modules/@syncfusion/ej2-base/styles/material3.css";
-@import "../../node_modules/@syncfusion/ej2-inputs/styles/material3.css";
-@import "../../node_modules/@syncfusion/ej2-interactive-chat/styles/material3.css";
+@import "../node_modules/@syncfusion/ej2-material3-theme/styles/ai-assistview/index.css";
 
 .banner-content {
   text-align: center;

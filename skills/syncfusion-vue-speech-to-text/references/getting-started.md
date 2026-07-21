@@ -81,14 +81,17 @@ yarn add @syncfusion/ej2-vue-inputs
 
 You can import themes using CSS or SASS styles from npm packages. This article uses the Material theme applied via CSS styles in the `<style>` section of **src/App.vue**.
 
+To install the material3 theme package, use the following command:
+
+```bash
+npm install @syncfusion/ej2-material3-theme --save
+```
+
 Import the necessary Material CSS styles for the SpeechToText component and its dependencies:
 
 ```vue
 <style>
-    @import '../node_modules/@syncfusion/ej2-base/styles/material.css';
-    @import '../node_modules/@syncfusion/ej2-buttons/styles/material.css';
-    @import '../node_modules/@syncfusion/ej2-popups/styles/material.css';
-    @import '../node_modules/@syncfusion/ej2-inputs/styles/material.css';
+    @import "../node_modules/@syncfusion/ej2-material3-theme/styles/speech-to-text/index.css";
 </style>
 ```
 
@@ -122,10 +125,7 @@ import { SpeechToTextComponent as EjsSpeechtotext } from "@syncfusion/ej2-vue-in
 </script>
 
 <style>
-@import '../node_modules/@syncfusion/ej2-base/styles/material.css';
-@import '../node_modules/@syncfusion/ej2-buttons/styles/material.css';
-@import '../node_modules/@syncfusion/ej2-popups/styles/material.css';
-@import '../node_modules/@syncfusion/ej2-inputs/styles/material.css';
+@import "../node_modules/@syncfusion/ej2-material3-theme/styles/speech-to-text/index.css";
 </style>
 ```
 

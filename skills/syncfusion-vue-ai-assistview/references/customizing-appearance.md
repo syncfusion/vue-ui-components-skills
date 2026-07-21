@@ -173,15 +173,7 @@ const onPromptRequest = (args) => {
 </script>
 
 <style>
-@import "../node_modules/@syncfusion/ej2-base/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-inputs/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-buttons/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-navigations/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-notifications/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-popups/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-dropdowns/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-splitbuttons/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-interactive-chat/styles/material3.css";
+@import "../node_modules/@syncfusion/ej2-material3-theme/styles/ai-assistview/index.css";
 
 .e-icons.e-bullet-4:before {
   font-size: 30px;
@@ -219,15 +211,7 @@ const onPromptRequest = (args) => {
 </script>
 
 <style>
-@import "../node_modules/@syncfusion/ej2-base/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-inputs/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-buttons/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-navigations/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-notifications/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-popups/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-dropdowns/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-splitbuttons/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-interactive-chat/styles/material3.css";
+@import "../node_modules/@syncfusion/ej2-material3-theme/styles/ai-assistview/index.css";
 </style>
 ```
 
@@ -241,15 +225,7 @@ Choose from Syncfusion's built-in themes to match your application's design.
 
 ```vue
 <style>
-@import "../node_modules/@syncfusion/ej2-base/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-inputs/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-buttons/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-navigations/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-notifications/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-popups/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-dropdowns/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-splitbuttons/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-interactive-chat/styles/material3.css";
+@import "../node_modules/@syncfusion/ej2-material3-theme/styles/ai-assistview/index.css";
 </style>
 ```
 
@@ -257,15 +233,7 @@ Choose from Syncfusion's built-in themes to match your application's design.
 
 ```vue
 <style>
-@import "../node_modules/@syncfusion/ej2-base/styles/bootstrap.css";
-@import "../node_modules/@syncfusion/ej2-inputs/styles/bootstrap.css";
-@import "../node_modules/@syncfusion/ej2-buttons/styles/bootstrap.css";
-@import "../node_modules/@syncfusion/ej2-navigations/styles/bootstrap.css";
-@import "../node_modules/@syncfusion/ej2-notifications/styles/bootstrap.css";
-@import "../node_modules/@syncfusion/ej2-popups/styles/bootstrap.css";
-@import "../node_modules/@syncfusion/ej2-dropdowns/styles/bootstrap.css";
-@import "../node_modules/@syncfusion/ej2-splitbuttons/styles/bootstrap.css";
-@import "../node_modules/@syncfusion/ej2-interactive-chat/styles/bootstrap.css";
+@import "../node_modules/@syncfusion/ej2-bootstrap-theme/styles/ai-assistview/index.css";
 </style>
 ```
 
@@ -273,15 +241,7 @@ Choose from Syncfusion's built-in themes to match your application's design.
 
 ```vue
 <style>
-@import "../node_modules/@syncfusion/ej2-base/styles/tailwind3.css";
-@import "../node_modules/@syncfusion/ej2-inputs/styles/tailwind3.css";
-@import "../node_modules/@syncfusion/ej2-buttons/styles/tailwind3.css";
-@import "../node_modules/@syncfusion/ej2-navigations/styles/tailwind3.css";
-@import "../node_modules/@syncfusion/ej2-notifications/styles/tailwind3.css";
-@import "../node_modules/@syncfusion/ej2-popups/styles/tailwind3.css";
-@import "../node_modules/@syncfusion/ej2-dropdowns/styles/tailwind3.css";
-@import "../node_modules/@syncfusion/ej2-splitbuttons/styles/tailwind3.css";
-@import "../node_modules/@syncfusion/ej2-interactive-chat/styles/tailwind3.css";
+@import "../node_modules/@syncfusion/ej2-tailwind3-theme/styles/ai-assistview/index.css";
 </style>
 ```
 
@@ -289,15 +249,7 @@ Choose from Syncfusion's built-in themes to match your application's design.
 
 ```vue
 <style>
-@import "../node_modules/@syncfusion/ej2-base/styles/highcontrast.css";
-@import "../node_modules/@syncfusion/ej2-inputs/styles/highcontrast.css";
-@import "../node_modules/@syncfusion/ej2-buttons/styles/highcontrast.css";
-@import "../node_modules/@syncfusion/ej2-navigations/styles/highcontrast.css";
-@import "../node_modules/@syncfusion/ej2-notifications/styles/highcontrast.css";
-@import "../node_modules/@syncfusion/ej2-popups/styles/highcontrast.css";
-@import "../node_modules/@syncfusion/ej2-dropdowns/styles/highcontrast.css";
-@import "../node_modules/@syncfusion/ej2-splitbuttons/styles/highcontrast.css";
-@import "../node_modules/@syncfusion/ej2-interactive-chat/styles/highcontrast.css";
+@import "../node_modules/@syncfusion/ej2-highcontrast-theme/styles/ai-assistview/index.css";
 </style>
 ```
 
@@ -315,15 +267,7 @@ Apply custom CSS to further customize the component's appearance.
 </template>
 
 <style>
-@import "../node_modules/@syncfusion/ej2-base/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-inputs/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-buttons/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-navigations/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-notifications/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-popups/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-dropdowns/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-splitbuttons/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-interactive-chat/styles/material3.css";
+@import "../node_modules/@syncfusion/ej2-material3-theme/styles/ai-assistview/index.css";
 
 .custom-aiassist .e-aiassist-container {
   background-color: #f5f5f5;
@@ -387,15 +331,7 @@ Use consistent avatars and theming throughout your application:
 </template>
 
 <style>
-@import "../node_modules/@syncfusion/ej2-base/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-inputs/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-buttons/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-navigations/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-notifications/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-popups/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-dropdowns/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-splitbuttons/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-interactive-chat/styles/material3.css";
+@import "../node_modules/@syncfusion/ej2-material3-theme/styles/ai-assistview/index.css";
 </style>
 ```
 
@@ -403,7 +339,7 @@ Use consistent avatars and theming throughout your application:
 Use high-contrast themes for better readability:
 ```vue
 <style>
-@import "../node_modules/@syncfusion/ej2-base/styles/highcontrast.css";
+@import "../node_modules/@syncfusion/ej2-highcontrast-theme/styles/ai-assistview/index.css";
 </style>
 ```
 

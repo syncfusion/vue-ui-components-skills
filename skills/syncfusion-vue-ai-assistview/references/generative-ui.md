@@ -463,7 +463,7 @@ Rules:
 
 <style>
 
-@import "../node_modules/@syncfusion/ej2-tailwind3-theme/styles/ai-assistview/index.css";
+@import "../node_modules/@syncfusion/ej2-material3-theme/styles/ai-assistview/index.css";
 
 .generative-aiassistview {
   height: 600px;

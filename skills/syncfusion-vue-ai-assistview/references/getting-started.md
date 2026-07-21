@@ -102,6 +102,12 @@ After installation, check your `package.json` to confirm the package is listed:
 
 ## Importing CSS Styles
 
+To install the material3 theme package, use the following command:
+
+```bash
+npm install @syncfusion/ej2-material3-theme --save
+```
+
 Syncfusion components require CSS styles to render correctly. Add the styles to your main **src/App.vue** file.
 
 ### Available Themes
@@ -119,15 +125,7 @@ Add these imports to the `<style>` section of **src/App.vue**:
 
 ```vue
 <style>
-@import "../node_modules/@syncfusion/ej2-base/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-inputs/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-buttons/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-navigations/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-notifications/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-popups/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-dropdowns/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-splitbuttons/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-interactive-chat/styles/material3.css";
+@import "../node_modules/@syncfusion/ej2-material3-theme/styles/ai-assistview/index.css";
 </style>
 ```
 
@@ -137,15 +135,7 @@ For Bootstrap theme, use:
 
 ```vue
 <style>
-@import "../node_modules/@syncfusion/ej2-base/styles/bootstrap.css";
-@import "../node_modules/@syncfusion/ej2-inputs/styles/bootstrap.css";
-@import "../node_modules/@syncfusion/ej2-buttons/styles/bootstrap.css";
-@import "../node_modules/@syncfusion/ej2-navigations/styles/bootstrap.css";
-@import "../node_modules/@syncfusion/ej2-notifications/styles/bootstrap.css";
-@import "../node_modules/@syncfusion/ej2-popups/styles/bootstrap.css";
-@import "../node_modules/@syncfusion/ej2-dropdowns/styles/bootstrap.css";
-@import "../node_modules/@syncfusion/ej2-splitbuttons/styles/bootstrap.css";
-@import "../node_modules/@syncfusion/ej2-interactive-chat/styles/bootstrap.css";
+@import "../node_modules/@syncfusion/ej2-bootstrap-theme/styles/ai-assistview/index.css";
 </style>
 ```
 
@@ -155,15 +145,7 @@ For Tailwind CSS theme, use:
 
 ```vue
 <style>
-@import "../node_modules/@syncfusion/ej2-base/styles/tailwind3.css";
-@import "../node_modules/@syncfusion/ej2-inputs/styles/tailwind3.css";
-@import "../node_modules/@syncfusion/ej2-buttons/styles/tailwind3.css";
-@import "../node_modules/@syncfusion/ej2-navigations/styles/tailwind3.css";
-@import "../node_modules/@syncfusion/ej2-notifications/styles/tailwind3.css";
-@import "../node_modules/@syncfusion/ej2-popups/styles/tailwind3.css";
-@import "../node_modules/@syncfusion/ej2-dropdowns/styles/tailwind3.css";
-@import "../node_modules/@syncfusion/ej2-splitbuttons/styles/tailwind3.css";
-@import "../node_modules/@syncfusion/ej2-interactive-chat/styles/tailwind3.css";
+@import "../node_modules/@syncfusion/ej2-tailwind3-theme/styles/ai-assistview/index.css";
 </style>
 ```
 
@@ -188,15 +170,7 @@ import { AIAssistViewComponent as EjsAiassistview } from "@syncfusion/ej2-vue-in
 </script>
 
 <style>
-@import "../node_modules/@syncfusion/ej2-base/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-inputs/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-buttons/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-navigations/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-notifications/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-popups/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-dropdowns/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-splitbuttons/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-interactive-chat/styles/material3.css";
+@import "../node_modules/@syncfusion/ej2-material3-theme/styles/ai-assistview/index.css";
 </style>
 ```
 
@@ -265,15 +239,7 @@ const onPromptRequest = (args) => {
 </script>
 
 <style>
-@import "../node_modules/@syncfusion/ej2-base/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-inputs/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-buttons/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-navigations/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-notifications/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-popups/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-dropdowns/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-splitbuttons/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-interactive-chat/styles/material3.css";
+@import "../node_modules/@syncfusion/ej2-material3-theme/styles/ai-assistview/index.css";
 </style>
 ```
 

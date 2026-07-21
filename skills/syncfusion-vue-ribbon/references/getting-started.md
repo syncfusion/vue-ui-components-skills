@@ -23,19 +23,17 @@ yarn add @syncfusion/ej2-vue-ribbon
 
 ## CSS Theme Import
 
+To install the material3 theme package, use the following command:
+
+```bash
+npm install @syncfusion/ej2-material3-theme --save
+```
+
 Import the required CSS files for the Ribbon component and its dependencies. Add these imports to your component's `<style>` section or main CSS file:
 
 ```vue
 <style>
-@import "../node_modules/@syncfusion/ej2-base/styles/material.css";
-@import "../node_modules/@syncfusion/ej2-buttons/styles/material.css";
-@import "../node_modules/@syncfusion/ej2-popups/styles/material.css";
-@import "../node_modules/@syncfusion/ej2-splitbuttons/styles/material.css";
-@import "../node_modules/@syncfusion/ej2-inputs/styles/material.css";
-@import "../node_modules/@syncfusion/ej2-lists/styles/material.css";
-@import "../node_modules/@syncfusion/ej2-dropdowns/styles/material.css";
-@import "../node_modules/@syncfusion/ej2-navigations/styles/material.css";
-@import "../node_modules/@syncfusion/ej2-vue-ribbon/styles/material.css";
+@import "../node_modules/@syncfusion/ej2-material3-theme/styles/ribbon/index.css";
 </style>
 ```
 
@@ -454,15 +452,7 @@ const tableSettings = {
 </script>
 
 <style>
-@import "../node_modules/@syncfusion/ej2-base/styles/material.css";
-@import "../node_modules/@syncfusion/ej2-buttons/styles/material.css";
-@import "../node_modules/@syncfusion/ej2-popups/styles/material.css";
-@import "../node_modules/@syncfusion/ej2-splitbuttons/styles/material.css";
-@import "../node_modules/@syncfusion/ej2-inputs/styles/material.css";
-@import "../node_modules/@syncfusion/ej2-lists/styles/material.css";
-@import "../node_modules/@syncfusion/ej2-dropdowns/styles/material.css";
-@import "../node_modules/@syncfusion/ej2-navigations/styles/material.css";
-@import "../node_modules/@syncfusion/ej2-vue-ribbon/styles/material.css";
+@import "../node_modules/@syncfusion/ej2-material3-theme/styles/ribbon/index.css";
 </style>
 ```
 

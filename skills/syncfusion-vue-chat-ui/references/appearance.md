@@ -278,9 +278,9 @@ const currentTheme = ref('material3');
 const customClass = ref('branded-ui');
 
 const themeMap = {
-  material3: '@syncfusion/ej2-base/styles/material3.css',
-  bootstrap5: '@syncfusion/ej2-base/styles/bootstrap5.css',
-  fluent: '@syncfusion/ej2-base/styles/fluent.css'
+  material3: '@syncfusion/ej2-material3-theme/styles/chat-ui/index.css',
+  bootstrap5: '@syncfusion/ej2-bootstrap5-theme/styles/chat-ui/index.css',
+  fluent: '@syncfusion/ej2-fluent-theme/styles/chat-ui/index.css'
 };
 
 const switchTheme = (theme) => {
@@ -743,8 +743,7 @@ Syncfusion provides multiple built-in themes:
 
 ```vue
 <style>
-@import "@syncfusion/ej2-base/styles/material3.css";
-@import "@syncfusion/ej2-interactive-chat/styles/material3.css";
+@import "../node_modules/@syncfusion/ej2-material3-theme/styles/chat-ui/index.css";
 </style>
 ```
 
@@ -752,8 +751,7 @@ Syncfusion provides multiple built-in themes:
 
 ```vue
 <style>
-@import "@syncfusion/ej2-base/styles/bootstrap5.css";
-@import "@syncfusion/ej2-interactive-chat/styles/bootstrap5.css";
+@import "../node_modules/@syncfusion/ej2-bootstrap5-theme/styles/chat-ui/index.css";
 </style>
 ```
 
@@ -761,8 +759,7 @@ Syncfusion provides multiple built-in themes:
 
 ```vue
 <style>
-@import "@syncfusion/ej2-base/styles/fluent.css";
-@import "@syncfusion/ej2-interactive-chat/styles/fluent.css";
+@import "../node_modules/@syncfusion/ej2-fluent-theme/styles/chat-ui/index.css";
 </style>
 ```
 
@@ -770,8 +767,7 @@ Syncfusion provides multiple built-in themes:
 
 ```vue
 <style>
-@import "@syncfusion/ej2-base/styles/tailwind.css";
-@import "@syncfusion/ej2-interactive-chat/styles/tailwind.css";
+@import "../node_modules/@syncfusion/ej2-tailwind-theme/styles/chat-ui/index.css";
 </style>
 ```
 
@@ -779,8 +775,7 @@ Syncfusion provides multiple built-in themes:
 
 ```vue
 <style>
-@import "@syncfusion/ej2-base/styles/fabric.css";
-@import "@syncfusion/ej2-interactive-chat/styles/fabric.css";
+@import "../node_modules/@syncfusion/ej2-fabric-theme/styles/chat-ui/index.css";
 </style>
 ```
 

@@ -112,15 +112,7 @@ Import a Syncfusion theme:
 <script setup>
 import { RibbonComponent as EjsRibbon } from '@syncfusion/ej2-vue-ribbon';
 // Material theme
-import '@syncfusion/ej2-base/styles/material.css';
-import '@syncfusion/ej2-buttons/styles/material.css';
-import '@syncfusion/ej2-popups/styles/material.css';
-import '@syncfusion/ej2-splitbuttons/styles/material.css';
-import '@syncfusion/ej2-inputs/styles/material.css';
-import '@syncfusion/ej2-lists/styles/material.css';
-import '@syncfusion/ej2-dropdowns/styles/material.css';
-import '@syncfusion/ej2-navigations/styles/material.css';
-import '@syncfusion/ej2-vue-ribbon/styles/material.css';
+import "@syncfusion/ej2-material3-theme/styles/ribbon/index.css";
 </script>
 ```
 
@@ -136,15 +128,7 @@ import '@syncfusion/ej2-vue-ribbon/styles/material.css';
 
 ```javascript
 // Bootstrap 5 theme
-import '@syncfusion/ej2-base/styles/bootstrap5.css';
-import '@syncfusion/ej2-buttons/styles/bootstrap5.css';
-import '@syncfusion/ej2-popups/styles/bootstrap5.css';
-import '@syncfusion/ej2-splitbuttons/styles/bootstrap5.css';
-import '@syncfusion/ej2-inputs/styles/bootstrap5.css';
-import '@syncfusion/ej2-lists/styles/bootstrap5.css';
-import '@syncfusion/ej2-dropdowns/styles/bootstrap5.css';
-import '@syncfusion/ej2-navigations/styles/bootstrap5.css';
-import '@syncfusion/ej2-vue-ribbon/styles/bootstrap5.css';
+import "@syncfusion/ej2-bootstrap5-theme/styles/ribbon/index.css";
 ```
 
 ### Custom Theme Variables
