@@ -1,4 +1,4 @@
-# Classic Layout
+﻿# Classic Layout
 
 ## Table of Contents
 - [Overview](#overview)
@@ -108,7 +108,7 @@ const height = '450px';
 </script>
 
 <style>
-@import "@syncfusion/ej2-vue-pivotview/styles/tailwind3.css";
+@import "@syncfusion/ej2-tailwind3-theme/styles/pivotview/index.css";
 </style>
 ```
 

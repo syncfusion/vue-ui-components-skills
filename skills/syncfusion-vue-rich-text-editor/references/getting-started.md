@@ -8,20 +8,19 @@ npm install @syncfusion/ej2-vue-richtexteditor
 
 ## CSS Imports
 
-Add the following CSS imports in `src/App.vue` (or your main style file). Order matters — base styles must come first.
+Install the theme package that matches your application. This example uses `Tailwind 3`:
 
-```css
-@import '../node_modules/@syncfusion/ej2-base/styles/tailwind3.css';
-@import '../node_modules/@syncfusion/ej2-buttons/styles/tailwind3.css';
-@import '../node_modules/@syncfusion/ej2-splitbuttons/styles/tailwind3.css';
-@import '../node_modules/@syncfusion/ej2-inputs/styles/tailwind3.css';
-@import '../node_modules/@syncfusion/ej2-lists/styles/tailwind3.css';
-@import '../node_modules/@syncfusion/ej2-navigations/styles/tailwind3.css';
-@import '../node_modules/@syncfusion/ej2-popups/styles/tailwind3.css';
-@import '../node_modules/@syncfusion/ej2-richtexteditor/styles/tailwind3.css';
+```bash
+npm install @syncfusion/ej2-tailwind3-theme
 ```
 
-Replace `tailwind3` with your chosen theme: `material`, `bootstrap5`, `fabric`, `fluent2`, etc.
+Add the following stylesheet in `src/App.vue`
+
+```css
+@import '../node_modules/@syncfusion/ej2-tailwind3-theme/styles/rich-text-editor/index.css';
+```
+
+Replace `tailwind3` with your preferred theme name (`material3`, `bootstrap5`, `fabric`, `fluent2`, etc) install the corresponding package, and use the same theme name in the CSS import path.
 
 ## Module Injection Reference
 
@@ -75,14 +74,7 @@ provide('richtexteditor', [Toolbar, Link, Image, HtmlEditor, QuickToolbar]);
 </script>
 
 <style>
-@import '../node_modules/@syncfusion/ej2-base/styles/tailwind3.css';
-@import '../node_modules/@syncfusion/ej2-buttons/styles/tailwind3.css';
-@import '../node_modules/@syncfusion/ej2-splitbuttons/styles/tailwind3.css';
-@import '../node_modules/@syncfusion/ej2-inputs/styles/tailwind3.css';
-@import '../node_modules/@syncfusion/ej2-lists/styles/tailwind3.css';
-@import '../node_modules/@syncfusion/ej2-navigations/styles/tailwind3.css';
-@import '../node_modules/@syncfusion/ej2-popups/styles/tailwind3.css';
-@import '../node_modules/@syncfusion/ej2-richtexteditor/styles/tailwind3.css';
+@import '../node_modules/@syncfusion/ej2-tailwind3-theme/styles/rich-text-editor/index.css';
 </style>
 ```
 

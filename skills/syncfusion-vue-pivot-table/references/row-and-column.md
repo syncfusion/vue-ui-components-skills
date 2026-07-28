@@ -1,4 +1,4 @@
-# Row and Column Configuration
+﻿# Row and Column Configuration
 
 ## Table of Contents
 - [Overview](#overview)
@@ -424,7 +424,7 @@ const cellSelectedHandler = (args) => {
 };
 </script>
 <style>
-@import "../node_modules/@syncfusion/ej2-vue-pivotview/styles/tailwind3.css";
+@import "../node_modules/@syncfusion/ej2-tailwind3-theme/styles/pivotview/index.css";
 .selected-info {
   background-color: #e3f2fd;
   padding: 10px;
@@ -492,7 +492,7 @@ const cellSelectingHandler = (args) => {
 };
 </script>
 <style>
-@import "../node_modules/@syncfusion/ej2-vue-pivotview/styles/tailwind3.css";
+@import "../node_modules/@syncfusion/ej2-tailwind3-theme/styles/pivotview/index.css";
 </style>
 ```
 
@@ -555,7 +555,7 @@ const cellClickHandler = (args) => {
 </script>
 
 <style scoped>
-@import "../node_modules/@syncfusion/ej2-vue-pivotview/styles/tailwind3.css";
+@import "../node_modules/@syncfusion/ej2-tailwind3-theme/styles/pivotview/index.css";
 </style>
 ```
 

@@ -312,6 +312,155 @@ export default {
 </script>
 ```
 
+## Mermaid Syntax Support
+
+Save and load diagrams using Mermaid syntax, a markdown-inspired syntax for creating diagrams automatically:
+
+### Save Diagram as Mermaid
+
+```javascript
+// Returns the serialized Mermaid string of the Diagram
+let mermaidData = diagramInstance.saveDiagramAsMermaid();
+console.log(mermaidData);
+```
+
+**Supported diagram types:**
+- Flowcharts
+- Mind maps
+
+### Load from Mermaid Syntax
+
+Load diagrams from Mermaid syntax strings:
+
+```javascript
+// Flowchart example
+const mermaidFlowchart = `flowchart TD
+  A[Start] --> B{Decision}
+    C -->|Yes| D[Action]
+    C -->|No| E[End]`;
+
+diagramInstance.loadDiagramFromMermaid(mermaidFlowchart);
+
+// Mind map example
+const mermaidMindMap = `mindmap
+  root((Central Node))
+    Branch 1
+      Sub-branch 1.1
+      Sub-branch 1.2
+    Branch 2
+      Sub-branch 2.1`;
+
+diagramInstance.loadDiagramFromMermaid(mermaidMindMap);
+```
+
+**Benefits:**
+- Easy diagram sharing and version control
+- Human-readable format
+- Support for multiple diagram types
+- Compatible with GitHub, GitLab markdown
+
+### Complete Mermaid Example
+
+```vue
+<template>
+    <div id="app">
+        <button v-on:click="saveMermaid">Save</button>
+        <button v-on:click="loadMermaid">Load</button>
+        <ejs-diagram id="diagram" ref="diagramObj" :width="width" :height="height" :layout="layout" :dataSourceSettings='dataSourceSettings' ></ejs-diagram>
+    </div>
+</template>
+
+<script>
+import { DiagramComponent, FlowchartLayout, DataBinding } from '@syncfusion/ej2-vue-diagrams';
+import { DataManager } from '@syncfusion/ej2-data';
+
+var diagramInstance;
+let flowchartData = [
+    { id: 'start', label: 'Start', parentId: '' },
+    { id: 'input', label: 'Input', parentId: 'start' },
+    { id: 'end', label: 'End', parentId: 'input' }
+  ];
+
+export default {
+    name: 'App',
+    components: {
+        'ejs-diagram': DiagramComponent,
+    },
+    data() {
+        return {
+            width: '100%',
+            height: '650px',
+
+            //Sets layout type
+            layout: { type: 'Flowchart' },
+            dataSourceSettings: {
+                dataManager: new DataManager(flowchartData),
+                id: 'id', parentId: 'parentId'
+            }
+        };
+    },
+    methods: {
+
+        saveMermaid() {
+            const mermaidData = diagramInstance.saveDiagramAsMermaid();
+            console.log(mermaidData);
+        },
+        loadMermaid() {
+            const mermaidFlowchartData =  `flowchart TD
+            A[Start] --> B(Process)
+            B --> C{Decision}
+            C -->|Yes| D[Action]
+            C -->|No| E[End]`;
+            // load the mermaid flowchart data to diagram
+            diagramInstance.loadDiagramFromMermaid(mermaidFlowchartData);
+        }
+    },
+    mounted: function () {
+        diagramInstance = this.$refs.diagramObj.ej2Instances;
+    },
+    provide: { diagram: [FlowchartLayout, DataBinding] }
+};
+
+</script>
+<style>
+  @import "../node_modules/@syncfusion/ej2-tailwind3-theme/styles/diagram/index.css";
+</style>
+```
+
+## Detecting Unsaved Changes
+
+The `isModified` property indicates whether the diagram has unsaved changes. It becomes **true** when the diagram changes:
+
+```javascript
+// Check for unsaved changes before closing
+if (diagramInstance.isModified) {
+  const confirmed = confirm('There are unsaved changes. Discard them?');
+  if (!confirmed) {
+    return; // Prevent navigation/close
+  }
+}
+```
+
+**When isModified becomes True:**
+- Nodes or connectors are added/removed/modified
+- Diagram properties are changed
+- Undo or redo operations are performed
+- Any shape or connector styling changes
+
+**When isModified is NOT Affected (Transient Interactions):**
+- Zooming or panning the diagram
+- Selecting or deselecting elements
+- Hovering over elements
+- Temporary interactions
+
+**Use cases:**
+- Show dirty indicator in UI (unsaved changes indicator)
+- Prevent accidental data loss
+- Track user changes for logging/audit
+- Enable/disable save buttons
+
+---
+
 ## EJ1 Migration
 
 ### Convert EJ1 Diagram to EJ2

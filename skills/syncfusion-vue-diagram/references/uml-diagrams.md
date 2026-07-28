@@ -33,7 +33,7 @@ const height = '590px';
 const nodes = ref([]); // Add UML nodes as shown below
 </script>
 <style>
-@import "../node_modules/@syncfusion/ej2-vue-diagrams/styles/material.css";
+  @import "../node_modules/@syncfusion/ej2-tailwind3-theme/styles/diagram/index.css";
 </style>
 ```
 
@@ -295,160 +295,469 @@ const composition = {
 ```
 
 
-## UML Sequence Diagrams (Vue 3)
+## UML Sequence Diagrams
 
-UML Sequence diagrams use a model-based approach. Use the `model` property of the diagram instance.
+UML Sequence diagrams demonstrate how objects interact with each other and the order of these interactions. The Vue Diagram control supports creating sequence diagrams through the `UmlSequenceDiagramModel` using a model-based approach.
 
-### Participants and Messages
+### Participants
+
+Participants represent entities that interact in the sequence diagram. They appear at the top with lifelines extending downward.
+
+#### Participant Stereotypes
+
+Stereotypes define the visual style of a participant and show their role in the interaction:
+
+| Stereotype | Description |
+|---|---|
+| Default | Standard object participant displayed as a rectangle |
+| Actor | External person or system interacting with the process |
+| Boundary | Interface or entry point (UI, API gateway, external system) |
+| Control | Object managing the flow (controller, coordinator) |
+| Entity | Object representing data or domain objects |
+| Database | Database or persistent storage system (cylindrical shape) |
+
+#### Participant Properties
+
+| Property | Type | Description |
+|---|---|---|
+| id | string \| number | Unique identifier for the participant |
+| content | string | Display text of the participant |
+| stereotype | UmlSequenceParticipantStereotype | Visual style (Default, Actor, Boundary, Control, Entity, Database) |
+| showDestructionMarker | boolean | Show destruction marker (X) at end of lifeline |
+| activationBoxes | UmlSequenceActivationBoxModel[] | Collection of activation boxes for the participant |
+
+#### Define Participants with Stereotypes
 
 ```vue
 <template>
-  <ejs-diagram ref="diagramRef" id="diagram" width="100%" height="600px" />
+  <div id="app">
+    <ejs-diagram ref="diagramRef" id="diagram" width="100%" height="600px" :snapSettings='snapSettings'/>
+  </div>
 </template>
-<script setup>
-import { ref, onMounted } from 'vue';
-import { DiagramComponent } from '@syncfusion/ej2-vue-diagrams';
-import { UmlSequenceMessageType, SnapConstraints } from '@syncfusion/ej2-diagrams';
+<script>
+import { DiagramComponent, SnapConstraints, UmlSequenceParticipantStereotype } from '@syncfusion/ej2-vue-diagrams';
 
 const model = {
   participants: [
-    { id: 'User', content: 'User', isActor: true },
-    { id: 'System', content: 'System', isActor: false, showDestructionMarker: true }
+    {
+      id: "User",
+      content: "User",
+      stereotype: UmlSequenceParticipantStereotype.Actor // External user
+    },
+    {
+      id: "UI",
+      content: "UI",
+      stereotype: UmlSequenceParticipantStereotype.Boundary // Interface/boundary
+    },
+    {
+      id: "Controller",
+      content: "Controller",
+      stereotype: UmlSequenceParticipantStereotype.Control // Flow controller
+    },
+    {
+      id: "UserData",
+      content: "UserData",
+      stereotype: UmlSequenceParticipantStereotype.Entity // Data object
+    },
+    {
+      id: "Database",
+      content: "Database",
+      stereotype: UmlSequenceParticipantStereotype.Database // Storage system
+    }
   ],
-  messages: [
-    { id: 'MSG1', content: 'Login Request', fromParticipantID: 'User', toParticipantID: 'System', type: UmlSequenceMessageType.Synchronous },
-    { id: 'MSG2', content: 'Login Response', fromParticipantID: 'System', toParticipantID: 'User', type: UmlSequenceMessageType.Reply }
-  ]
+  messages: []
 };
-const snapSettings = { constraints: SnapConstraints.None };
-const diagramRef = ref(null);
-onMounted(() => {
-  const diagramInstance = diagramRef.value.ej2Instances;
-  diagramInstance.model = model;
-  diagramInstance.updateFromModel();
-});
+
+export default {
+  name: "App",
+  components: { "ejs-diagram": DiagramComponent },
+  data() {
+    return {
+      snapSettings: { constraints: SnapConstraints.None },
+    }
+  },
+  mounted() {
+    const diagramInstance = this.$refs.diagramRef.ej2Instances;
+    diagramInstance.model = model;
+    diagramInstance.updateFromModel();
+  }
+};
 </script>
-<style scoped>
-@import "../node_modules/@syncfusion/ej2-vue-diagrams/styles/material.css";
-@import "../node_modules/@syncfusion/ej2-navigations/styles/material.css";
-@import "../node_modules/@syncfusion/ej2-popups/styles/material.css";
+<style>
+  @import "../node_modules/@syncfusion/ej2-tailwind3-theme/styles/diagram/index.css";
 </style>
 ```
 
-### Participant Lifeline
+### Messages
+
+Messages represent communication between participants.
+
+#### Message Types
+
+| Type | Description | Usage |
+|---|---|---|
+| Synchronous | Sender waits for response (blocking call) | Function calls, requests |
+| Asynchronous | Sender continues without waiting | Event notifications, async calls |
+| Reply | Response to a previous message | Returning from function calls |
+| Create | Creates a new participant | Object instantiation |
+| Delete | Terminates a participant | Object destruction |
+| Self | Message to the same participant | Internal logic/validation |
+
+#### Message Properties
+
+| Property | Type | Description |
+|---|---|---|
+| id | string \| number | Unique identifier for the message |
+| content | string | Display text for the message |
+| fromParticipantID | string \| number | ID of sending participant |
+| toParticipantID | string \| number | ID of receiving participant |
+| type | UmlSequenceMessageType | Message type (Synchronous, Asynchronous, Reply, Create, Delete, Self) |
+
+#### Define Messages
 
 ```javascript
-const participantLifeline = {
-  id: 'system1',
-  width: 100,
-  height: 300,
-  offsetX: 300,
-  offsetY: 200,
-  shape: {
-    type: 'UmlSequence',
-    sequence: {
-      name: 'System',
-      lifeline: {
-        name: 'participant'
-      }
-    }
-  }
-};
-```
-
-## Messages
-
-### Asynchronous Message
-
-```javascript
-const asyncMessage = {
-  id: 'msg2',
-  sourceID: 'system1',
-  targetID: 'actor1',
-  shape: {
-    type: 'UmlSequence',
-    sequence: {
-      message: {
-        type: 'Asynchronous'         // Open arrow
-      }
-    }
+const messages = [
+  // Synchronous: User sends login request to UI
+  {
+    id: "MSG1",
+    content: "Login Request",
+    fromParticipantID: "User",
+    toParticipantID: "UI",
+    type: UmlSequenceMessageType.Synchronous
   },
-  annotations: [{ content: 'response()' }]
-};
-```
-
-### Reply Message
-
-```javascript
-const replyMessage = {
-  id: 'msg3',
-  sourceID: 'system1',
-  targetID: 'actor1',
-  shape: {
-    type: 'UmlSequence',
-    sequence: {
-      message: {
-        type: 'Reply'                // Dashed line
-      }
-    }
+  // Asynchronous: UI sends request to Controller
+  {
+    id: "MSG2",
+    content: "Validate Login",
+    fromParticipantID: "UI",
+    toParticipantID: "Controller",
+    type: UmlSequenceMessageType.Asynchronous
   },
-  style: { strokeDashArray: '5,5' },
-  annotations: [{ content: 'return' }]
+  // Create: Controller creates UserData object
+  {
+    id: "MSG3",
+    content: "Create UserData",
+    fromParticipantID: "Controller",
+    toParticipantID: "UserData",
+    type: UmlSequenceMessageType.Create
+  },
+  // Synchronous: UserData queries database
+  {
+    id: "MSG4",
+    content: "Query User",
+    fromParticipantID: "UserData",
+    toParticipantID: "Database",
+    type: UmlSequenceMessageType.Synchronous
+  },
+  // Reply: Database returns result
+  {
+    id: "MSG5",
+    content: "User Found",
+    fromParticipantID: "Database",
+    toParticipantID: "UserData",
+    type: UmlSequenceMessageType.Reply
+  },
+  // Self: UserData validates data
+  {
+    id: "MSG6",
+    content: "Validate Data",
+    fromParticipantID: "UserData",
+    toParticipantID: "UserData",
+    type: UmlSequenceMessageType.Self
+  },
+  // Delete: Controller destroys UserData
+  {
+    id: "MSG7",
+    content: "Destroy UserData",
+    fromParticipantID: "Controller",
+    toParticipantID: "UserData",
+    type: UmlSequenceMessageType.Delete
+  }
+];
+```
+
+### Activation Boxes
+
+Activation boxes represent periods when a participant is active and processing messages. They appear as thin rectangles on participant lifelines.
+
+#### Activation Box Properties
+
+| Property | Type | Description |
+|---|---|---|
+| id | string \| number | Unique identifier for the activation box |
+| startMessageID | string \| number | ID of the message that initiates activation |
+| endMessageID | string \| number | ID of the message that terminates activation |
+
+#### Define Activation Boxes
+
+```javascript
+const model = {
+  participants: [
+    {
+      id: "User",
+      content: "User",
+      stereotype: UmlSequenceParticipantStereotype.Actor
+    },
+    {
+      id: "System",
+      content: "System",
+      showDestructionMarker: true,
+      // System is active from MSG1 to MSG2
+      activationBoxes: [
+        {
+          id: "ActSystem1",
+          startMessageID: "MSG1", // Starts when receiving login request
+          endMessageID: "MSG2"    // Ends when sending response
+        }
+      ]
+    }
+  ],
+  messages: [
+    {
+      id: "MSG1",
+      content: "Login Request",
+      fromParticipantID: "User",
+      toParticipantID: "System",
+      type: UmlSequenceMessageType.Synchronous
+    },
+    {
+      id: "MSG2",
+      content: "Login Response",
+      fromParticipantID: "System",
+      toParticipantID: "User",
+      type: UmlSequenceMessageType.Reply
+    }
+  ]
 };
 ```
 
-### Create Message
+### Fragments (Loops & Conditions)
+
+Fragments group a set of messages based on specific conditions in a sequence diagram. They are displayed as rectangular enclosures that visually separate conditional or looping interactions.
+
+#### Fragment Types
+
+| Fragment Type | Description |
+|---|---|
+| `Optional` | Represents a sequence that is executed only if a specified condition is met; otherwise, it is skipped. |
+| `Alternative` | Represents a choice between two or more alternative message sequences. |
+| `Loop` | Represents a sequence that is repeated until a condition is met. |
 
 ```javascript
-const createMessage = {
-  id: 'msg4',
-  sourceID: 'actor1',
-  targetID: 'newObject',
-  shape: {
-    type: 'UmlSequence',
-    sequence: {
-      message: {
-        type: 'Create'
-      }
-    }
-  }
+import { Diagram, SnapConstraints, UmlSequenceDiagramModel, UmlSequenceFragmentType, UmlSequenceMessageType, UmlSequenceParticipantStereotype } from '@syncfusion/ej2-diagrams';
+
+const model = {
+  spaceBetweenParticipants: 300,
+  participants: [
+    { id: 'Customer', content: 'Customer', stereotype: UmlSequenceParticipantStereotype.Actor },
+    { id: 'OrderSystem', content: 'Order System' },
+    { id: 'PaymentGateway', content: 'Payment Gateway' },
+  ],
+  messages: [
+    {
+      id: 'MSG1',
+      content: 'Place Order',
+      fromParticipantID: 'Customer',
+      toParticipantID: 'OrderSystem',
+      type: UmlSequenceMessageType.Synchronous,
+    },
+    {
+      id: 'MSG2',
+      content: 'Check Stock',
+      fromParticipantID: 'OrderSystem',
+      toParticipantID: 'OrderSystem',
+      type: UmlSequenceMessageType.Synchronous,
+    },
+    {
+      id: 'MSG3',
+      content: 'Stock Available',
+      fromParticipantID: 'OrderSystem',
+      toParticipantID: 'Customer',
+      type: UmlSequenceMessageType.Reply,
+    },
+    {
+      id: 'MSG4',
+      content: 'Process Payment',
+      fromParticipantID: 'OrderSystem',
+      toParticipantID: 'PaymentGateway',
+      type: UmlSequenceMessageType.Synchronous,
+    },
+    {
+      id: 'MSG5',
+      content: 'Payment Successful',
+      fromParticipantID: 'PaymentGateway',
+      toParticipantID: 'OrderSystem',
+      type: UmlSequenceMessageType.Reply,
+    },
+    {
+      id: 'MSG6',
+      content: 'Order Confirmed',
+      fromParticipantID: 'OrderSystem',
+      toParticipantID: 'Customer',
+      type: UmlSequenceMessageType.Reply,
+    },
+    {
+      id: 'MSG7',
+      content: 'Payment Failed',
+      fromParticipantID: 'PaymentGateway',
+      toParticipantID: 'OrderSystem',
+      type: UmlSequenceMessageType.Reply,
+    },
+    {
+      id: 'MSG8',
+      content: 'Retry Payment',
+      fromParticipantID: 'OrderSystem',
+      toParticipantID: 'Customer',
+      type: UmlSequenceMessageType.Reply,
+    },
+  ],
+  fragments: [
+    // Optional: only if item is in stock
+    {
+      id: 1,
+      type: UmlSequenceFragmentType.Optional,
+      conditions: [{ content: 'if item is in stock', messageIds: ['MSG4'] }],
+    },
+    // Alternative: payment success vs failure
+    {
+      id: 2,
+      type: UmlSequenceFragmentType.Alternative,
+      conditions: [
+        { content: 'if payment is successful', messageIds: ['MSG5', 'MSG6'] },
+        { content: 'if payment fails', messageIds: ['MSG7', 'MSG8'] },
+      ],
+    },
+    // Loop wraps both child fragments
+    {
+      id: 3,
+      type: UmlSequenceFragmentType.Loop,
+      conditions: [{ content: 'while attempts < 3', fragmentIds: ['1', '2'] }],
+    },
+  ]
 };
 ```
+> Use `spaceBetweenParticipants` on the model to increase horizontal spacing when message labels are long.
 
-### Delete Message
+### Complete Example
 
-```javascript
-const deleteMessage = {
-  id: 'msg5',
-  sourceID: 'actor1',
-  targetID: 'destroyedObject',
-  shape: {
-    type: 'UmlSequence',
-    sequence: {
-      message: {
-        type: 'Delete'
-      }
-    }
-  }
+```vue
+<template>
+  <div id="app">
+    <ejs-diagram ref="diagramRef" id="diagram" width="100%" height="700px" :snapSettings="snapSettings" />
+  </div>
+</template>
+
+<script>
+import { DiagramComponent, SnapConstraints, UmlSequenceParticipantStereotype, UmlSequenceFragmentType, UmlSequenceMessageType } from '@syncfusion/ej2-vue-diagrams';
+
+const model = {
+  participants: [
+    {
+      id: 'User',
+      content: 'User',
+      stereotype: UmlSequenceParticipantStereotype.Actor,
+    },
+    { id: 'System', content: 'System', showDestructionMarker: true },
+    { id: 'Logger', content: 'Logger', showDestructionMarker: true },
+    { id: 'SessionManager', content: 'SessionManager' },
+  ],
+  messages: [
+    {
+      id: 'MSG1',
+      content: 'Login Request',
+      fromParticipantID: 'User',
+      toParticipantID: 'System',
+      type: UmlSequenceMessageType.Synchronous,
+    },
+    {
+      id: 'MSG2',
+      content: 'Login Response',
+      fromParticipantID: 'System',
+      toParticipantID: 'User',
+      type: UmlSequenceMessageType.Reply,
+    },
+    {
+      id: 'MSG3',
+      content: 'Log Event',
+      fromParticipantID: 'System',
+      toParticipantID: 'Logger',
+      type: UmlSequenceMessageType.Asynchronous,
+    },
+    {
+      id: 'MSG4',
+      content: 'Create Session',
+      fromParticipantID: 'System',
+      toParticipantID: 'SessionManager',
+      type: UmlSequenceMessageType.Create,
+    },
+    {
+      id: 'MSG5',
+      content: 'Delete Session',
+      fromParticipantID: 'System',
+      toParticipantID: 'SessionManager',
+      type: UmlSequenceMessageType.Delete,
+    },
+    {
+      id: 'MSG6',
+      content: 'Validate Inputs',
+      fromParticipantID: 'System',
+      toParticipantID: 'System',
+      type: UmlSequenceMessageType.Self,
+    },
+  ],
+
+  // Define conditional fragments for the flow
+  fragments: [
+    // Optional: Show only if credentials are valid
+    {
+      id: 'validationFrag',
+      type: UmlSequenceFragmentType.Optional,
+      conditions: [
+        {
+          content: 'if credentials valid',
+          messageIds: ['MSG4', 'MSG5', 'MSG6'],
+        },
+      ],
+    },
+    // Alternative: Success or Failure
+    {
+      id: 'resultFrag',
+      type: UmlSequenceFragmentType.Alternative,
+      conditions: [
+        {
+          content: 'if login successful',
+          messageIds: ['MSG6', 'MSG7'],
+        },
+        {
+          content: 'else login failed',
+          messageIds: ['MSG1'], // User tries again
+        },
+      ],
+    },
+  ],
 };
-```
 
-### Lost/Found Message
+const snapSettings = { constraints: SnapConstraints.None };
 
-```javascript
-const lostMessage = {
-  id: 'msg6',
-  sourceID: 'actor1',
-  targetID: 'endpoint',
-  shape: {
-    type: 'UmlSequence',
-    sequence: {
-      message: {
-        type: 'Lost'
-      }
-    }
-  }
+export default {
+  name: 'App',
+  components: { 'ejs-diagram': DiagramComponent },
+  data() {
+    return {
+      snapSettings: snapSettings,
+    };
+  },
+  mounted() {
+    // Retrieve the diagram instance
+    const diagramInstance = this.$refs.diagramRef.ej2Instances;
+    diagramInstance.model = model;
+    diagramInstance.updateFromModel();
+  },
 };
+</script>
+<style>
+  @import "../node_modules/@syncfusion/ej2-tailwind3-theme/styles/diagram/index.css";
+</style>
 ```
 
 UML diagrams enable technical teams to communicate software design, architecture, and object relationships clearly and consistently.

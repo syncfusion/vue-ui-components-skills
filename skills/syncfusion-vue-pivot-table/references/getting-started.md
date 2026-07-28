@@ -4,6 +4,10 @@
 - [Prerequisites](#prerequisites)
 - [Installation](#installation)
 - [CSS Imports](#css-imports)
+  - [Available Themes](#available-themes)
+  - [Recommended: Use a Single Theme Package (Tailwind 3)](#recommended-use-a-single-theme-package-tailwind-3)
+  - [Alternative: Import Each Dependency Individually](#alternative-import-each-dependency-individually)
+  - [Theme Application Methods Summary](#theme-application-methods-summary)
 - [Basic Setup](#basic-setup)
 - [Module Injection](#module-injection)
 - [Adding Fields](#adding-fields)
@@ -59,16 +63,69 @@ When prompted, select `Default ([Vue 2] babel, eslint)`.
 npm install @syncfusion/ej2-vue-pivotview --save
 ```
 
+or
+
+```bash
+yarn add @syncfusion/ej2-vue-pivotview
+```
+
+### Step 3: Install a Theme Package (Tailwind 3)
+The Pivot Table component looks unstyled without a theme. Install a theme package (Tailwind 3 is recommended for new projects) so the styles are picked up by the single `@import` in the **CSS Imports** section below:
+
+```bash
+npm install @syncfusion/ej2-tailwind3-theme --save
+```
+
+or
+
+```bash
+yarn add @syncfusion/ej2-tailwind3-theme
+```
+
 ## CSS Imports
+
+Themes for the Syncfusion Vue Pivot Table can be applied using CSS or SASS files from the [npm theme packages](https://ej2.syncfusion.com/vue/documentation/appearance/theme#theme-packages), CDN, CRG, or [Theme Studio](https://ej2.syncfusion.com/vue/documentation/appearance/theme-studio). For more information, refer to the [themes documentation](https://ej2.syncfusion.com/vue/documentation/appearance/theme).
 
 ### Available Themes
 - Material (default)
 - Fabric
 - Bootstrap
 - Material3
+- Tailwind 3 (recommended for new projects)
 - High Contrast
 
-### Import CSS in App.vue
+### Recommended: Use a Single Theme Package (Tailwind 3)
+
+The simplest way to theme the Pivot Table is to install a single theme package. Each component in the theme package ships an `index.css` file that automatically pulls in **all required dependency styles** (base, inputs, buttons, dropdowns, lists, popups, navigations, grids, pivotview, etc.), so you only need to write **one** `@import` line.
+
+This is the same approach shown in the official `docs/getting-started.md` and is what you should default to for new projects.
+
+**1. Install the Tailwind 3 theme package:**
+
+```bash
+npm install @syncfusion/ej2-tailwind3-theme --save
+```
+
+or
+
+```bash
+yarn add @syncfusion/ej2-tailwind3-theme
+```
+
+**2. Import the Pivot Table theme in the `<style>` section of `src/App.vue`:**
+
+```vue
+<style>
+@import "../node_modules/@syncfusion/ej2-tailwind3-theme/styles/pivotview/index.css";
+</style>
+```
+
+> **Why a single import?** The `pivotview/index.css` entry of the theme package automatically loads the styles for every dependency the Pivot Table needs (base, inputs, buttons, dropdowns, lists, popups, navigations, grids, etc.). You do not need to import each dependency's CSS file manually.
+
+### Alternative: Import Each Dependency Individually
+
+If you are **not** using a theme package (for example, you are pinned to Material 3 or another pre-Tailwind 3 theme), you must import each dependency's CSS file yourself. Below is the equivalent list for the **Material 3** theme:
+
 ```vue
 <style>
 @import "../node_modules/@syncfusion/ej2-base/styles/material3.css";
@@ -82,6 +139,17 @@ npm install @syncfusion/ej2-vue-pivotview --save
 @import "../node_modules/@syncfusion/ej2-pivotview/styles/material3.css";
 </style>
 ```
+
+> **When to use this approach:** Only when the team-wide theme is one of the pre-Tailwind 3 themes (Material, Material 3, Fabric, Bootstrap, High Contrast). For Tailwind 3 and any new project, prefer the single-import approach above.
+
+### Theme Application Methods Summary
+
+| Method | Best For | Notes |
+|--------|----------|-------|
+| **npm theme package** (e.g. `@syncfusion/ej2-tailwind3-theme`) | New projects, local builds | One `@import` line covers all dependencies |
+| **CDN** | Demos, prototypes, no build step | Add a `<link>` to the CDN-hosted CSS |
+| **CRG** (Common Resource Generator) | Custom-built subset of CSS | Generates a CSS bundle from the Syncfusion CRG tool |
+| **Theme Studio** | Visually customized themes | Generates a downloadable theme CSS you host yourself |
 
 ## Basic Setup
 
@@ -193,7 +261,8 @@ const height = 350;
 </script>
 
 <style>
-@import "../node_modules/@syncfusion/ej2-vue-pivotview/styles/tailwind3.css";
+/* Tailwind 3 theme package — single import covers all Pivot Table dependencies */
+@import "../node_modules/@syncfusion/ej2-tailwind3-theme/styles/pivotview/index.css";
 </style>
 ```
 

@@ -255,7 +255,7 @@ export default {
 }
 </script>
 <style>
-@import "../node_modules/@syncfusion/ej2-vue-diagrams/styles/material.css";
+  @import "../node_modules/@syncfusion/ej2-tailwind3-theme/styles/diagram/index.css";
 </style>
 ```
 
@@ -434,7 +434,7 @@ export default {
 }
 </script>
 <style>
-@import "../node_modules/@syncfusion/ej2-vue-diagrams/styles/material.css";
+  @import "../node_modules/@syncfusion/ej2-tailwind3-theme/styles/diagram/index.css";
 </style>
 ```
 

@@ -51,27 +51,26 @@ npm run dev
 
 ## CSS Imports
 
-Import Syncfusion diagram styles in your component or App.vue file. The necessity CSS styles need to be imported in the following order:
+The Diagram component needs Syncfusion® theme styles to display correctly. Syncfusion® theme packages include ready-to-use styles for supported control.
+
+To add the styles, install the Tailwind 3 theme package using the following command:
+
+```bash
+npm install @syncfusion/ej2-tailwind3-theme
+```
+
+Add the following import to the **src/App.vue** file:
 
 ```vue
 <style>
-    @import "../node_modules/@syncfusion/ej2-base/styles/material.css";
-    @import "../node_modules/@syncfusion/ej2-navigations/styles/material.css";
-    @import "../node_modules/@syncfusion/ej2-buttons/styles/material.css";
-    @import "../node_modules/@syncfusion/ej2-inputs/styles/material.css";
-    @import "../node_modules/@syncfusion/ej2-popups/styles/material.css";
-    @import "../node_modules/@syncfusion/ej2-vue-diagrams/styles/material.css";
+  @import "../node_modules/@syncfusion/ej2-tailwind3-theme/styles/diagram/index.css";
 </style>
 ```
 
-> The order of importing CSS styles should be in line with its dependency graph.
+For the list of available themes, refer to the [Themes](https://ej2.syncfusion.com/vue/documentation/appearance/theme) documentation.
 
-Available themes:
-- `material.css` (Default)
-- `bootstrap.css` (Bootstrap theme)
-- `bootstrap4.css` (Bootstrap 4 theme)
-- `fabric.css` (Fabric UI)
-- `highcontrast.css` (High contrast)
+N> Syncfusion® provides multiple built-in themes. If the application uses a different theme, replace **@syncfusion/ej2-tailwind3-theme/styles/diagram/index.css** with the corresponding stylesheet from the desired theme package. For example, to use the Material 3 theme, import **@syncfusion/ej2-material3-theme/styles/diagram/index.css**.
+
 
 ## Basic Usage
 
@@ -116,7 +115,7 @@ export default {
 </script>
 
 <style>
-@import '@syncfusion/ej2-vue-diagrams/styles/material.css';
+  @import "../node_modules/@syncfusion/ej2-tailwind3-theme/styles/diagram/index.css";
 </style>
 ```
 
@@ -152,7 +151,7 @@ const nodes = [
 </script>
 
 <style>
-@import '@syncfusion/ej2-vue-diagrams/styles/material.css';
+  @import "../node_modules/@syncfusion/ej2-tailwind3-theme/styles/diagram/index.css";
 </style>
 ```
 

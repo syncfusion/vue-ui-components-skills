@@ -1,6 +1,6 @@
 ---
 name: syncfusion-vue-diagram
-description: Implement interactive diagrams, flowcharts, BPMN, UML, and organizational charts using Syncfusion Vue Diagram. Use this when working with diagram components, including nodes, connectors, shapes, layouts, ports, labels, symbol palettes, serialization, and export. Covers BPMN workflows, UML diagrams, swimlanes, and data visualization flows.
+description: Build interactive diagrams using Syncfusion Vue Diagram, including flowcharts, BPMN workflows, UML diagrams, Entity Relationship (ER) diagrams, swimlanes, and organizational charts. Trigger when working with Vue diagram components such as nodes, connectors, shapes, ports, labels, layouts, symbol palettes, serialization/deserialization with unsaved changes detection, Mermaid syntax support, data binding, interactive editing, and exporting diagrams for visualization and process flows.
 metadata:
   author: "Syncfusion Inc"
   version: "34.1.29"
@@ -91,8 +91,20 @@ The Syncfusion Vue Diagram component enables you to create interactive, customiz
 - UML class diagrams
 - Classifier shapes (class, interface, enumeration)
 - UML relationships and associations
-- UML sequence diagrams
-- Lifelines and message interactions
+- UML sequence diagram elements and participants
+- Participant stereotypes (Actor, Boundary, Control, Entity, Database, Default)
+- Message types (Synchronous, Asynchronous, Reply, Create, Delete, Self)
+- Activation boxes and lifelines
+- Complete workflow examples
+
+### Entity Relationship Diagrams
+📄 **Read:** [references/implementing-entity-relationship-diagrams.md](references/entity-relationship-diagrams.md)
+- Entity Relationship (ER) diagram concepts and models
+- ER shape configuration with fields and properties
+- Field constraints (NotNull, Unique, Primary Key, Foreign Key)
+- Relationship types and multiplicities (One, OneAndOnlyOne, Many, ZeroOrOne, OneOrMany, ZeroOrMany)
+- ER connectors and relationship configuration
+- Runtime field management and manipulation
 
 ### Automatic Layouts
 📄 **Read:** [references/layouts.md](references/layouts.md)
@@ -152,6 +164,8 @@ The Syncfusion Vue Diagram component enables you to create interactive, customiz
 - Export to image (PNG, SVG, JPG) — use `exportDiagram` (inject PrintAndExport)
 - Print functionality
 - Visio file import/export (experimental; inject ImportAndExportVisio)
+- Mermaid syntax support with `saveDiagramAsMermaid()` and `loadDiagramFromMermaid()`
+- Change detection with `isModified` property for unsaved changes tracking
 - EJ1 migration serialization
 
 ### Diagram Settings & Configuration

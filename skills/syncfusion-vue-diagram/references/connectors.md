@@ -217,7 +217,7 @@ methods :{
 }
 </script>
 <style>
-@import "../node_modules/@syncfusion/ej2-vue-diagrams/styles/material.css";
+  @import "../node_modules/@syncfusion/ej2-tailwind3-theme/styles/diagram/index.css";
 </style>
 
 ```
@@ -462,7 +462,7 @@ diagram: [ConnectorEditing]
 </script>
 
 <style>
-@import "../node_modules/@syncfusion/ej2-vue-diagrams/styles/material.css";
+  @import "../node_modules/@syncfusion/ej2-tailwind3-theme/styles/diagram/index.css";
 </style>
 ```
 
@@ -702,7 +702,7 @@ export default {
 }
 </script>
 <style>
-@import "../node_modules/@syncfusion/ej2-vue-diagrams/styles/material.css";
+  @import "../node_modules/@syncfusion/ej2-tailwind3-theme/styles/diagram/index.css";
 </style>
 ```
 
@@ -859,7 +859,7 @@ components: {
 }
 </script>
 <style>
-@import "../node_modules/@syncfusion/ej2-vue-diagrams/styles/material.css";
+  @import "../node_modules/@syncfusion/ej2-tailwind3-theme/styles/diagram/index.css";
 </style>
 ```
 
@@ -921,7 +921,7 @@ components: {
 </script>
 
 <style>
-@import "../node_modules/@syncfusion/ej2-vue-diagrams/styles/material.css";
+  @import "../node_modules/@syncfusion/ej2-tailwind3-theme/styles/diagram/index.css";
 </style>
 ```
 

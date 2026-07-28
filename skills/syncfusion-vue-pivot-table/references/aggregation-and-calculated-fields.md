@@ -1,4 +1,4 @@
-# Aggregation and Calculated Fields
+﻿# Aggregation and Calculated Fields
 
 ## Table of Contents
 - [Overview](#overview)
@@ -8,10 +8,18 @@
 - [Customizing Aggregation Dropdown](#customizing-aggregation-dropdown)
 - [Hiding Aggregation Label](#hiding-aggregation-label)
 - [Advanced Aggregation](#advanced-aggregation)
+  - [Running Totals and Percentage of Running Totals](#running-totals-and-percentage-of-running-totals)
+  - [Calculated Field (Custom Formula)](#calculated-field-custom-formula)
+- [Events](#events)
+- [Best Practices](#best-practices)
 
 ## Overview
 
 Aggregation combines multiple data values into a single summary value (Sum, Average, Count, etc.). By default, values are summed. Each value field must have an aggregation type. Property: [`type`](https://ej2.syncfusion.com/vue/documentation/api/pivotview/iFieldOptions#type)
+
+> This feature is applicable only for the **relational data source**.
+
+> Numeric fields support all aggregation types listed below, except **CalculatedField**. Fields of type string, date, datetime, boolean, and similar types support only **Count** and **DistinctCount** aggregation.
 
 ## Aggregation Types
 
@@ -45,6 +53,7 @@ Aggregation combines multiple data values into a single summary value (Sum, Aver
 | **DifferenceFrom** | Difference vs base item | Yes (baseField, baseItem) |
 | **PercentageOfDifferenceFrom** | % difference vs base | Yes (baseField, baseItem) |
 | **RunningTotals** | Cumulative sum | No |
+| **PercentageOfRunningTotals** | Cumulative percentage of running totals (client-side engine only) | No |
 
 ### Non-Numeric Field Types (Limited)
 
@@ -248,7 +257,9 @@ const dataSourceSettings = {
 
 Each value field shows its configured aggregation independently.
 
-### Running Totals (Cumulative Sum)
+### Running Totals and Percentage of Running Totals
+
+The `RunningTotals` aggregation shows each cell as a **cumulative sum** to that point. Its companion, `PercentageOfRunningTotals`, shows each cell as a **percentage of the final running total** instead of a raw cumulative sum — answering "what share of the final cumulative total has been reached at this point?"
 
 ```vue
 <script setup>
@@ -266,7 +277,59 @@ const dataSourceSettings = {
 </script>
 ```
 
-**Result:** Jan=100, Feb=250, Mar=450, etc. (cumulative)
+**RunningTotals result:** Jan=100, Feb=250, Mar=450, etc. (cumulative)
+
+For the percentage variant, set `type: 'PercentageOfRunningTotals'`:
+
+```vue
+<template>
+  <div id="app">
+    <ejs-pivotview :dataSourceSettings="dataSourceSettings" :height="height"> </ejs-pivotview>
+  </div>
+</template>
+<script setup>
+import { PivotViewComponent as EjsPivotview } from "@syncfusion/ej2-vue-pivotview";
+import { pivotData } from './pivotData.js';
+
+const dataSourceSettings = {
+  dataSource: pivotData,
+  expandAll: false,
+  columns: [{ name: 'Year', caption: 'Production Year' }, { name: 'Quarter' }],
+  values: [
+    { name: 'Sold', caption: 'Units Sold', type: 'PercentageOfRunningTotals' },
+    { name: 'Amount', caption: 'Sold Amount' }
+  ],
+  rows: [{ name: 'Country' }, { name: 'Products' }],
+  formatSettings: [{ name: 'Sold', format: 'P2' }],
+  filters: []
+};
+const height = 350;
+</script>
+<style>
+@import "../node_modules/@syncfusion/ej2-tailwind3-theme/styles/pivotview/index.css";
+</style>
+```
+
+**How the values are computed:**
+
+For each cell at position `(r, c)`, the value is:
+
+```
+PercentageOfRunningTotals(r, c) = RunningTotal(r, c) / RunningTotal(last row, last column) * 100
+```
+
+So if the final running total across the full grid is `1000` and the running total at cell `(r, c)` is `250`, the cell shows `25%`. The last cell on the cumulative path always reaches `100%`.
+
+> **Engine requirement:** `PercentageOfRunningTotals` is supported only when the Pivot Table is using the **client-side engine**. If you have switched to a server-side pivot engine, this aggregation type will not be available.
+
+**When to choose which:**
+
+| Need | Aggregation Type |
+|------|------------------|
+| Raw cumulative sum at each point | `RunningTotals` |
+| Each cell as % of the final running total | `PercentageOfRunningTotals` |
+| Each cell as % of the grand total (non-cumulative) | `PercentageOfGrandTotal` |
+| Each cell as % of its row/column total | `PercentageOfRowTotal` / `PercentageOfColumnTotal` |
 
 ### Calculated Field (Custom Formula)
 
@@ -343,7 +406,7 @@ const aggregateCellInfo = (args) => {
 provide('pivotview', []);
 </script>
 <style>
-@import "../node_modules/@syncfusion/ej2-vue-pivotview/styles/tailwind3.css";
+@import "../node_modules/@syncfusion/ej2-tailwind3-theme/styles/pivotview/index.css";
 </style>
 ```
 
@@ -399,7 +462,7 @@ const actionBegin = (args) => {
 provide('pivotview', [GroupingBar, FieldList]);
 </script>
 <style>
-@import "../node_modules/@syncfusion/ej2-vue-pivotview/styles/tailwind3.css";
+@import "../node_modules/@syncfusion/ej2-tailwind3-theme/styles/pivotview/index.css";
 </style>
 ```
 
@@ -448,7 +511,7 @@ const actionComplete = (args) => {
 };
 </script>
 <style>
-@import "../node_modules/@syncfusion/ej2-vue-pivotview/styles/tailwind3.css";
+@import "../node_modules/@syncfusion/ej2-tailwind3-theme/styles/pivotview/index.css";
 </style>
 ```
 
@@ -498,7 +561,7 @@ const actionFailure = (args) => {
 };
 </script>
 <style>
-@import "../node_modules/@syncfusion/ej2-vue-pivotview/styles/tailwind3.css";
+@import "../node_modules/@syncfusion/ej2-tailwind3-theme/styles/pivotview/index.css";
 .error-box {
   background-color: #ffebee;
   color: #c62828;
@@ -563,7 +626,7 @@ const calculatedFieldCreate = (args) => {
 provide('pivotview', [CalculatedField, FieldList]);
 </script>
 <style>
-@import "../node_modules/@syncfusion/ej2-vue-pivotview/styles/tailwind3.css";
+@import "../node_modules/@syncfusion/ej2-tailwind3-theme/styles/pivotview/index.css";
 </style>
 ```
       name: 'Profit Margin',

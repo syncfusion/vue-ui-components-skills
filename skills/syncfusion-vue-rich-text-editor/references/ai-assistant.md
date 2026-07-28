@@ -2,26 +2,6 @@
 
 The Rich Text Editor includes a built-in AI Assistant panel powered by the `AIAssistantService` module. It provides two toolbar items — **AICommands** (predefined prompts menu) and **AIQuery** (custom prompt popup) — and renders an AssistView inside a popup next to the editor.
 
-## Additional Style Imports
-
-The AI Assistant requires styles from two extra packages. Add these **after** the standard RTE styles:
-
-```css
-/* src/App.vue <style> block */
-@import '../node_modules/@syncfusion/ej2-base/styles/tailwind3.css';
-@import '../node_modules/@syncfusion/ej2-buttons/styles/tailwind3.css';
-@import '../node_modules/@syncfusion/ej2-splitbuttons/styles/tailwind3.css';
-@import '../node_modules/@syncfusion/ej2-inputs/styles/tailwind3.css';
-@import '../node_modules/@syncfusion/ej2-lists/styles/tailwind3.css';
-@import '../node_modules/@syncfusion/ej2-navigations/styles/tailwind3.css';
-@import '../node_modules/@syncfusion/ej2-popups/styles/tailwind3.css';
-@import '../node_modules/@syncfusion/ej2-richtexteditor/styles/tailwind3.css';
-
-/* Required for AI AssistView */
-@import '../node_modules/@syncfusion/ej2-interactive-chat/styles/tailwind3.css';
-@import '../node_modules/@syncfusion/ej2-notifications/styles/tailwind3.css';
-```
-
 ## Setup
 
 ```vue

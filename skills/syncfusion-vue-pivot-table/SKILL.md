@@ -279,14 +279,10 @@ const onAggregateCellInfo = (args) => {
 📄 **Read:** [references/getting-started.md](references/getting-started.md)
 
 - Installation steps and dependencies
-## Getting Started
-
-📄 **Read:** [references/getting-started.md](references/getting-started.md)
-
-- Installation steps and dependencies
 - Setting up a basic PivotView
 - Configuration fundamentals
-- CSS imports and theming
+- **CSS imports and theming** — including the Tailwind 3 single-import theme package (`@syncfusion/ej2-tailwind3-theme`)
+- **Theme application methods** — npm theme package, CDN, CRG, Theme Studio
 - Vue 2 and Vue 3 compatibility
 - **Field List Component** - UI for dynamic field configuration
 - **Grouping Bar Component** - Inline field organization and drag-drop
@@ -383,12 +379,14 @@ const onAggregateCellInfo = (args) => {
 ### Filtering Data
 📄 **Read:** [references/filtering.md](references/filtering.md)
 
-- Member filtering (include/exclude specific members)
-- Label filtering (contains, starts with, ends with, etc.)
-- Value filtering (filter by aggregated value ranges)
-- Programmatic filter configuration
-- Filter dialog UI features (search, select all, sort)
-- Large dataset filter optimization
+- Member filtering (include/exclude specific members, select all, search, sort)
+- Label filtering (contains, starts with, ends with, between, etc., for string, number, and date)
+- Value filtering (filter by aggregated value ranges, including **Top N** and **Bottom N**)
+- Programmatic filter configuration via `filterSettings`
+- Filter dialog UI features (search, select all, sort, **append current selection to filter**)
+- OLAP-specific options: `loadOnDemandInMemberEditor` and `levelCount`
+- Large dataset filter optimization with `maxNodeLimitInMemberEditor`
+- Filter-related events: `memberFiltering`, `memberEditorOpen`, `actionBegin`, `actionComplete`, `actionFailure`
 
 ### Sorting Fields & Values
 📄 **Read:** [references/sorting.md](references/sorting.md)
@@ -406,6 +404,7 @@ const onAggregateCellInfo = (args) => {
 - Aggregation types (Sum, Average, Count, Min, Max, etc.)
 - Percentage aggregations (% of Total, % of Row, % of Parent, etc.)
 - Comparative aggregations (Difference From, Percentage Difference)
+- Running totals and percentage of running totals (cumulative % of running totals; client-side engine only)
 - Aggregation dropdown customization
 - Hiding aggregation labels for cleaner UI
 - Calculated fields and custom formulas
@@ -596,7 +595,8 @@ provide('pivotview', [FieldList]);
 </script>
 
 <style>
-@import "../node_modules/@syncfusion/ej2-vue-pivotview/styles/tailwind3.css";
+/* Tailwind 3 theme package — single import covers all Pivot Table dependencies */
+@import "../node_modules/@syncfusion/ej2-tailwind3-theme/styles/pivotview/index.css";
 </style>
 ```
 

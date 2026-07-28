@@ -1,4 +1,4 @@
-# Pivot Chart
+﻿# Pivot Chart
 
 ## Table of Contents
 - [Overview](#overview)
@@ -248,7 +248,7 @@ provide('pivotview', [PivotChart]);
 </script>
 
 <style>
-@import "@syncfusion/ej2-vue-pivotview/styles/tailwind3.css";
+@import "@syncfusion/ej2-tailwind3-theme/styles/pivotview/index.css";
 </style>
 ```
 

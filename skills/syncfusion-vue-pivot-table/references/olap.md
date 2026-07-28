@@ -1,4 +1,4 @@
-# OLAP (Online Analytical Processing) Binding
+﻿# OLAP (Online Analytical Processing) Binding
 
 ## ⚠️ CRITICAL SECURITY NOTICE
 
@@ -351,7 +351,7 @@ provide('pivotview', [FieldList, GroupingBar]);
 </script>
 
 <style>
-@import "@syncfusion/ej2-vue-pivotview/styles/tailwind3.css";
+@import "@syncfusion/ej2-tailwind3-theme/styles/pivotview/index.css";
 </style>
 ```
 

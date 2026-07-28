@@ -1,4 +1,4 @@
-# Show/Hide Totals
+﻿# Show/Hide Totals
 
 ## Table of Contents
 - [Overview](#overview)
@@ -325,7 +325,7 @@ provide('pivotview', [Toolbar]);
 </script>
 
 <style>
-@import "../node_modules/@syncfusion/ej2-vue-pivotview/styles/tailwind3.css";
+@import "../node_modules/@syncfusion/ej2-tailwind3-theme/styles/pivotview/index.css";
 </style>
 ```
 
@@ -504,7 +504,7 @@ const height = 350;
 </script>
 
 <style>
-@import "../node_modules/@syncfusion/ej2-vue-pivotview/styles/tailwind3.css";
+@import "../node_modules/@syncfusion/ej2-tailwind3-theme/styles/pivotview/index.css";
 </style>
 ```
 
@@ -535,7 +535,7 @@ const height = 350;
 </script>
 
 <style>
-@import "../node_modules/@syncfusion/ej2-vue-pivotview/styles/tailwind3.css";
+@import "../node_modules/@syncfusion/ej2-tailwind3-theme/styles/pivotview/index.css";
 </style>
 ```
 
@@ -565,7 +565,7 @@ const height = 350;
 </script>
 
 <style>
-@import "../node_modules/@syncfusion/ej2-vue-pivotview/styles/tailwind3.css";
+@import "../node_modules/@syncfusion/ej2-tailwind3-theme/styles/pivotview/index.css";
 </style>
 ```
 
@@ -595,7 +595,7 @@ const height = 350;
 </script>
 
 <style>
-@import "../node_modules/@syncfusion/ej2-vue-pivotview/styles/tailwind3.css";
+@import "../node_modules/@syncfusion/ej2-tailwind3-theme/styles/pivotview/index.css";
 </style>
 ```
 
