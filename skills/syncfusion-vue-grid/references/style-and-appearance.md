@@ -1,329 +1,507 @@
-# Style and Appearance
+# Styling and Appearance in Vue Data Grid
+
+The Syncfusion Vue Data Grid provides flexible styling and appearance customization options to align with your application's design requirements. You can choose from a wide range of built-in themes, customize visual elements using CSS, and create consistent experiences through theme-based styling.
 
 ## Table of Contents
-- [When to Use](#when-to-use)
-- [Theme Selection](#theme-selection)
-- [CSS Styling](#css-styling)
-- [Cell Styling](#cell-styling)
-- [Row Styling](#row-styling)
-- [Header Styling](#header-styling)
-- [Paging Styling](#paging-styling)
-- [Sorting Styling](#sorting-styling)
-- [Filtering Styling](#filtering-styling)
-- [Grouping Styling](#grouping-styling)
-- [Toolbar Styling](#toolbar-styling)
-- [Editing Styling](#editing-styling)
-- [Aggregate Styling](#aggregate-styling)
-- [Selection Styling](#selection-styling)
-- [Responsive Design](#responsive-design)
-- [Dark Mode](#dark-mode)
 
-## When to Use
+- [Built-in Themes](#built-in-themes)
+- [Theme Packages](#theme-packages)
+- [Size Modes](#size-modes)
+- [Theme Customization](#theme-customization)
+- [Default CSS Override](#default-css-override)
+- [Common Patterns](#common-patterns)
+- [Quick Start](#quick-start)
 
-Use this reference when you need to:
-- Select and apply themes (Material, Bootstrap, Fluent, Tailwind)
-- Customize cell and row styling
-- Style headers, paging, filtering, and other grid elements
-- Implement responsive design
-- Configure dark mode
-- Apply custom CSS classes and styling
+---
 
-## Theme Selection
+## Quick Start
 
-### Built-in Themes
+### Install a Theme Package
 
-Available: Material3 | Bootstrap5 | Tailwind | HighContrast | Fluent | Material
+```bash
+npm install @syncfusion/ej2-tailwind3-theme
+```
 
-Import theme CSS and apply via grid configuration:
+### Import Theme in Your App
+
+```css
+@import "../node_modules/@syncfusion/ej2-tailwind3-theme/styles/grid/index.css";
+```
+```vue
+<template>
+  <ejs-grid :dataSource="data" :allowPaging="true">
+    <e-columns>
+      <e-column field="OrderID" headerText="Order ID" width="100"></e-column>
+      <e-column field="CustomerName" headerText="Customer Name" width="150"></e-column>
+      <e-column field="TotalAmount" headerText="Total Amount" type="number" format="C2" width="120"></e-column>
+    </e-columns>
+  </ejs-grid>
+</template>
+
+<script setup>
+const data = [
+  { OrderID: 10248, CustomerName: 'VINET', TotalAmount: 32.38 },
+  { OrderID: 10249, CustomerName: 'TOMSP', TotalAmount: 11.61 }
+];
+</script>
+```
+
+### Enable Touch Mode (Larger UI Elements)
 
 ```vue
-<script setup>
-import '@syncfusion/ej2-vue-grids/styles/material3.css'; // or bootstrap5, tailwind, etc.
-</script>
+// Add to body in index.html or apply CSS class dynamically
+<body className="e-bigger">
+  <div id="root"></div>
+</body>
+```
 
+---
+
+## Built-in Themes
+
+The Data Grid components include a comprehensive collection of themes to match popular design systems and provide both light and dark variants.
+
+### Available Themes
+
+| Theme | Style Sheet | Use Case |
+|-------|------------|----------|
+| **Tailwind 3.4** | `tailwind3.css` / `tailwind3.scss` | Modern utility-first design system |
+| **Tailwind 3.4 Dark** | `tailwind3-dark.css` | Dark mode variant of Tailwind 3.4 |
+| **Bootstrap 5.3** | `bootstrap5.3.css` / `bootstrap5.3.scss` | Latest Bootstrap framework integration |
+| **Bootstrap 5.3 Dark** | `bootstrap5.3-dark.css` | Dark mode for Bootstrap 5.3 |
+| **Fluent 2** | `fluent2.css` / `fluent2.scss` | Microsoft Fluent Design System 2 |
+| **Fluent 2 Dark** | `fluent2-dark.css` | Dark mode variant of Fluent 2 |
+| **Material 3** | `material3.css` / `material3.scss` | Latest Google Material Design 3 |
+| **Material 3 Dark** | `material3-dark.css` | Dark mode for Material Design 3 |
+| **Bootstrap 5** | `bootstrap5.css` / `bootstrap5.scss` | Standard Bootstrap 5 |
+| **Bootstrap 5 Dark** | `bootstrap5-dark.css` | Dark variant of Bootstrap 5 |
+| **Fluent** | `fluent.css` / `fluent.scss` | Microsoft Fluent Design |
+| **Fluent Dark** | `fluent-dark.css` | Dark variant of Fluent |
+| **Material** | `material.css` / `material.scss` | Google Material Design |
+| **Material Dark** | `material-dark.css` | Dark variant of Material Design |
+| **Tailwind** | `tailwind.css` / `tailwind.scss` | Standard Tailwind CSS |
+| **Tailwind Dark** | `tailwind-dark.css` | Dark variant of Tailwind |
+| **Office Fabric** | `fabric.css` / `fabric.scss` | Microsoft Office Fabric design |
+| **Office Fabric Dark** | `fabric-dark.css` | Dark variant of Office Fabric |
+| **High Contrast** | `highcontrast.css` | Accessible high contrast theme |
+
+### Choosing a Theme
+
+- **Material 3** — Best for modern, clean designs with vibrant colors
+- **Fluent 2** — Ideal for enterprise applications following Microsoft design
+- **Bootstrap 5.3** — Great for Bootstrap ecosystem integration
+- **Tailwind 3.4** — Recommended for utility-first workflows
+- **High Contrast** — Required for accessibility compliance (WCAG AA/AAA)
+
+---
+
+## Theme Packages
+
+Syncfusion® built-in themes are distributed as npm packages. Install the theme package that matches your design requirements.
+
+### Installation Examples
+
+**Material 3 Theme (Light + Dark variants)**
+
+```bash
+# Light theme
+npm install @syncfusion/ej2-material3-theme
+
+# Dark theme
+npm install @syncfusion/ej2-material3-dark-theme
+```
+
+**Bootstrap 5.3 Theme**
+
+```bash
+npm install @syncfusion/ej2-bootstrap5.3-theme
+npm install @syncfusion/ej2-bootstrap5.3-dark-theme
+```
+
+**Tailwind 3 Theme**
+
+```bash
+npm install @syncfusion/ej2-tailwind3-theme
+npm install @syncfusion/ej2-tailwind3-dark-theme
+```
+
+### All Available Theme Packages
+
+| Theme | Light Package | Dark Package |
+|-------|---|---|
+| Tailwind 3 | `@syncfusion/ej2-tailwind3-theme` | `@syncfusion/ej2-tailwind3-dark-theme` |
+| Bootstrap 5.3 | `@syncfusion/ej2-bootstrap5.3-theme` | `@syncfusion/ej2-bootstrap5.3-dark-theme` |
+| Fluent 2 | `@syncfusion/ej2-fluent2-theme` | `@syncfusion/ej2-fluent2-dark-theme` |
+| Material 3 | `@syncfusion/ej2-material3-theme` | `@syncfusion/ej2-material3-dark-theme` |
+| Bootstrap 5 | `@syncfusion/ej2-bootstrap5-theme` | `@syncfusion/ej2-bootstrap5-dark-theme` |
+| Bootstrap 4 | `@syncfusion/ej2-bootstrap4-theme` | — |
+| Bootstrap | `@syncfusion/ej2-bootstrap-theme` | `@syncfusion/ej2-bootstrap-dark-theme` |
+| Material | `@syncfusion/ej2-material-theme` | `@syncfusion/ej2-material-dark-theme` |
+| Tailwind | `@syncfusion/ej2-tailwind-theme` | `@syncfusion/ej2-tailwind-dark-theme` |
+| Fluent | `@syncfusion/ej2-fluent-theme` | `@syncfusion/ej2-fluent-dark-theme` |
+| Fabric | `@syncfusion/ej2-fabric-theme` | `@syncfusion/ej2-fabric-dark-theme` |
+| High Contrast | `@syncfusion/ej2-highcontrast-theme` | — |
+
+---
+
+## Size Modes
+
+The Data Grid components support two size modes to optimize user experience across different devices and input methods.
+
+### Normal Mode (Default)
+
+Standard sizing optimized for mouse and keyboard interactions. This is the default mode for desktop applications.
+
+```vue
+// No additional configuration needed - normal mode is default
+<ejs-grid :dataSource="data">
+  // Your grid configuration
+</ejs-grid>
+```
+
+### Touch Mode (Bigger)
+
+Larger elements with increased padding, font sizes, and touch targets for improved touch interaction and accessibility. Use this for mobile applications or touch-enabled interfaces.
+
+```vue
+// Option 1: Apply globally via CSS class on body
+<body className="e-bigger">
+  <div id="root"></div>
+</body>
+
+// Option 2: Apply dynamically with JavaScript
+document.body.classList.add('e-bigger');
+
+// Option 3: Apply to specific container
+<div className="e-bigger">
+<ejs-grid :dataSource="data">
+  // Your grid configuration
+</ejs-grid>
+</div>
+```
+
+### Size Mode Comparison
+
+| Aspect | Normal Mode | Touch Mode |
+|--------|-------------|-----------|
+| **Target Device** | Desktop, mouse, keyboard | Mobile, tablet, touch input |
+| **Element Size** | Standard | Larger (increased padding/height) |
+| **Font Size** | Standard | Increased for better readability |
+| **Touch Targets** | Moderate | Larger for easier interaction |
+| **Row Height** | ~30-40px | ~48-56px |
+| **Column Headers** | Standard height | Increased height |
+| **Padding** | Compact | Spacious |
+
+---
+
+## Theme Customization
+
+The DataGrid provides flexible theme customization options to help align the control appearance with your application's design requirements. You can customize built-in themes either by overriding CSS variables or by creating customized themes.
+
+### Default CSS Override (CSS Variables)
+
+The DataGrid themes use CSS variables with the unified `--sf` naming convention. This ensures visual consistency, simple customization, and global updates. Centralized variables allow quick adjustments to colors, backgrounds, and borders across the grid.
+
+#### Material 3 Theme Color Variables
+
+The Material 3 theme applies scalable CSS custom properties to maintain consistency. Here are commonly used color-related variables:
+
+| Variable | Purpose | Example Value |
+|----------|---------|----------------|
+| `--e-font-name` | Default font family for DataGrid | `Segoe UI, sans-serif` |
+| `--color-sf-content-bg-color-alt1` | Background of DataGrid header | `#f3f3f3` |
+| `--color-sf-primary` | Primary brand color | `#6200ee` |
+| `--color-sf-surface` | Surface/card background color | `#ffffff` |
+| `--color-sf-on-surface` | Text color on surfaces | `#1c1b1f` |
+| `--color-sf-error` | Error/alert color | `#b3261e` |
+| `--color-sf-warning` | Warning color | `#f57c00` |
+| `--color-sf-success` | Success color | `#388e3c` |
+
+#### Customize CSS Variables
+
+Create a custom stylesheet to override theme variables:
+
+```css
+@import "../node_modules/@syncfusion/ej2-tailwind3-theme/styles/grid/index.css";
+/* custom-theme.css */
+
+/* Override Material 3 theme variables */
+:root {
+  /* Header customization */
+  --color-sf-content-bg-color-alt1: #e8eaf6;
+  
+  /* Primary brand color */
+  --color-sf-primary: #5e35b1;
+  
+  /* Row hover effect */
+  --color-sf-surface-hover: #f3e5f5;
+  
+  /* Border color */
+  --color-sf-outline: #ede7f6;
+  
+  /* Text color */
+  --color-sf-on-surface: #311b92;
+  
+  /* Selection color */
+  --color-sf-secondary-container: #e1bee7;
+}
+```
+
+```vue
 <template>
   <ejs-grid :dataSource="data">
-    <e-columns>
-      <e-column field="OrderID" width="100"></e-column>
-      <e-column field="CustomerID" width="120"></e-column>
-    </e-columns>
-  </ejs-grid>
-</template>
-```
-
-## CSS Styling
-
-### Override Default Styles
-
-Inspect generated HTML using browser DevTools to identify CSS classes. Use `.e-grid` root class and specific element classes:
-
-```css
-/* Root grid styling */
-.e-grid { font-family: cursive; }
-.my-grid .e-gridcontent { background-color: #f5f5f5; }
-
-/* Header customization */
-.e-grid .e-headercell {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white; font-weight: 600; padding: 12px;
-}
-
-/* Row hover and selection */
-.e-grid .e-row:hover .e-rowcell { background-color: rgb(204, 229, 255); }
-.e-grid .e-rowcell.e-selectionbackground { background-color: rgb(230, 230, 250); }
-.e-grid .e-row.e-altrow { background-color: rgb(150, 212, 212); }
-```
-
-## Cell Styling
-
-### Conditional Cell Styling
-
-Use `queryCellInfo` callback to apply classes based on cell data:
-
-```vue
-<template>
-  <ejs-grid :dataSource="data" :queryCellInfo="handleQueryCellInfo">
-    <e-columns>
-      <e-column field="Status" width="100"></e-column>
-      <e-column field="Freight" width="100"></e-column>
-    </e-columns>
+    <!-- Grid with customized colors -->
   </ejs-grid>
 </template>
 
 <script setup>
-const handleQueryCellInfo = (args) => {
-  if (args.column.field === 'Status' && args.data.Status === 'Completed')
-    args.cell.classList.add('status-completed');
-  if (args.column.field === 'Freight' && args.data.Freight > 100)
-    args.cell.classList.add('high-value');
-};
+const data = [
+  { OrderID: 10248, CustomerName: 'VINET', TotalAmount: 32.38 },
+  { OrderID: 10249, CustomerName: 'TOMSP', TotalAmount: 11.61 }
+];
 </script>
-
-<style>
-.status-completed { background-color: #d4edda; color: #155724; font-weight: bold; }
-.status-pending { background-color: #fff3cd; color: #856404; font-weight: bold; }
-.high-value { background-color: #ffe6e6; color: #c00; }
-</style>
 ```
 
-## Row Styling
+#### Common Customizations
 
-### Alternating Rows & Conditional Styling
+**Change Header Background Color**
 
 ```css
-/* Alternating row colors */
-.e-grid tbody tr:nth-child(odd) { background-color: #f9f9f9; }
-.e-grid tbody tr:nth-child(even) { background-color: #ffffff; }
-.e-grid tbody tr:hover { background-color: #e8f4f8; cursor: pointer; }
-```
-
-For conditional row styling, use `queryRowInfo` callback:
-
-```javascript
-const handleQueryRowInfo = (args) => {
-  if (args.data.Status === 'Completed') args.row.classList.add('row-completed');
-  if (args.data.Priority === 'High') args.row.classList.add('row-high-priority');
-};
-```
-
-```css
-.row-completed { background-color: #d4edda; }
-.row-high-priority { background-color: #ffe6e6; font-weight: bold; }
-```
-
-## Header Styling
-
-```css
-/* Grid header container */
-.e-gridheader { border-bottom: 2px solid #d0d0d0; background-color: #f5f5f5; }
-
-/* Header cells */
-.e-gridheader .e-headercell {
-  background-color: #f8f9fa; color: #333333; font-weight: 600; padding: 12px 8px;
-}
-.e-gridheader .e-headercell:hover { background-color: #f0f2f5; }
-.e-gridheader .e-headercelldiv { font-weight: 600; font-size: 14px; color: #1a1a1a; padding: 8px; }
-```
-
-## Paging Styling
-
-```css
-.e-gridpager { background-color: #f8f9fa; border-top: 2px solid #e8e8e8; padding: 12px 16px; }
-
-/* Navigation buttons */
-.e-gridpager .e-prevpage, .e-gridpager .e-nextpage, .e-gridpager .e-firstpage, .e-gridpager .e-lastpage {
-  background-color: #ffffff; color: #495057; border: 1px solid #dee2e6; padding: 6px 12px; margin: 0 2px; border-radius: 4px; cursor: pointer; transition: all 0.2s ease;
-}
-
-.e-gridpager .e-prevpagedisabled, .e-gridpager .e-nextpagedisabled, .e-gridpager .e-firstpagedisabled, .e-gridpager .e-lastpagedisabled {
-  background-color: #f5f5f5; color: #ccc; border: 1px solid #e0e0e0; cursor: not-allowed; padding: 6px 12px; margin: 0 2px;
-}
-
-/* Numeric pagination */
-.e-gridpager .e-numericitem { background-color: #ffffff; color: #495057; border: 1px solid #dee2e6; padding: 6px 12px; margin: 0 2px; cursor: pointer; border-radius: 4px; font-weight: 500; }
-.e-gridpager .e-numericitem:hover { background-color: #e3f2fd; border-color: #3f51b5; color: #3f51b5; }
-.e-gridpager .e-currentitem { background-color: #3f51b5; color: #ffffff; border: 1px solid #3f51b5; padding: 6px 12px; margin: 0 2px; border-radius: 4px; font-weight: 600; }
-```
-
-## Sorting Styling
-
-```css
-.e-icon-ascending::before { content: '\e7a3'; color: #00a4ef; font-size: 14px; font-weight: 600; }
-.e-icon-descending::before { content: '\e7b6'; color: #ff6b6b; font-size: 14px; font-weight: 600; }
-.e-sortnumber {
-  background-color: #ff8a65; color: #ffffff; border-radius: 50%; font-weight: 700; font-size: 11px;
-  min-width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; margin-left: 4px;
+:root {
+  --color-sf-content-bg-color-alt1: #2c3e50;
+  --color-sf-on-content-text: #ffffff;
 }
 ```
 
-## Filtering Styling
+**Customize Row Hover Effect**
 
 ```css
-/* Filter bar cell */
-.e-filterbarcell { background-color: #f5f7fa; border-bottom: 2px solid #e0e0e0; }
-
-/* Filter input */
-.e-filterbarcell .e-input-group input.e-input { padding: 8px 12px; border: 1px solid #cbd5e0; border-radius: 4px; font-size: 14px; font-family: cursive; }
-.e-filterbarcell .e-input-group.e-input-focus input.e-input { border-color: #3f51b5; box-shadow: 0 0 0 3px rgba(63, 81, 181, 0.1); }
-
-/* Filter icons */
-.e-filterbarcell .e-clear-icon::before { content: '\e71d'; color: #999999; }
-.e-filterbarcell .e-clear-icon:hover::before { color: #ff6b6b; }
-.e-icon-filter::before { content: '\e7c8'; color: #3f51b5; }
-
-/* Filter popup dialog */
-.e-filter-popup .e-dlg-content, .e-filter-popup .e-footer-content { background-color: #deecf9; }
-.e-filter-popup .e-footer-content { padding: 12px; border-top: 1px solid #e0e0e0; }
-.e-filter-popup .e-btn { font-family: cursive; }
-```
-
-## Grouping Styling
-
-```css
-.e-groupdroparea { background: linear-gradient(135deg, #f5f7fa, #e8ecf1); border: 2px dashed #cbd5e0; padding: 12px 16px; border-radius: 6px; min-height: 60px; }
-
-/* Group icons */
-.e-icon-gdownarrow::before { content: '\e7c9'; color: #3f51b5; font-size: 14px; font-weight: 600; }
-.e-icon-grightarrow::before { content: '\e80f'; color: #666666; font-size: 14px; }
-
-/* Group caption and rows */
-.e-groupcaption { background-color: #e8eef7; font-weight: 600; color: #2c3e50; border-bottom: 2px solid #d8d8d8; }
-.e-grid .e-recordplusexpand, .e-grid .e-recordpluscollapse { background-color: #e8eef7; }
-.e-indentcell { background-color: transparent; border-right: 2px solid #e8ecf1; }
-```
-
-## Toolbar Styling
-
-```css
-.e-toolbar { background: linear-gradient(to right, #f8f9fa, #f0f2f5); border-bottom: 3px solid #d8d8d8; padding: 10px; }
-.e-toolbar-items { background-color: transparent; }
-
-/* Toolbar buttons */
-.e-toolbar .e-btn { background-color: #ffffff; color: #2c3e50; border: 1px solid #cbd5e0; padding: 8px 14px; margin: 2px 4px; border-radius: 4px; cursor: pointer; font-weight: 500; transition: all 0.2s ease; }
-.e-toolbar .e-btn:hover { background-color: #f0f7ff; border-color: #3f51b5; color: #3f51b5; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-.e-toolbar .e-btn.e-active { background-color: #3f51b5; color: #ffffff; border-color: #3f51b5; }
-```
-
-## Editing Styling
-
-```css
-/* Edit row highlighting */
-.e-editedrow table { background-color: #fffacd; border: 2px solid #ffd700; }
-.e-addedrow table { background-color: #e0f7ff; border: 2px solid #00bfff; }
-
-/* Edit form inputs */
-.e-gridform .e-rowcell .e-input-group input.e-input { padding: 10px 12px; border: 2px solid #cbd5e0; border-radius: 4px; font-size: 14px; }
-.e-gridform .e-rowcell .e-input-group.e-input-focus input.e-input { border-color: #3f51b5; box-shadow: inset 0 0 0 1px #3f51b5; }
-.e-gridform .e-rowcell .e-float-input .e-field { padding: 12px; border-bottom: 2px solid #cbd5e0; font-size: 14px; }
-.e-gridform .e-rowcell .e-float-input .e-field:focus { border-bottom-color: #3f51b5; }
-
-/* Edit dialog */
-.e-edit-dialog .e-dlg-header-content { background: linear-gradient(to right, #f8f9fa, #f0f2f5); border-bottom: 2px solid #d8d8d8; padding: 16px 20px; }
-
-/* Toolbar action buttons */
-.e-toolbar .e-btn.e-edit::before { color: #00a4ef; }
-.e-toolbar .e-btn.e-delete::before { color: #f44336; }
-.e-toolbar .e-btn.e-update::before { color: #4caf50; }
-.e-grid .e-delete::before, .e-grid .e-cancel-icon::before { color: #f51717; }
-```
-
-## Aggregate Styling
-
-```css
-.e-gridfooter { background: linear-gradient(to bottom, #fafbfc, #f5f7fa); border-top: 3px solid #e0e0e0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
-
-.e-summaryrow { background-color: #f5f7fa; font-weight: 600; }
-.e-summaryrow .e-summarycell { background-color: #f5f7fa; color: #2c3e50; font-weight: 600; padding: 10px 12px; border-right: 1px solid #e0e0e0; }
-.e-summaryrow .e-summarycell:nth-child(even) { background-color: #eef0f5; }
-```
-
-## Selection Styling
-
-```css
-/* Row selection */
-.e-selectionbackground { background-color: #cfe9ff; border-left: 4px solid #0078d4; }
-.e-row.e-selectionbackground .e-rowcell { background-color: #cfe9ff; color: #000000; }
-.e-row.e-selectionbackground:hover .e-rowcell { background-color: #a8d8ff; }
-
-/* Cell and column selection */
-.e-cellselectionbackground { background-color: #c8e6c9; border: 2px solid #25a125; }
-.e-columnselection { background-color: #fff3cd; }
-```
-
-## Responsive Design & Dark Mode
-
-### Responsive Grid
-```css
-@media (max-width: 800px) {
-  .e-grid { font-size: 12px; }
-  .e-grid .e-gridcontent { max-height: 300px; }
+:root {
+  --color-sf-surface-hover: #eceff1;
 }
 ```
 
-### Dark Mode
-Apply dark theme by toggling a class and styling accordingly:
+**Modify Grid Lines Color**
 
 ```css
-.dark-mode .e-grid { background-color: #1e1e1e; color: #ffffff; }
-.dark-mode .e-headercell { background-color: #2d2d2d; color: #ffffff; border-color: #444; }
-.dark-mode .e-grid .e-row { border-color: #444; }
-.dark-mode .e-grid tbody tr:hover { background-color: #3d3d3d; }
+:root {
+  --color-sf-outline: #b0bec5;
+}
 ```
 
-## Practical Example
+**Change Selected Row Appearance**
 
+```css
+:root {
+  --color-sf-secondary-container: #c5e1a5;
+  --color-sf-on-secondary-container: #33691e;
+}
+```
+
+---
+
+## Common Patterns
+
+### Pattern 1: Switching Themes Dynamically
+
+Allow users to switch between light and dark themes at runtime:
+
+```css
+@import "../node_modules/@syncfusion/ej2-tailwind3-theme/styles/grid/index.css";
+```
 ```vue
 <template>
-  <div class="grid-container">
-    <div class="controls">
-      <button @click="toggleDarkMode">{{ isDarkMode ? 'Light' : 'Dark' }}</button>
-    </div>
-    <ejs-grid :dataSource="data" :class="{ 'dark-mode': isDarkMode }" :queryCellInfo="handleQueryCellInfo">
-      <e-columns>
-        <e-column field="OrderID" width="100"></e-column>
-        <e-column field="Status" width="120"></e-column>
-        <e-column field="Freight" format="C2" width="100"></e-column>
-      </e-columns>
-    </ejs-grid>
-  </div>
+  <button @click="toggleTheme">
+    Toggle {{ isDarkMode ? 'Light' : 'Dark' }} Mode
+  </button>
+
+  <ejs-grid :dataSource="data" :allowPaging="true">
+    <e-columns>
+      <e-column field="OrderID" headerText="Order ID" width="100"></e-column>
+      <e-column field="CustomerName" headerText="Customer Name" width="150"></e-column>
+    </e-columns>
+  </ejs-grid>
 </template>
 
 <script setup>
 import { ref } from 'vue';
-import '@syncfusion/ej2-vue-grids/styles/material3.css';
 
 const isDarkMode = ref(false);
-
-const toggleDarkMode = () => { isDarkMode.value = !isDarkMode.value; };
-const handleQueryCellInfo = (args) => {
-  if (args.data.Freight > 100) args.cell.classList.add('high-value');
+const data = [
+  { OrderID: 10248, CustomerName: 'Thomas Hardy' },
+  { OrderID: 10249, CustomerName: 'Maria Anders' },
+  { OrderID: 10250, CustomerName: 'Ana Trujillo' }
+];
+const toggleTheme = async () => {
+  isDarkMode.value = !isDarkMode.value;
+  if (isDarkMode.value) {
+    document.body.classList.add('e-dark');
+    await import('@syncfusion/ej2-tailwind3-dark-theme/styles/grid/index.css');
+  } else {
+    document.body.classList.remove('e-dark');
+    await import('@syncfusion/ej2-tailwind3-theme/styles/grid/index.css');
+  }
 };
 </script>
-
-<style>
-.grid-container { padding: 20px; }
-.controls { margin-bottom: 20px; display: flex; gap: 10px; }
-.dark-mode .e-grid { background-color: #1e1e1e; color: #ffffff; }
-.high-value { font-weight: bold; color: #ff0000; }
-</style>
 ```
+
+### Pattern 2: Responsive Design with Multiple Themes
+
+Apply different themes based on screen size:
+
+```css
+@import "../node_modules/@syncfusion/ej2-bootstrap5.3-theme/styles/grid/index.css";
+```
+
+```vue
+<template>
+  <ejs-grid :dataSource="data"></ejs-grid>
+</template>
+
+<script setup>
+import { ref, onMounted, onUnmounted } from 'vue';
+
+const theme = ref('bootstrap');
+const data = [{ OrderID: 10248, CustomerName: 'Thomas Hardy' }];
+const resizeHandler = () => {
+  document.body.classList.toggle('e-bigger', window.innerWidth < 768);
+  theme.value = window.innerWidth < 768 ? 'touch-optimized' : 'desktop';
+};
+onMounted(() => {
+  window.addEventListener('resize', resizeHandler);
+  resizeHandler();
+});
+onUnmounted(() => window.removeEventListener('resize', resizeHandler));
+</script>
+```
+
+### Pattern 3: Custom Brand Colors
+
+Override theme colors to match brand identity:
+
+```css
+@import "../node_modules/@syncfusion/ej2-material3-theme/styles/grid/index.css";
+/* brand-theme.css */
+:root {
+  /* Company brand color (instead of Material purple) */
+  --color-sf-primary: #1976d2; /* Blue brand */
+  --color-sf-secondary: #dc004e; /* Pink accent */
+  
+  /* Header styling */
+  --color-sf-content-bg-color-alt1: #f5f5f5;
+  
+  /* Selection and hover states */
+  --color-sf-surface-hover: #e3f2fd;
+  --color-sf-secondary-container: #f3e5f5;
+  
+  /* Success/Error states */
+  --color-sf-success: #4caf50;
+  --color-sf-error: #f44336;
+}
+```
+
+```vue
+import './brand-theme.css';
+```
+
+### Pattern 4: Accessibility with High Contrast Theme
+
+Implement high contrast theme for accessibility compliance:
+
+```vue
+<template>
+  <label>
+    <input type="checkbox" :checked="highContrast" @change="onHighContrastChange" />
+    Enable High Contrast Mode (Accessibility)
+  </label>
+  <ejs-grid :dataSource="data">
+    <e-columns>
+      <e-column field="OrderID" headerText="Order ID" width="120"></e-column>
+      <e-column field="CustomerName" headerText="Customer Name" width="180"></e-column>
+    </e-columns>
+  </ejs-grid>
+</template>
+
+<script setup>
+import { ref } from 'vue';
+const highContrast = ref(false);
+const data = [
+  { OrderID: 10248, CustomerName: 'Thomas Hardy' },
+  { OrderID: 10249, CustomerName: 'Maria Anders' }
+];
+const onHighContrastChange = async (event) => {
+  highContrast.value = event.target.checked;
+  if (highContrast.value) {
+    document.body.classList.add('e-highcontrast');
+    await import('@syncfusion/ej2-highcontrast-theme/styles/highcontrast.css');
+  } else {
+    document.body.classList.remove('e-highcontrast');
+  }
+};
+</script>
+```
+---
+
+## When to Use Each Approach
+
+| Scenario | Recommendation | Method |
+|----------|---|---|
+| **Static theme** | Use one theme throughout app | Import CSS in main app file |
+| **User preference** | Let users choose theme | Use CSS class switching + state |
+| **Brand matching** | Override default colors | CSS variable customization |
+| **Accessibility** | Support high contrast | Provide high contrast theme toggle |
+| **Mobile-first** | Optimize for touch | Apply `e-bigger` class on mobile |
+| **Team design system** | Consistent styling | Create custom theme package |
+
+---
+
+## Edge Cases & Troubleshooting
+
+### Issue: Custom CSS variables not overriding theme
+
+**Problem:** CSS variable changes ignored by theme
+
+**Solution:** Ensure custom styles load AFTER theme CSS and use `!important` if needed
+
+```vue
+// Order matters!
+import '@syncfusion/ej2-material3-theme/styles/material3.css';
+import './custom-overrides.css'; // Load custom styles AFTER theme
+
+// In custom-overrides.css:
+:root {
+  --color-sf-primary: #1976d2 !important; /* Use !important if necessary */
+}
+```
+
+### Issue: Touch mode not activating
+
+**Problem:** `e-bigger` class applied but UI not enlarging
+
+**Solution:** 
+1. Verify class is applied to `<body>` or parent container
+2. Check theme includes touch mode styles
+3. Ensure theme CSS is loaded correctly
+
+```vue
+// ✅ Correct: Add to body in index.html or main layout
+<body className="e-bigger">
+  <div id="root"></div>
+</body>
+
+// Or dynamically:
+if (isTouchDevice) {
+  document.body.classList.add('e-bigger');
+}
+```
+
+---
+
+## Best Practices
+
+1. **Choose theme once at startup** — Switching themes frequently impacts performance
+2. **Keep CSS variable overrides minimal** — Override only what you need to customize
+3. **Test accessibility** — Verify color contrast meets WCAG AA standards
+4. **Mobile consideration** — Use `e-bigger` class for better touch UX
+5. **Cache management** — Clear cache when switching themes during development
+6. **Use dark theme package** — Don't manually create dark themes; use official packages

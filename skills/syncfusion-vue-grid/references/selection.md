@@ -1,384 +1,507 @@
 # Selection
 
 ## Table of Contents
-- [When to Use](#when-to-use)
+
+- [When to Use This Skill](#when-to-use-this-skill)
+- [Overview](#overview)
+- [Selection Settings](#selection-settings)
+- [Critical Rule](#critical-rule)
 - [Row Selection](#row-selection)
 - [Cell Selection](#cell-selection)
 - [Column Selection](#column-selection)
 - [Checkbox Selection](#checkbox-selection)
-- [Multi Select](#multi-select)
-- [Keyboard Shortcuts](#keyboard-shortcuts)
 - [Selection Events](#selection-events)
 
-## When to Use
+## When to Use This Skill
 
-Use this reference when you need to:
-- Enable row, cell, or column selection in grid
-- Implement multi-select with checkboxes
-- Configure keyboard shortcuts for selection
-- Handle selection events
-- Get selected rows/cells programmatically
-- Customize selection appearance
+Use this skill when you need to:
+- Enable row selection for single or multiple records.
+- Enable cell selection for individual cells or cell ranges.
+- Enable column selection for whole-column interactions.
+- Render checkbox selection for bulk actions.
+- Persist selection across paging or data refresh.
+- Select rows, cells, or columns programmatically.
+- Conditionally block selection for specific rows.
+- Handle row, cell, and column selection events.
 
-## Row Selection
+## Overview
 
-### Enable Row Selection
+The Syncfusion EJ2 Vue Grid supports row, cell, and column selection. Configure `selectionSettings` to choose single or multiple selection and to control behaviors such as checkbox-only selection, column selection, and persistent selection.
+
+Selection is enabled by default, and the grid uses `mode: 'Row'` with `type: 'Single'` unless you override those values.
+
+## Selection Settings
+
+Common `selectionSettings` properties:
+- `mode`: `'Row' | 'Cell' | 'Both'` — selects rows, cells, or both.
+- `type`: `'Single' | 'Multiple'` — selects one item or many.
+- `allowColumnSelection`: `true | false` — enables column header selection.
+- `checkboxOnly`: `true | false` — allows selection only on checkbox clicks.
+- `checkboxMode`: `'Default' | 'ResetOnRowClick'` — controls how checkboxes behave.
+- `persistSelection`: `true | false` — keeps selection across paging and refresh.
+- `enableSimpleMultiRowSelection`: `true | false` — enables single-click multi-row selection.
+- `enableToggle`: `true | false` — lets users click a selected item again to deselect it.
+- `cellSelectionMode`: `'Flow' | 'Box' | 'BoxWithBorder'` — controls cell range selection shape.
+- `isRowSelectable`: callback to conditionally allow selection per row.
+
+You can also pre-select a row during initial rendering with the `selectedRowIndex` property.
+
+## Critical Rule
+
+### Rule 1: Selection APIs Work by Default Unless Disabled
+
+Selection is enabled by default. Do not disable selection unless you explicitly want to block selection behavior.
+
 ```vue
 <template>
-  <ejs-grid 
-    :dataSource="data"
-    :allowSelection="true"
-    :selectionSettings="selectionSettings">
+  <ejs-grid :dataSource="data" :selectionSettings="selectionSettings">
     <e-columns>
-      <e-column field="OrderID" headerText="Order ID" width="100"></e-column>
-      <e-column field="CustomerID" headerText="Customer ID" width="120"></e-column>
+      <e-column field="OrderID" headerText="Order ID" width="120"></e-column>
+      <e-column field="CustomerID" headerText="Customer ID" width="150"></e-column>
     </e-columns>
   </ejs-grid>
 </template>
 
 <script setup>
-import { GridComponent as EjsGrid, ColumnDirective as EColumn, ColumnsDirective as EColumns, Selection } from "@syncfusion/ej2-vue-grids";
-import { provide } from 'vue';
+import { GridComponent as EjsGrid, ColumnDirective as EColumn, ColumnsDirective as EColumns } from '@syncfusion/ej2-vue-grids';
 
 const selectionSettings = {
-  type: 'Row',      // 'Row', 'Cell', 'Column'
-  mode: 'Single'    // 'Single', 'Multiple'
-};
-
-provide('grid', [Selection]);
-</script>
-```
-
-### Single Row Selection
-```vue
-<script setup>
-const selectionSettings = {
-  type: 'Row',
-  mode: 'Single'
+  mode: 'Row',
+  type: 'Multiple'
 };
 </script>
 ```
-
-### Multiple Row Selection
-```vue
-<script setup>
-const selectionSettings = {
-  type: 'Row',
-  mode: 'Multiple'
-};
-</script>
-```
-
-### Cell Selection Modes
-
-Cell selection display can be customized using `cellSelectionMode`:
 
 ```javascript
-const selectionSettings = {
-  type: 'Cell',
-  mode: 'Multiple',
-  cellSelectionMode: 'Flow'  // 'Flow', 'Box', 'BoxWithBorder'
-};
+// ✅ Works when selection is enabled by default
+this.$refs.grid.selectRow(0);
+this.$refs.grid.selectRows([0, 2, 4]);
+this.$refs.grid.selectAll();
+this.$refs.grid.clearSelection();
 ```
 
-**Cell Selection Modes:**
-- **`Flow`** - Continuous selection flowing through cells (default)
-- **`Box`** - Rectangular box selection
-- **`BoxWithBorder`** - Rectangular selection with visible border
-
-### External Cell Selection
-```javascript
-// Select single cell by row and column index
-gridInstance.selectCell({ rowIndex: 1, cellIndex: 2 });
-
-// Select multiple cells
-gridInstance.selectCells([
-  { rowIndex: 0, cellIndex: 0 },
-  { rowIndex: 1, cellIndex: 1 },
-  { rowIndex: 2, cellIndex: 2 }
-]);
-
-// Select cell range
-gridInstance.selectCellsByRange({ startRowIndex: 0, endRowIndex: 5, startCellIndex: 0, endCellIndex: 3 });
-
-// Clear cell selection
-gridInstance.clearCellSelection();
+```vue
+<!-- ❌ Avoid disabling selection if you still need selection APIs -->
+<ejs-grid :dataSource="data" :allowSelection="false">
+  <e-columns>
+    <e-column field="OrderID"></e-column>
+  </e-columns>
+</ejs-grid>
 ```
 
-### Cell Selection Events
+## Row Selection
+
+Row selection allows users to select one or more rows.
+
+### Enable row selection
+
 ```vue
 <template>
-  <ejs-grid 
-    :dataSource="data"
-    :cellSelecting="handleCellSelecting"
-    :cellSelected="handleCellSelected"
-    :cellDeselected="handleCellDeselected">
-    <!-- columns -->
+  <ejs-grid :dataSource="data" :selectionSettings="selectionSettings">
+    <e-columns>
+      <e-column field="OrderID" headerText="Order ID" width="120"></e-column>
+      <e-column field="CustomerID" headerText="Customer ID" width="150"></e-column>
+    </e-columns>
   </ejs-grid>
 </template>
 
 <script setup>
-const handleCellSelecting = (args) => {
-  console.log('Cell selecting:', args.cellIndex, args.rowIndex);
+const selectionSettings = {
+  mode: 'Row',
+  type: 'Multiple'
+};
+</script>
+```
+
+### Single row selection
+
+```javascript
+const selectionSettings = {
+  mode: 'Row',
+  type: 'Single'
+};
+```
+
+### Multiple row selection
+
+```javascript
+const selectionSettings = {
+  mode: 'Row',
+  type: 'Multiple'
+};
+```
+
+### Select a row at initial render
+
+```vue
+<ejs-grid :dataSource="data" :selectedRowIndex="1" :selectionSettings="selectionSettings">
+  <e-columns>
+    <e-column field="OrderID" headerText="Order ID" width="120"></e-column>
+    <e-column field="CustomerID" headerText="Customer ID" width="150"></e-column>
+  </e-columns>
+</ejs-grid>
+```
+
+### Multiple row selection by single click
+
+```javascript
+const selectionSettings = {
+  mode: 'Row',
+  type: 'Multiple',
+  enableSimpleMultiRowSelection: true
+};
+```
+
+### Select rows programmatically
+
+```javascript
+this.$refs.grid.selectRow(2);
+this.$refs.grid.selectRows([0, 3, 5]);
+this.$refs.grid.selectRowsByRange(1, 4);
+```
+
+### Select rows based on a condition
+
+```javascript
+const isRowSelectable = (data) => data.Status !== 'Cancelled';
+```
+
+### Get selected row indexes and records
+
+```javascript
+const selectedIndexes = this.$refs.grid.getSelectedRowIndexes();
+const selectedRecords = this.$refs.grid.getSelectedRecords();
+```
+
+### Persist row selection across pages
+
+```javascript
+const selectionSettings = {
+  mode: 'Row',
+  type: 'Multiple',
+  persistSelection: true
+};
+```
+
+### Clear row selection programmatically
+
+```javascript
+this.$refs.grid.clearRowSelection();
+```
+
+### Row selection events
+
+```vue
+<template>
+  <ejs-grid
+    :dataSource="data"
+    :selectionSettings="selectionSettings"
+    :rowSelecting="rowSelecting"
+    :rowSelected="rowSelected"
+    :rowDeselecting="rowDeselecting"
+    :rowDeselected="rowDeselected">
+    <e-columns>
+      <e-column field="OrderID" headerText="Order ID" width="120"></e-column>
+      <e-column field="CustomerID" headerText="Customer ID" width="150"></e-column>
+    </e-columns>
+  </ejs-grid>
+</template>
+
+<script setup>
+const selectionSettings = { mode: 'Row', type: 'Multiple' };
+
+const rowSelecting = (args) => {
+  if (args.data.CustomerID === 'VINET') {
+    args.cancel = true;
+  }
 };
 
-const handleCellSelected = (args) => {
-  console.log('Cell selected:', args.data);
+const rowSelected = (args) => {
+  console.log('Row selected', args.data);
 };
 
-const handleCellDeselected = (args) => {
-  console.log('Cell deselected:', args.data);
+const rowDeselecting = (args) => {
+  console.log('Row deselecting', args.data);
+};
+
+const rowDeselected = (args) => {
+  console.log('Row deselected', args.data);
+};
+</script>
+```
+
+## Cell Selection
+
+Cell selection allows users to select individual cells or ranges of cells.
+
+### Enable cell selection
+
+```javascript
+const selectionSettings = {
+  mode: 'Cell',
+  type: 'Multiple'
+};
+```
+
+### Cell selection modes
+
+```javascript
+const selectionSettings = {
+  mode: 'Cell',
+  type: 'Multiple',
+  cellSelectionMode: 'Box' // 'Flow' | 'Box' | 'BoxWithBorder'
+};
+```
+
+### Select cells programmatically
+
+```javascript
+this.$refs.grid.selectCell({ rowIndex: 1, cellIndex: 2 });
+this.$refs.grid.selectCells([{ rowIndex: 0, cellIndexes: [1, 3] }]);
+this.$refs.grid.selectCellsByRange(
+  { rowIndex: 0, cellIndex: 1 },
+  { rowIndex: 2, cellIndex: 3 }
+);
+```
+
+### Get selected cell indexes
+
+```javascript
+const selectedCellIndexes = this.$refs.grid.getSelectedRowCellIndexes();
+```
+
+### Clear cell selection programmatically
+
+```javascript
+this.$refs.grid.clearCellSelection();
+```
+
+### Cell selection events
+
+```vue
+<template>
+  <ejs-grid
+    :dataSource="data"
+    :selectionSettings="selectionSettings"
+    :cellSelecting="cellSelecting"
+    :cellSelected="cellSelected"
+    :cellDeselecting="cellDeselecting"
+    :cellDeselected="cellDeselected">
+    <e-columns>
+      <e-column field="OrderID" headerText="Order ID" width="120"></e-column>
+      <e-column field="CustomerID" headerText="Customer ID" width="150"></e-column>
+    </e-columns>
+  </ejs-grid>
+</template>
+
+<script setup>
+const selectionSettings = { mode: 'Cell', type: 'Multiple' };
+
+const cellSelecting = (args) => {
+  if (args.data.ShipCountry === 'France') {
+    args.cancel = true;
+  }
+};
+
+const cellSelected = (args) => {
+  console.log('Cell selected', args.data);
+};
+
+const cellDeselecting = (args) => {
+  console.log('Cell deselecting', args.data);
+};
+
+const cellDeselected = (args) => {
+  console.log('Cell deselected', args.data);
 };
 </script>
 ```
 
 ## Column Selection
 
-### Enable Column Selection
-```vue
-<script setup>
-const selectionSettings = {
-  type: 'Column',
-  mode: 'Single',
-  allowColumnSelection: true
-};
-</script>
-```
+Column selection allows users to select whole columns through the header.
 
-### Multiple Column Selection
-```vue
-<script setup>
-const selectionSettings = {
-  type: 'Column',
-  mode: 'Multiple',
-  allowColumnSelection: true
-};
-</script>
-```
+### Enable column selection
 
-### External Column Selection
 ```javascript
-// Select single column by index
-gridInstance.selectColumn(2);
-
-// Select multiple columns
-gridInstance.selectColumns([0, 2, 4]);
-
-// Select column range
-gridInstance.selectColumnsByRange(0, 4);
-
-// Clear column selection
-gridInstance.clearColumnSelection();
+const selectionSettings = {
+  allowColumnSelection: true,
+  type: 'Multiple'
+};
 ```
 
-### Column Selection Events
+### Select columns programmatically
+
+```javascript
+this.$refs.grid.selectColumn(1);
+this.$refs.grid.selectColumns([0, 2]);
+this.$refs.grid.selectColumnsByRange(1, 3);
+this.$refs.grid.selectColumnWithExisting(2);
+```
+
+### Clear column selection programmatically
+
+```javascript
+this.$refs.grid.clearColumnSelection();
+```
+
+### Column selection events
+
 ```vue
 <template>
-  <ejs-grid 
+  <ejs-grid
     :dataSource="data"
-    :columnSelecting="handleColumnSelecting"
-    :columnSelected="handleColumnSelected"
-    :columnDeselected="handleColumnDeselected">
-    <!-- columns -->
+    :selectionSettings="selectionSettings"
+    :columnSelecting="columnSelecting"
+    :columnSelected="columnSelected"
+    :columnDeselecting="columnDeselecting"
+    :columnDeselected="columnDeselected">
+    <e-columns>
+      <e-column field="OrderID" headerText="Order ID" width="120"></e-column>
+      <e-column field="CustomerID" headerText="Customer ID" width="150"></e-column>
+    </e-columns>
   </ejs-grid>
 </template>
 
 <script setup>
-const handleColumnSelecting = (args) => {
-  console.log('Column selecting:', args.column);
+const selectionSettings = { allowColumnSelection: true, type: 'Multiple' };
+
+const columnSelecting = (args) => {
+  if (args.column.field === 'CustomerID') {
+    args.cancel = true;
+  }
 };
 
-const handleColumnSelected = (args) => {
-  console.log('Column selected:', args.column);
+const columnSelected = (args) => {
+  console.log('Column selected', args.column.field);
 };
 
-const handleColumnDeselected = (args) => {
-  console.log('Column deselected:', args.column);
+const columnDeselecting = (args) => {
+  console.log('Column deselecting', args.column.field);
+};
+
+const columnDeselected = (args) => {
+  console.log('Column deselected', args.column.field);
 };
 </script>
 ```
 
 ## Checkbox Selection
 
-### Row Selector Column
+Checkbox selection renders row checkboxes inside a checkbox column.
+
+### Enable checkbox selection
+
 ```vue
 <template>
-  <ejs-grid :dataSource="data">
+  <ejs-grid :dataSource="data" :selectionSettings="selectionSettings">
     <e-columns>
       <e-column type="checkbox" width="50"></e-column>
-      <e-column field="OrderID" headerText="Order ID" width="100"></e-column>
-      <e-column field="CustomerID" headerText="Customer ID" width="120"></e-column>
-    </e-columns>
-  </ejs-grid>
-</template>
-```
-
-### Checkbox Selection Modes
-
-Configure checkbox behavior with `checkboxMode`:
-
-```javascript
-const selectionSettings = {
-  checkboxOnly: true,
-  checkboxMode: 'Default',     // 'Default' or 'ResetOnRowClick'
-  type: 'Row'
-};
-```
-
-**Checkbox Modes:**
-- **`Default`** - Checkbox selection independent of row click
-- **`ResetOnRowClick`** - Reset other selections when clicking a row
-
-### Allow Checkbox-Only Selection
-```vue
-<template>
-  <ejs-grid 
-    :dataSource="data"
-    :selectionSettings="selectionSettings">
-    <e-columns>
-      <e-column type="checkbox" width="50"></e-column>
-      <e-column field="OrderID" width="100"></e-column>
+      <e-column field="OrderID" headerText="Order ID" width="120"></e-column>
+      <e-column field="CustomerID" headerText="Customer ID" width="150"></e-column>
     </e-columns>
   </ejs-grid>
 </template>
 
 <script setup>
 const selectionSettings = {
-  checkboxOnly: true,  // Only allow checkbox selection, not row click
-  type: 'Row'
+  mode: 'Row',
+  type: 'Multiple'
 };
 </script>
 ```
 
-### Prevent Selection on Specific Rows
+### Checkbox selection modes
+
+```javascript
+const selectionSettings = {
+  mode: 'Row',
+  type: 'Multiple',
+  checkboxMode: 'ResetOnRowClick' // 'Default' | 'ResetOnRowClick'
+};
+```
+
+### Restrict selection to checkbox clicks
+
+```javascript
+const selectionSettings = {
+  mode: 'Row',
+  type: 'Multiple',
+  checkboxOnly: true
+};
+```
+
+### Hide the header select-all checkbox
+
 ```vue
-<template>
-  <ejs-grid 
-    :dataSource="data"
-    :rowDataBound="handleRowDataBound">
-    <e-columns>
-      <e-column type="checkbox" width="50"></e-column>
-      <e-column field="OrderID" width="100"></e-column>
-    </e-columns>
-  </ejs-grid>
-</template>
-
-<script setup>
-const handleRowDataBound = (args) => {
-  // Disable checkbox for specific rows (e.g., cancelled orders)
-  if (args.data.Status === 'Cancelled') {
-    args.isSelectable = false;
-  }
-};
-</script>
+<e-column type="checkbox" width="50">
+  <template #headerTemplate></template>
+</e-column>
 ```
 
-### Partial Checkbox Selection
+### Prevent specific rows from being selected
 
-Use `isRowSelectable` function with `rowDataBound` event:
+```javascript
+const selectionSettings = { type: 'Multiple' };
+
+const rowDataBound = (args) => {
+  args.isSelectable = args.data.Status !== 'Cancelled';
+};
+```
+
+### Use `isRowSelectable` for partial selection
+
+```javascript
+const isRowSelectable = (data) => data.Status !== 'Cancelled';
+```
+
+### Persist checkbox selection across pages
 
 ```javascript
 const selectionSettings = {
-  type: 'Row'
+  mode: 'Row',
+  type: 'Multiple',
+  persistSelection: true
 };
-
-const handleRowDataBound = (args) => {
-  // Allow selection only for orders with Freight > 50
-  if (args.data.Freight < 50) {
-    args.isSelectable = false;
-  }
-};
-```
-
-## Selection Persistence
-
-Persist selection when paging or re-binding data:
-
-```javascript
-const selectionSettings = {
-  type: 'Row',
-  mode: 'Multiple',
-  persistSelection: true  // Maintain selection across page navigation
-};
-```
-
-## Toggle Selection
-
-Allow users to toggle selection on/off for the same row/cell:
-
-```javascript
-const selectionSettings = {
-  type: 'Row',
-  mode: 'Multiple',
-  enableToggle: true  // Click again to deselect
-};
-```
-
-## Programmatic Selection
-
-### Select Rows
-```javascript
-// Select by row index
-gridInstance.selectRow(0);
-
-// Select multiple rows
-gridInstance.selectRows([0, 2, 4]);
-
-// Select all rows
-gridInstance.selectAll();
-```
-
-### Deselect Rows
-```javascript
-// Deselect by row index
-gridInstance.deselectRow(0);
-
-// Clear all selection
-gridInstance.clearSelection();
 ```
 
 ## Selection Events
 
-### Row Selected Event
+Use these events to validate or respond to selection changes:
+- `rowSelecting`, `rowSelected`, `rowDeselecting`, `rowDeselected`
+- `cellSelecting`, `cellSelected`, `cellDeselecting`, `cellDeselected`
+- `columnSelecting`, `columnSelected`, `columnDeselecting`, `columnDeselected`
+
 ```vue
 <template>
-  <ejs-grid 
+  <ejs-grid
     :dataSource="data"
-    :rowSelected="handleRowSelected">
-    <!-- columns -->
+    :selectionSettings="selectionSettings"
+    :rowSelecting="onRowSelecting"
+    :cellSelected="onCellSelected"
+    :columnDeselected="onColumnDeselected">
+    <e-columns>
+      <e-column field="OrderID" headerText="Order ID" width="120"></e-column>
+      <e-column field="CustomerID" headerText="Customer ID" width="150"></e-column>
+    </e-columns>
   </ejs-grid>
 </template>
 
 <script setup>
-const handleRowSelected = (args) => {
-  console.log('Row selected:', args.data);
-  console.log('Row index:', args.rowIndex);
+const selectionSettings = { mode: 'Row', type: 'Multiple' };
+
+const onRowSelecting = (args) => {
+  if (args.data.CustomerID === 'VINET') {
+    args.cancel = true;
+  }
+};
+
+const onCellSelected = (args) => {
+  console.log('Cell selected', args.data);
+};
+
+const onColumnDeselected = (args) => {
+  console.log('Column deselected', args.column.field);
 };
 </script>
-```
-
-### Row Deselected Event
-```javascript
-const handleRowDeselected = (args) => {
-  console.log('Row deselected:', args.data);
-};
-```
-
-## Get Selected Data
-
-### Get Selected Rows
-```javascript
-// Get selected row data
-const selectedRecords = gridInstance.getSelectedRecords();
-console.log(selectedRecords);  // Array of selected records
-
-// Get selected row indices
-const selectedIndices = gridInstance.getSelectedRowIndexes();
-console.log(selectedIndices);  // [0, 2, 4]
-```
-
-### Get Selected Cells indexes
-```javascript
-// Get selected cells indexes
-const selectedCells = gridInstance.getSelectedRowCellIndexes();
 ```
