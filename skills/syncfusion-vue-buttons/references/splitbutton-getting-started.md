@@ -16,8 +16,7 @@ npm install @syncfusion/ej2-vue-splitbuttons @syncfusion/ej2-base
 
 ```vue
 <script setup>
-import '@syncfusion/ej2-base/styles/material.css';
-import '@syncfusion/ej2-splitbuttons/styles/material.css';
+import "@syncfusion/ej2-material3-theme/styles/split-button/index.css";
 </script>
 ```
 
@@ -33,8 +32,7 @@ import '@syncfusion/ej2-splitbuttons/styles/material.css';
 
 <script setup>
 import { SplitButtonComponent } from '@syncfusion/ej2-vue-splitbuttons';
-import '@syncfusion/ej2-base/styles/material.css';
-import '@syncfusion/ej2-splitbuttons/styles/material.css';
+import "@syncfusion/ej2-material3-theme/styles/split-button/index.css";
 
 export default {
   name: "App",

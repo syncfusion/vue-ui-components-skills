@@ -30,7 +30,15 @@ yarn add @syncfusion/ej2-vue-schedule
 
 The `--save` flag adds the package to the `dependencies` section in `package.json`.
 
-## Importing CSS Themes
+## Install theme package and importing CSS themes
+
+### Install theme package
+
+Install the `@syncfusion/ej2-material3-theme` package:
+
+```bash
+npm install @syncfusion/ej2-material3-theme
+```
 
 Import the required CSS styles in your component's `<style>` section or in your main application file.
 
@@ -51,14 +59,7 @@ Syncfusion provides multiple built-in themes:
 
 ```vue
 <style>
-@import '@syncfusion/ej2-base/styles/material3.css';
-@import '@syncfusion/ej2-buttons/styles/material3.css';
-@import '@syncfusion/ej2-calendars/styles/material3.css';
-@import '@syncfusion/ej2-dropdowns/styles/material3.css';
-@import '@syncfusion/ej2-inputs/styles/material3.css';
-@import '@syncfusion/ej2-navigations/styles/material3.css';
-@import '@syncfusion/ej2-popups/styles/material3.css';
-@import '@syncfusion/ej2-vue-schedule/styles/material3.css';
+@import "../node_modules/@syncfusion/ej2-material3-theme/styles/schedule/index.css";
 </style>
 ```
 
@@ -122,14 +123,7 @@ provide('schedule', [Day, Week, WorkWeek, Month, Agenda]);
 </script>
 
 <style>
-@import '@syncfusion/ej2-base/styles/material3.css';
-@import '@syncfusion/ej2-buttons/styles/material3.css';
-@import '@syncfusion/ej2-calendars/styles/material3.css';
-@import '@syncfusion/ej2-dropdowns/styles/material3.css';
-@import '@syncfusion/ej2-inputs/styles/material3.css';
-@import '@syncfusion/ej2-navigations/styles/material3.css';
-@import '@syncfusion/ej2-popups/styles/material3.css';
-@import '@syncfusion/ej2-vue-schedule/styles/material3.css';
+@import "../node_modules/@syncfusion/ej2-material3-theme/styles/schedule/index.css";
 </style>
 ```
 
@@ -172,14 +166,7 @@ export default {
 </script>
 
 <style>
-@import '@syncfusion/ej2-base/styles/material3.css';
-@import '@syncfusion/ej2-buttons/styles/material3.css';
-@import '@syncfusion/ej2-calendars/styles/material3.css';
-@import '@syncfusion/ej2-dropdowns/styles/material3.css';
-@import '@syncfusion/ej2-inputs/styles/material3.css';
-@import '@syncfusion/ej2-navigations/styles/material3.css';
-@import '@syncfusion/ej2-popups/styles/material3.css';
-@import '@syncfusion/ej2-vue-schedule/styles/material3.css';
+@import "../node_modules/@syncfusion/ej2-material3-theme/styles/schedule/index.css";
 </style>
 ```
 
@@ -352,14 +339,7 @@ provide('schedule', [Day, Week, WorkWeek, Month, Agenda]);
 </script>
 
 <style>
-@import '@syncfusion/ej2-base/styles/material3.css';
-@import '@syncfusion/ej2-buttons/styles/material3.css';
-@import '@syncfusion/ej2-calendars/styles/material3.css';
-@import '@syncfusion/ej2-dropdowns/styles/material3.css';
-@import '@syncfusion/ej2-inputs/styles/material3.css';
-@import '@syncfusion/ej2-navigations/styles/material3.css';
-@import '@syncfusion/ej2-popups/styles/material3.css';
-@import '@syncfusion/ej2-vue-schedule/styles/material3.css';
+@import "../node_modules/@syncfusion/ej2-material3-theme/styles/schedule/index.css";
 </style>
 ```
 

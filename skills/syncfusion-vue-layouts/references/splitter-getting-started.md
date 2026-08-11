@@ -40,29 +40,7 @@ The Splitter component requires CSS files for styling. Import these in your main
 ### Tailwind 3 Theme
 
 ```js
-import '@syncfusion/ej2-base/styles/tailwind3.css';
-import '@syncfusion/ej2-vue-layouts/styles/tailwind3.css';
-```
-
-### Bootstrap 5 Theme
-
-```js
-import '@syncfusion/ej2-base/styles/bootstrap5.css';
-import '@syncfusion/ej2-vue-layouts/styles/bootstrap5.css';
-```
-
-### Material Theme
-
-```js
-import '@syncfusion/ej2-base/styles/material3.css';
-import '@syncfusion/ej2-vue-layouts/styles/material3.css';
-```
-
-### Fluent Theme
-
-```js
-import '@syncfusion/ej2-base/styles/fluent2.css';
-import '@syncfusion/ej2-vue-layouts/styles/fluent2.css';
+@import "../node_modules/@syncfusion/ej2-material3-theme/styles/splitter/index.css";
 ```
 
 **Best Practice:** Import CSS in your main `App.vue` component before rendering the Splitter.

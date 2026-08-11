@@ -94,11 +94,7 @@ import { DatePickerComponent } from '@syncfusion/ej2-vue-calendars';
 Add to your `App.css`:
 
 ```css
-@import "../node_modules/@syncfusion/ej2-base/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-buttons/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-inputs/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-popups/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-calendars/styles/material3.css";
+@import "../node_modules/@syncfusion/ej2-material3-theme/styles/datepicker/index.css";
 ```
 
 Then import the CSS file in your component:

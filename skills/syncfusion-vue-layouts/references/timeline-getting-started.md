@@ -27,29 +27,7 @@ Import the required CSS in your main file or component:
 ### Tailwind 3
 
 ```js
-import '@syncfusion/ej2-base/styles/tailwind3.css';
-import '@syncfusion/ej2-vue-layouts/styles/tailwind3.css';
-```
-
-### Material 3
-
-```js
-import '@syncfusion/ej2-base/styles/material3.css';
-import '@syncfusion/ej2-vue-layouts/styles/material3.css';
-```
-
-### Bootstrap 5
-
-```js
-import '@syncfusion/ej2-base/styles/bootstrap5.css';
-import '@syncfusion/ej2-vue-layouts/styles/bootstrap5.css';
-```
-
-### Fluent 2
-
-```js
-import '@syncfusion/ej2-base/styles/fluent2.css';
-import '@syncfusion/ej2-vue-layouts/styles/fluent2.css';
+@import "../node_modules/@syncfusion/ej2-material3-theme/styles/timeline/index.css";
 ```
 
 ## Basic Setup

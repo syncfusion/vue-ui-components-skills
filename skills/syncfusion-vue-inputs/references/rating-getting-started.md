@@ -27,8 +27,7 @@ npm install @syncfusion/ej2-vue-inputs @syncfusion/ej2-base
 <script setup>
 import { ref } from 'vue';
 import { RatingComponent } from '@syncfusion/ej2-vue-inputs';
-import '@syncfusion/ej2-base/styles/material.css';
-import '@syncfusion/ej2-inputs/styles/material.css';
+import "@syncfusion/ej2-material3-theme/styles/rating/index.css";
 
 const rating = ref(0);
 

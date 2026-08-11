@@ -13,9 +13,7 @@ npm install @syncfusion/ej2-vue-dropdowns --save
 Add required CSS imports to `src/main.ts`:
 
 ```typescript
-import '@syncfusion/ej2-base/styles/material3.css';
-import '@syncfusion/ej2-inputs/styles/material3.css';
-import '@syncfusion/ej2-dropdowns/styles/material3.css';
+@import "../node_modules/@syncfusion/ej2-material3-theme/styles/auto-complete/index.css";
 ```
 
 Available themes: `material3`, `bootstrap5`, `bootstrap4`, `fluent`, `fabric`, `highcontrast`, `tailwind`

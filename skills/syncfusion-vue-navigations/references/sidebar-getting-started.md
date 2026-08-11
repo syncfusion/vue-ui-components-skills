@@ -40,16 +40,7 @@ Add theme CSS imports to your application entry point (`main.js` or `main.ts`):
 
 ```javascript
 // Default theme (Material)
-import '@syncfusion/ej2-navigations/styles/material.css';
-import '@syncfusion/ej2-base/styles/material.css';
-
-// Or choose another theme:
-// import '@syncfusion/ej2-navigations/styles/bootstrap5.css';
-// import '@syncfusion/ej2-base/styles/bootstrap5.css';
-// import '@syncfusion/ej2-navigations/styles/fluent.css';
-// import '@syncfusion/ej2-base/styles/fluent.css';
-// import '@syncfusion/ej2-navigations/styles/tailwind.css';
-// import '@syncfusion/ej2-base/styles/tailwind.css';
+@import "../node_modules/@syncfusion/ej2-material3-theme/styles/sidebar/index.css";
 
 import { createApp } from 'vue';
 import App from './App.vue';

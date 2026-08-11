@@ -59,30 +59,7 @@ Add Carousel styles to your main.js or component file. Choose your preferred the
 
 ### Tailwind 3 Theme
 ```js
-import "@syncfusion/ej2-base/styles/tailwind3.css";
-import "@syncfusion/ej2-buttons/styles/tailwind3.css";
-import "@syncfusion/ej2-navigations/styles/tailwind3.css";
-```
-
-### Bootstrap 5.3 Theme
-```js
-import "@syncfusion/ej2-base/styles/bootstrap5.3.css";
-import "@syncfusion/ej2-buttons/styles/bootstrap5.3.css";
-import "@syncfusion/ej2-navigations/styles/bootstrap5.3.css";
-```
-
-### Material 3 Theme
-```js
-import "@syncfusion/ej2-base/styles/material3.css";
-import "@syncfusion/ej2-buttons/styles/material3.css";
-import "@syncfusion/ej2-navigations/styles/material3.css";
-```
-
-### Fluent 2 Theme
-```js
-import "@syncfusion/ej2-base/styles/fluent2.css";
-import "@syncfusion/ej2-buttons/styles/fluent2.css";
-import "@syncfusion/ej2-navigations/styles/fluent2.css";
+@import "../node_modules/@syncfusion/ej2-material3-theme/styles/carousel/index.css";
 ```
 
 ## Basic Carousel Component Setup

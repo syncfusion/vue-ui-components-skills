@@ -60,7 +60,7 @@ npm install @syncfusion/ej2-vue-base --save
 <script setup>
 import { ref } from 'vue';
 import { TreeViewComponent } from '@syncfusion/ej2-vue-navigations';
-import '@syncfusion/ej2-vue-navigations/styles/tree-view.css';
+import "@syncfusion/ej2-material3-theme/styles/treeview/index.css";
 
 const data = ref([
   { id: 1, name: 'Item 1' },
@@ -271,20 +271,7 @@ import '@syncfusion/ej2-vue-navigations/styles/tree-view.css';
 Syncfusion provides multiple themes:
 
 ```vue
-// Material Design (Default, recommended)
-import '@syncfusion/ej2-vue-navigations/styles/material.css';
-
-// Bootstrap
-import '@syncfusion/ej2-vue-navigations/styles/bootstrap.css';
-
-// Bootstrap 5
-import '@syncfusion/ej2-vue-navigations/styles/bootstrap5.css';
-
-// Fluent
-import '@syncfusion/ej2-vue-navigations/styles/fluent.css';
-
-// Tailwind (requires Tailwind CSS)
-import '@syncfusion/ej2-vue-navigations/styles/tailwind.css';
+import "@syncfusion/ej2-material3-theme/styles/treeview/index.css";
 ```
 
 ### Complete Import Example
@@ -321,8 +308,7 @@ const data = ref([...]);
 <script setup>
 import { ref } from 'vue';
 import { TreeViewComponent } from '@syncfusion/ej2-vue-navigations';
-import '@syncfusion/ej2-vue-navigations/styles/tree-view.css';
-import '@syncfusion/ej2-vue-navigations/styles/material.css';
+import "@syncfusion/ej2-material3-theme/styles/treeview/index.css";
 
 const employeeData = ref([
   {
@@ -481,8 +467,7 @@ enableRipple(true);
 
 ```vue
 // ✅ Correct - Both imports needed
-import '@syncfusion/ej2-vue-navigations/styles/tree-view.css';
-import '@syncfusion/ej2-vue-navigations/styles/material.css';
+import "@syncfusion/ej2-material3-theme/styles/treeview/index.css";
 
 // ❌ Wrong - Missing theme CSS
 import '@syncfusion/ej2-vue-navigations/styles/tree-view.css';
@@ -544,8 +529,7 @@ const data = ref([
 
 ```vue
 // ✅ Correct order
-import '@syncfusion/ej2-vue-navigations/styles/tree-view.css';
-import '@syncfusion/ej2-vue-navigations/styles/material.css';
+import "@syncfusion/ej2-material3-theme/styles/treeview/index.css";
 import './custom.css';  // Custom CSS after theme
 
 // ❌ Wrong - Custom CSS before theme

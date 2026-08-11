@@ -75,20 +75,14 @@ npm run dev
 The Tab component requires CSS files for styling. Add these imports to your `src/App.vue` file or main CSS file:
 
 ```css
-@import '../node_modules/@syncfusion/ej2-base/styles/tailwind3.css';
-@import '../node_modules/@syncfusion/ej2-buttons/styles/tailwind3.css';
-@import '../node_modules/@syncfusion/ej2-popups/styles/tailwind3.css';
-@import '../node_modules/@syncfusion/ej2-vue-navigations/styles/tailwind3.css';
+@import "../node_modules/@syncfusion/ej2-material3-theme/styles/tab/index.css";
 ```
 
 Then import in your `App.vue`:
 
 ```vue
 <style>
-@import '../node_modules/@syncfusion/ej2-base/styles/tailwind3.css';
-@import '../node_modules/@syncfusion/ej2-buttons/styles/tailwind3.css';
-@import '../node_modules/@syncfusion/ej2-popups/styles/tailwind3.css';
-@import '../node_modules/@syncfusion/ej2-vue-navigations/styles/tailwind3.css';
+@import "../node_modules/@syncfusion/ej2-material3-theme/styles/tab/index.css";
 </style>
 ```
 
@@ -150,10 +144,7 @@ Create your Vue component:
 <script setup>
 import { ref } from 'vue';
 import { TabComponent, TabItemsDirective, TabItemDirective } from '@syncfusion/ej2-vue-navigations';
-import '@syncfusion/ej2-base/styles/tailwind3.css';
-import '@syncfusion/ej2-buttons/styles/tailwind3.css';
-import '@syncfusion/ej2-popups/styles/tailwind3.css';
-import '@syncfusion/ej2-vue-navigations/styles/tailwind3.css';
+import "@syncfusion/ej2-material3-theme/styles/tab/index.css";
 
 const tabs = [
   { header: 'HTML', content: 'HTML is the standard markup language for creating web pages.' },
@@ -199,10 +190,7 @@ const tabs = [
 
 <script setup>
 import { TabComponent, TabItemsDirective, TabItemDirective } from '@syncfusion/ej2-vue-navigations';
-import '@syncfusion/ej2-base/styles/tailwind3.css';
-import '@syncfusion/ej2-buttons/styles/tailwind3.css';
-import '@syncfusion/ej2-popups/styles/tailwind3.css';
-import '@syncfusion/ej2-vue-navigations/styles/tailwind3.css';
+import "@syncfusion/ej2-material3-theme/styles/tab/index.css";
 </script>
 
 <style scoped>
@@ -258,7 +246,7 @@ If you want the absolute minimum code to get started:
 
 <script setup>
 import { TabComponent, TabItemsDirective, TabItemDirective } from '@syncfusion/ej2-vue-navigations';
-import '@syncfusion/ej2-vue-navigations/styles/tailwind3.css';
+import "@syncfusion/ej2-material3-theme/styles/tab/index.css";
 </script>
 ```
 

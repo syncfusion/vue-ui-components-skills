@@ -74,8 +74,7 @@ const onChange = (args) => {
 **Theme import example:**
 ```js
 // For Bootstrap 5 theme
-import '@syncfusion/ej2-base/styles/bootstrap5.css';
-import '@syncfusion/ej2-calendars/styles/bootstrap5.css';
+@import "../node_modules/@syncfusion/ej2-material3-theme/styles/calendar/index.css";
 ```
 
 ---

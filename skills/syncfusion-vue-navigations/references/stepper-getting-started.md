@@ -46,9 +46,7 @@ Import the necessary CSS files in your main application file (typically `src/mai
 
 ```javascript
 // main.js
-import '@syncfusion/ej2-base/styles/tailwind3.css';
-import '@syncfusion/ej2-popups/styles/tailwind3.css';
-import '@syncfusion/ej2-navigations/styles/tailwind3.css';
+@import "../node_modules/@syncfusion/ej2-material3-theme/styles/stepper/index.css";
 ```
 
 **Available Themes:**
@@ -65,8 +63,7 @@ Import in your Vue Single File Component:
 
 ```vue
 <script setup>
-import '@syncfusion/ej2-base/styles/tailwind3.css';
-import '@syncfusion/ej2-navigations/styles/tailwind3.css';
+import "@syncfusion/ej2-material3-theme/styles/stepper/index.css";
 </script>
 ```
 
@@ -78,8 +75,7 @@ import '@syncfusion/ej2-navigations/styles/tailwind3.css';
 <script setup>
 import { ref } from 'vue';
 import { StepperComponent } from '@syncfusion/ej2-vue-navigations';
-import '@syncfusion/ej2-base/styles/tailwind3.css';
-import '@syncfusion/ej2-navigations/styles/tailwind3.css';
+import "@syncfusion/ej2-material3-theme/styles/stepper/index.css";
 
 const steps = ref([
   { iconCss: 'sf-icon-cart', label: 'Cart' },

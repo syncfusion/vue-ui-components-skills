@@ -34,8 +34,7 @@ Add the following imports to `src/main.ts`:
 
 ```ts
 // src/main.ts
-import '@syncfusion/ej2-base/styles/tailwind3.css';
-import '@syncfusion/ej2-vue-notifications/styles/tailwind3.css';
+import "@syncfusion/ej2-material3-theme/styles/badge/index.css";
 ```
 
 > Vue 3 prefers global CSS imports in `main.ts` so styles are loaded before any component mounts.

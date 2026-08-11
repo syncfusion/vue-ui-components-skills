@@ -57,32 +57,7 @@ registerLicense(licenseKey);
 
 1. **Material** (Default)
 ```js
-import '@syncfusion/ej2-vue-lists/styles/material.css';
-```
-
-2. **Bootstrap**
-```js
-import '@syncfusion/ej2-vue-lists/styles/bootstrap.css';
-```
-
-3. **Fabric (Office)**
-```js
-import '@syncfusion/ej2-vue-lists/styles/fabric.css';
-```
-
-4. **Tailwind**
-```js
-import '@syncfusion/ej2-vue-lists/styles/tailwind.css';
-```
-
-5. **High Contrast**
-```js
-import '@syncfusion/ej2-vue-lists/styles/highcontrast.css';
-```
-
-6. **Tailwind 3**
-```js
-import '@syncfusion/ej2-vue-lists/styles/tailwind3.css';
+@import "../node_modules/@syncfusion/ej2-material3-theme/styles/listview/index.css";
 ```
 
 ### Applying a Theme

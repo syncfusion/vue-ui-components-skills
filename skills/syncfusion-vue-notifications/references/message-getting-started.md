@@ -22,8 +22,7 @@ Import the required stylesheets in your global stylesheet or `main.ts`. The `ej2
 
 ```ts
 // src/main.ts
-import '@syncfusion/ej2-base/styles/tailwind3.css';
-import '@syncfusion/ej2-vue-notifications/styles/tailwind3.css';
+import "@syncfusion/ej2-material3-theme/styles/message/index.css";
 ```
 
 > In Vue 3, CSS imports are commonly placed in `main.ts` to ensure the styles are loaded before the application mounts.

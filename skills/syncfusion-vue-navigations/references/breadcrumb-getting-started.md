@@ -67,7 +67,7 @@ createApp(App).mount('#app')
 
 ```vue
 <style>
-@import '@syncfusion/ej2-vue-navigations/styles/bootstrap5.css';
+@import "../node_modules/@syncfusion/ej2-material3-theme/styles/breadcrumb/index.css";
 </style>
 ```
 

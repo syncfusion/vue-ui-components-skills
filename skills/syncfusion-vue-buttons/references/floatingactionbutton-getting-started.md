@@ -18,8 +18,7 @@ Add stylesheet imports:
 
 ```vue
 <script setup>
-import '@syncfusion/ej2-base/styles/tailwind3.css';
-import '@syncfusion/ej2-buttons/styles/tailwind3.css';
+import "@syncfusion/ej2-material3-theme/styles/floating-action-button/index.css";
 import { FabComponent } from '@syncfusion/ej2-vue-buttons';
 </script>
 ```

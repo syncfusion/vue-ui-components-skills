@@ -38,13 +38,7 @@ npm install @syncfusion/ej2-vue-image-editor --save
 Add the required CSS files to your `src/style.css` for styling the Image Editor and its dependencies:
 
 ```css
-@import "../node_modules/@syncfusion/ej2-base/styles/tailwind3.css";
-@import "../node_modules/@syncfusion/ej2-buttons/styles/tailwind3.css";
-@import "../node_modules/@syncfusion/ej2-popups/styles/tailwind3.css";
-@import "../node_modules/@syncfusion/ej2-splitbuttons/styles/tailwind3.css";
-@import "../node_modules/@syncfusion/ej2-inputs/styles/tailwind3.css";
-@import "../node_modules/@syncfusion/ej2-navigations/styles/tailwind3.css";
-@import "../node_modules/@syncfusion/ej2-image-editor/styles/tailwind3.css";
+@import "../node_modules/@syncfusion/ej2-material3-theme/styles/image-editor/index.css";
 ```
 
 Import this CSS file in your `src/main.ts`:

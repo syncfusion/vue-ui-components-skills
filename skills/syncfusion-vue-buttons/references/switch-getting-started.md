@@ -16,8 +16,7 @@ npm install @syncfusion/ej2-vue-buttons @syncfusion/ej2-base
 
 ```vue
 <script setup>
-import '@syncfusion/ej2-base/styles/material.css';
-import '@syncfusion/ej2-buttons/styles/material.css';
+import "@syncfusion/ej2-material3-theme/styles/switch/index.css";
 </script>
 ```
 
@@ -30,8 +29,7 @@ import '@syncfusion/ej2-buttons/styles/material.css';
 
 <script setup>
 import { SwitchComponent } from '@syncfusion/ej2-vue-buttons';
-import '@syncfusion/ej2-base/styles/material.css';
-import '@syncfusion/ej2-buttons/styles/material.css';
+import "@syncfusion/ej2-material3-theme/styles/switch/index.css";
 
 export default {
   name: "App",

@@ -24,12 +24,7 @@ Add the Card CSS styles to your Vue application. Choose the theme that matches y
 
 ```css
 /* Using Tailwind CSS theme (recommended) */
-@import '@syncfusion/ej2-vue-layouts/styles/tailwind3.css';
-
-/* Or use other available themes: */
-/* @import '@syncfusion/ej2-vue-layouts/styles/bootstrap5.css'; */
-/* @import '@syncfusion/ej2-vue-layouts/styles/material3.css'; */
-/* @import '@syncfusion/ej2-vue-layouts/styles/fluent2.css'; */
+@import "../node_modules/@syncfusion/ej2-material3-theme/styles/card/index.css";
 ```
 
 Place this import in your main CSS file or at the top of your component's `<script setup>` block.

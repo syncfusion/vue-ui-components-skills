@@ -38,9 +38,7 @@ The Material3 theme styles must be imported in the `<style>` section of `src/App
 
 ```vue
 <style>
-@import "../node_modules/@syncfusion/ej2-base/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-vue-buttons/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-vue-popups/styles/material3.css";
+@import "../node_modules/@syncfusion/ej2-material3-theme/styles/dialog/index.css";
 </style>
 ```
 
@@ -94,9 +92,7 @@ export default {
 </script>
 
 <style>
-@import "../node_modules/@syncfusion/ej2-base/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-vue-buttons/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-vue-popups/styles/material3.css";
+@import "../node_modules/@syncfusion/ej2-material3-theme/styles/dialog/index.css";
 
 #statusText {
   font-size: 16px;
@@ -161,9 +157,7 @@ export default {
 </script>
 
 <style>
-@import "../node_modules/@syncfusion/ej2-base/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-vue-buttons/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-vue-popups/styles/material3.css";
+@import "../node_modules/@syncfusion/ej2-material3-theme/styles/dialog/index.css";
 
 #statusText {
   font-size: 16px;
@@ -237,9 +231,7 @@ export default {
 </script>
 
 <style>
-@import "../node_modules/@syncfusion/ej2-base/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-vue-buttons/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-vue-popups/styles/material3.css";
+@import "../node_modules/@syncfusion/ej2-material3-theme/styles/dialog/index.css";
 
 #statusText {
   font-size: 16px;
@@ -301,9 +293,7 @@ export default {
 </script>
 
 <style>
-@import "../node_modules/@syncfusion/ej2-base/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-vue-buttons/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-vue-popups/styles/material3.css";
+@import "../node_modules/@syncfusion/ej2-material3-theme/styles/dialog/index.css";
 
 #statusText {
   font-size: 16px;
@@ -365,9 +355,7 @@ export default {
 </script>
 
 <style>
-@import "../node_modules/@syncfusion/ej2-base/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-vue-buttons/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-vue-popups/styles/material3.css";
+@import "../node_modules/@syncfusion/ej2-material3-theme/styles/dialog/index.css";
 
 #statusText {
   font-size: 16px;
@@ -434,9 +422,7 @@ export default {
 </script>
 
 <style>
-@import "../node_modules/@syncfusion/ej2-base/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-vue-buttons/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-vue-popups/styles/material3.css";
+@import "../node_modules/@syncfusion/ej2-material3-theme/styles/dialog/index.css";
 
 #statusText {
   font-size: 16px;
@@ -507,9 +493,7 @@ export default {
 </script>
 
 <style>
-@import "../node_modules/@syncfusion/ej2-base/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-vue-buttons/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-vue-popups/styles/material3.css";
+@import "../node_modules/@syncfusion/ej2-material3-theme/styles/dialog/index.css";
 
 #statusText {
   font-size: 16px;
@@ -583,9 +567,7 @@ export default {
 </script>
 
 <style>
-@import "../node_modules/@syncfusion/ej2-base/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-vue-buttons/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-vue-popups/styles/material3.css";
+@import "../node_modules/@syncfusion/ej2-material3-theme/styles/dialog/index.css";
 
 #statusText {
   font-size: 16px;
@@ -664,9 +646,7 @@ export default {
 </script>
 
 <style>
-@import "../node_modules/@syncfusion/ej2-base/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-vue-buttons/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-vue-popups/styles/material3.css";
+@import "../node_modules/@syncfusion/ej2-material3-theme/styles/dialog/index.css";
 
 #statusText {
   font-size: 16px;
@@ -728,9 +708,7 @@ export default {
 </script>
 
 <style>
-@import "../node_modules/@syncfusion/ej2-base/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-vue-buttons/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-vue-popups/styles/material3.css";
+@import "../node_modules/@syncfusion/ej2-material3-theme/styles/dialog/index.css";
 
 #statusText {
   font-size: 16px;
@@ -806,9 +784,7 @@ export default {
 </script>
 
 <style>
-@import "../node_modules/@syncfusion/ej2-base/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-vue-buttons/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-vue-popups/styles/material3.css";
+@import "../node_modules/@syncfusion/ej2-material3-theme/styles/dialog/index.css";
 
 #statusText {
   font-size: 16px;
@@ -864,9 +840,7 @@ export default {
 </script>
 
 <style>
-@import "../node_modules/@syncfusion/ej2-base/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-vue-buttons/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-vue-popups/styles/material3.css";
+@import "../node_modules/@syncfusion/ej2-material3-theme/styles/dialog/index.css";
 
 #statusText {
   font-size: 16px;
@@ -993,9 +967,7 @@ export default {
 </script>
 
 <style>
-@import "../node_modules/@syncfusion/ej2-base/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-vue-buttons/styles/material3.css";
-@import "../node_modules/@syncfusion/ej2-vue-popups/styles/material3.css";
+@import "../node_modules/@syncfusion/ej2-material3-theme/styles/dialog/index.css";
 
 #statusText {
   font-size: 16px;

@@ -96,8 +96,7 @@ createApp(App).mount('#app')
 ### Option 2: In App.css or Global CSS
 
 ```css
-@import "../node_modules/@syncfusion/ej2-base/styles/tailwind3.css";
-@import "../node_modules/@syncfusion/ej2-navigations/styles/tailwind3.css";
+@import "../node_modules/@syncfusion/ej2-material3-theme/styles/appbar/index.css";
 ```
 
 **Available Theme Options:**

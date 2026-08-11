@@ -33,10 +33,7 @@ Add component styles to your application. Choose the theme that matches your des
 ```vue
 <!-- In your App.vue or main component -->
 <script setup>
-import '@syncfusion/ej2-base/styles/tailwind3.css';
-import '@syncfusion/ej2-buttons/styles/tailwind3.css';
-import '@syncfusion/ej2-popups/styles/tailwind3.css';
-import '@syncfusion/ej2-vue-navigations/styles/tailwind3.css';
+@import "../node_modules/@syncfusion/ej2-material3-theme/styles/accordion/index.css";
 </script>
 ```
 

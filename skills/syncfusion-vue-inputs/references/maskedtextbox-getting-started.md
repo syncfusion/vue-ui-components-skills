@@ -65,9 +65,7 @@ import App from './App.vue';
 import { enableRipple } from '@syncfusion/ej2-base';
 
 // Import CSS theme
-import '@syncfusion/ej2-inputs/styles/material.css';
-import '@syncfusion/ej2-buttons/styles/material.css';
-import '@syncfusion/ej2-base/styles/material.css';
+@import "../node_modules/@syncfusion/ej2-material3-theme/styles/maskedtextbox/index.css";
 
 enableRipple(true);
 

@@ -9,9 +9,7 @@ npm install @syncfusion/ej2-vue-richtexteditor --save
 ## CSS Imports
 
 ```typescript
-import '@syncfusion/ej2-base/styles/material3.css';
-import '@syncfusion/ej2-inputs/styles/material3.css';
-import '@syncfusion/ej2-richtexteditor/styles/material3.css';
+@import "../node_modules/@syncfusion/ej2-material3-theme/styles/mention/index.css";
 ```
 
 ## Basic Mention

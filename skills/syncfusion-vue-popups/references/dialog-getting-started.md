@@ -29,27 +29,7 @@ Import theme CSS in your component. Choose one theme:
 **Material Theme (Default):**
 ```vue
 <style>
-@import '@syncfusion/ej2-base/styles/material.css';
-@import '@syncfusion/ej2-buttons/styles/material.css';
-@import '@syncfusion/ej2-popups/styles/material.css';
-</style>
-```
-
-**Bootstrap Theme:**
-```vue
-<style>
-@import '@syncfusion/ej2-base/styles/bootstrap.css';
-@import '@syncfusion/ej2-buttons/styles/bootstrap.css';
-@import '@syncfusion/ej2-popups/styles/bootstrap.css';
-</style>
-```
-
-**Tailwind Theme:**
-```vue
-<style>
-@import '@syncfusion/ej2-base/styles/tailwind.css';
-@import '@syncfusion/ej2-buttons/styles/tailwind.css';
-@import '@syncfusion/ej2-popups/styles/tailwind.css';
+@import "../node_modules/@syncfusion/ej2-material3-theme/styles/dialog/index.css";
 </style>
 ```
 

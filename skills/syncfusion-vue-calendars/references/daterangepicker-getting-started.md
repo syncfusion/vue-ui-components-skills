@@ -24,11 +24,7 @@ Import the necessary CSS files in `main.js` or component:
 
 ```javascript
 // main.js
-import '@syncfusion/ej2-base/styles/material3.css';
-import '@syncfusion/ej2-buttons/styles/material3.css';
-import '@syncfusion/ej2-inputs/styles/material3.css';
-import '@syncfusion/ej2-popups/styles/material3.css';
-import '@syncfusion/ej2-calendars/styles/material3.css';
+@import "../node_modules/@syncfusion/ej2-material3-theme/styles/daterangepicker/index.css";
 ```
 
 Available themes: `material3`, `bootstrap5`, `bootstrap4`, `fluent`, `fabric`, `highcontrast`, `tailwind`

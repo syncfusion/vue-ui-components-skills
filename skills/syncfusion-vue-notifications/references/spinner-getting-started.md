@@ -31,24 +31,7 @@ Add the required theme CSS to your `src/main.ts` file:
 
 ```ts
 // src/main.ts
-import '@syncfusion/ej2-base/styles/tailwind3.css';
-import '@syncfusion/ej2-vue-popups/styles/tailwind3.css';
-```
-
-Other available themes (pick ONE):
-
-```ts
-// Material
-import '@syncfusion/ej2-base/styles/material.css';
-import '@syncfusion/ej2-vue-popups/styles/material.css';
-
-// Bootstrap 5
-import '@syncfusion/ej2-base/styles/bootstrap5.css';
-import '@syncfusion/ej2-vue-popups/styles/bootstrap5.css';
-
-// Fluent 2
-import '@syncfusion/ej2-base/styles/fluent2.css';
-import '@syncfusion/ej2-vue-popups/styles/fluent2.css';
+import "@syncfusion/ej2-material3-theme/styles/spinner/index.css";
 ```
 
 > ⚠️ Always import `ej2-base` theme **before** `ej2-vue-popups` theme.

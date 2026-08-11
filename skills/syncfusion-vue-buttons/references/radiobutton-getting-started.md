@@ -26,8 +26,7 @@ npm install @syncfusion/ej2-vue-buttons @syncfusion/ej2-base
 
 <script setup>
 import { ref } from 'vue';
-import '@syncfusion/ej2-base/styles/tailwind3.css';
-import '@syncfusion/ej2-buttons/styles/tailwind3.css';
+import "@syncfusion/ej2-material3-theme/styles/radio-button/index.css";
 import { RadioButtonComponent } from '@syncfusion/ej2-vue-buttons';
 
 export default {
@@ -70,8 +69,7 @@ const selected = ref('1');
 
 <script setup>
 import { ref } from 'vue';
-import '@syncfusion/ej2-base/styles/tailwind3.css';
-import '@syncfusion/ej2-buttons/styles/tailwind3.css';
+import "@syncfusion/ej2-material3-theme/styles/radio-button/index.css";
 import { RadioButtonComponent } from '@syncfusion/ej2-vue-buttons';
 
 export default {

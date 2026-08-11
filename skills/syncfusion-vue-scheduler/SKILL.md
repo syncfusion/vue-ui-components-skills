@@ -42,8 +42,8 @@ Complete coverage of Syncfusion Vue Scheduler with 14 comprehensive reference fi
 
 ### Getting Started
 📄 **Read:** [references/getting-started.md](references/getting-started.md)
-- Installation via npm (@syncfusion/ej2-vue-schedule)
-- CSS theme imports (Material3, Bootstrap5, Fabric, Tailwind, etc.)
+- Installation `@syncfusion/ej2-vue-schedule` and theme package
+- CSS reference using Syncfusion theme packages
 - Module injection and provide setup for both Vue 2/3
 - Basic scheduler initialization with selectedDate and currentView
 - Creating first appointments with eventSettings
@@ -273,14 +273,7 @@ provide('schedule', [Day, Week, WorkWeek, Month, Agenda]);
 </script>
 
 <style>
-@import '@syncfusion/ej2-base/styles/material3.css';
-@import '@syncfusion/ej2-buttons/styles/material3.css';
-@import '@syncfusion/ej2-calendars/styles/material3.css';
-@import '@syncfusion/ej2-dropdowns/styles/material3.css';
-@import '@syncfusion/ej2-inputs/styles/material3.css';
-@import '@syncfusion/ej2-navigations/styles/material3.css';
-@import '@syncfusion/ej2-popups/styles/material3.css';
-@import '@syncfusion/ej2-vue-schedule/styles/material3.css';
+@import "../node_modules/@syncfusion/ej2-material3-theme/styles/schedule/index.css";
 </style>
 ```
 

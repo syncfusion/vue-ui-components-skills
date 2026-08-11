@@ -74,8 +74,7 @@ Create a basic Vue 3 SFC (Single File Component) with the Uploader:
 <script setup>
 import { ref } from 'vue';
 import { UploaderComponent } from '@syncfusion/ej2-vue-inputs';
-import '@syncfusion/ej2-base/styles/material.css';
-import '@syncfusion/ej2-inputs/styles/material.css';
+import "@syncfusion/ej2-material3-theme/styles/uploader/index.css";
 
 // Component reference for imperative method calls
 const uploaderRef = ref(null);
@@ -128,8 +127,7 @@ For a minimal uploader setup with auto-upload:
 
 <script setup>
 import { UploaderComponent } from '@syncfusion/ej2-vue-inputs';
-import '@syncfusion/ej2-base/styles/material.css';
-import '@syncfusion/ej2-inputs/styles/material.css';
+import "@syncfusion/ej2-material3-theme/styles/uploader/index.css";
 </script>
 ```
 
@@ -414,15 +412,7 @@ Import theme styles in your main app file or component:
 
 ```vue
 <script setup>
-// Material theme
-import '@syncfusion/ej2-base/styles/material.css';
-import '@syncfusion/ej2-buttons/styles/material.css';
-import '@syncfusion/ej2-inputs/styles/material.css';
-import '@syncfusion/ej2-popups/styles/material.css';
-
-// Or Bootstrap theme
-// import '@syncfusion/ej2-base/styles/bootstrap5.css';
-// import '@syncfusion/ej2-inputs/styles/bootstrap5.css';
+import "@syncfusion/ej2-material3-theme/styles/uploader/index.css";
 </script>
 ```
 
@@ -500,8 +490,7 @@ Override component styles with scoped styles:
 <script setup>
 import { ref } from 'vue';
 import { UploaderComponent } from '@syncfusion/ej2-vue-inputs';
-import '@syncfusion/ej2-base/styles/material.css';
-import '@syncfusion/ej2-inputs/styles/material.css';
+import "@syncfusion/ej2-material3-theme/styles/uploader/index.css";
 
 const uploaderRef = ref(null);
 const dropZoneRef = ref(null);

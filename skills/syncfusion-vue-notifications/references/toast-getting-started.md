@@ -31,10 +31,7 @@ Add all required CSS files in `src/assets/styles.css` (or your global stylesheet
 
 ```ts
 // src/main.ts
-import '@syncfusion/ej2-base/styles/tailwind3.css';
-import '@syncfusion/ej2-vue-buttons/styles/tailwind3.css';
-import '@syncfusion/ej2-popups/styles/tailwind3.css';
-import '@syncfusion/ej2-vue-notifications/styles/tailwind3.css';
+import "@syncfusion/ej2-material3-theme/styles/toast/index.css";
 ```
 
 Other available themes: `material.css`, `bootstrap5.css`, `fluent.css`, `fabric.css`

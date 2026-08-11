@@ -157,7 +157,7 @@ import '@syncfusion/ej2-dropdowns/styles/material.css';
 Apply theme globally in your main CSS file or app entry:
 
 ```css
-@import '@syncfusion/ej2-dropdowns/styles/material.css';
+@import "../node_modules/@syncfusion/ej2-material3-theme/styles/drop-down-tree/index.css";
 ```
 
 ### Custom CSS
