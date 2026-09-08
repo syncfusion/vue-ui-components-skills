@@ -4,7 +4,7 @@ Setup and first implementation of the Syncfusion Vue Gantt Chart component.
 
 ## Table of Contents
 - [Installation](#installation)
-- [CSS Import Order](#css-import-order)
+- [CSS Import Order](#adding-css-reference)
 - [Composition API (Vue 3 — Recommended)](#composition-api-vue-3--recommended)
 - [Options API (Vue 2 / Vue 3)](#options-api-vue-2--vue-3)
 - [Module Injection](#module-injection)
@@ -19,27 +19,23 @@ Setup and first implementation of the Syncfusion Vue Gantt Chart component.
 npm install @syncfusion/ej2-vue-gantt --save
 ```
 
-## CSS Import Order
+## Adding CSS Reference
 
-The Gantt Chart has many dependencies. Import all stylesheets **in this exact order** — wrong or missing imports cause broken layouts, unstyled popups, and misaligned toolbars.
+Install the **Tailwind 3** theme package using the following command:
 
-```css
-/* In App.vue <style> or main.css */
-@import "../node_modules/@syncfusion/ej2-base/styles/tailwind3.css";
-@import "../node_modules/@syncfusion/ej2-buttons/styles/tailwind3.css";
-@import "../node_modules/@syncfusion/ej2-calendars/styles/tailwind3.css";
-@import "../node_modules/@syncfusion/ej2-dropdowns/styles/tailwind3.css";
-@import "../node_modules/@syncfusion/ej2-inputs/styles/tailwind3.css";
-@import "../node_modules/@syncfusion/ej2-navigations/styles/tailwind3.css";
-@import "../node_modules/@syncfusion/ej2-popups/styles/tailwind3.css";
-@import "../node_modules/@syncfusion/ej2-splitbuttons/styles/tailwind3.css";
-@import "../node_modules/@syncfusion/ej2-layouts/styles/tailwind3.css";
-@import "../node_modules/@syncfusion/ej2-grids/styles/tailwind3.css";
-@import "../node_modules/@syncfusion/ej2-treegrid/styles/tailwind3.css";
-@import "../node_modules/@syncfusion/ej2-vue-gantt/styles/tailwind3.css";
+```bash
+npm install @syncfusion/ej2-tailwind3-theme --save
 ```
 
-Replace `tailwind3` with your chosen theme: `material`, `material3`, `bootstrap5`, `fluent`, `fabric`, `highcontrast`.
+Then add the following CSS reference to the **src/App.vue** file:
+
+```vue
+<style>
+    @import "../node_modules/@syncfusion/ej2-tailwind3-theme/styles/gantt/index.css";
+</style>
+```
+
+For other themes, replace `ej2-tailwind3-theme` with your chosen theme package: `ej2-material-theme`, `ej2-material3-theme`, `ej2-bootstrap5-theme`, `ej2-fluent-theme`, `ej2-fabric-theme`, or `ej2-highcontrast-theme`.
 
 ## Composition API (Vue 3 — Recommended)
 

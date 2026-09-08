@@ -20,7 +20,7 @@ Use this skill when the user needs to:
 - **Edit tasks** — cell editing, dialog editing, taskbar drag/resize, adding/deleting rows, indent/outdent
 - **Work with resources** — assign resources, resource view, multi-taskbar view
 - **Configure columns** — reorder, resize, freeze, span, templates, WBS, checkbox
-- **Customize the timeline** — top/bottom tiers, zooming, time units (hour to decade)
+- **Customize the timeline** — top/bottom tiers, zooming, time units (hour to decade), infinite scrolling
 - **Filter and sort** — column menu filter, Excel-like filter, toolbar search, sorting
 - **Select rows or cells** — row/cell selection, selection events
 - **Use the toolbar** — built-in items (Add, Edit, Delete, Search, ExpandAll…) and custom items
@@ -62,8 +62,8 @@ Use this skill when the user needs to:
 ### Getting Started
 📄 **Read:** [references/getting-started.md](references/getting-started.md)
 - Vite (Vue 3) and Vue CLI (Vue 2) project setup
-- Installing `@syncfusion/ej2-vue-gantt`
-- CSS import order (12 dependent stylesheets)
+- Installing `@syncfusion/ej2-vue-gantt` and theme package
+- CSS reference using Syncfusion theme packages
 - Composition API and Options API registration
 - Minimal working example with `taskFields`
 - Module injection pattern (`provide`)
@@ -99,7 +99,17 @@ Use this skill when the user needs to:
 - Per-day working hours (`weekWorkingTime` — overrides `dayWorkingTime` for listed days; unlisted days fall back to `dayWorkingTime`)
 - Non-working days: `workWeek` array + `highlightWeekends`
 - `includeWeekend: true` to count weekends in duration calculations
-- Baseline rendering (`renderBaseline`, `baselineColor`, `baselineStartDate`/`baselineEndDate`)
+
+### Baseline
+📄 **Read:** [references/baseline.md](references/baseline.md)
+- Enabling baseline visualization (`renderBaseline: true`)
+- Baseline field mapping (`baselineStartDate`, `baselineEndDate`, `baselineDuration`)
+- Baseline milestone creation (`baselineDuration: 0`)
+- Color customization via `baselineColor` property or `.e-baseline-bar` CSS class
+- **Baseline templates** — `baselineTemplate` for custom rendering, multiple baselines per task (original vs revised)
+- Template API access to internal metrics (`baselineTop`, `baselineHeight`, `taskBarHeight`, `getTaskLeft()`)
+- Render multiple baselines (compare original/revised/draft schedules)
+- Best for: schedule variance tracking, milestone planning, phase comparisons
 
 ### Task Constraints
 📄 **Read:** [references/task-constraints.md](references/task-constraints.md)
@@ -157,7 +167,7 @@ Use this skill when the user needs to:
 - Custom validation (callback function in `validationRules`)
 - Dependency/Resource grid validation via `actionBegin` (`beforeOpenEditDialog`)
 - Server-side CRUD with `UrlAdaptor` + `batchUrl` (`added`/`changed`/`deleted` collections)
-- `updateRecordByID()`, `addRecord()`, `deleteRow()`, `indent()`, `outdent()`
+- `updateRecordByID()`, `addRecord()`, `deleteRecord()`, `indent()`, `outdent()`
 
 ### Resources
 📄 **Read:** [references/resources.md](references/resources.md)
@@ -193,6 +203,7 @@ Use this skill when the user needs to:
 - `showTooltip` — timeline cell tooltip on hover
 - `showWeekend` — show or hide weekend columns
 - `timelineTemplate` — custom cell content for timeline tiers
+- `enableInfiniteTimelineScroll` — enable infinite horizontal scrolling (extends timeline dynamically as user navigates)
 
 ### Filtering and Sorting
 📄 **Read:** [references/filtering-and-sorting.md](references/filtering-and-sorting.md)
@@ -314,7 +325,7 @@ Use this skill when the user needs to:
 - WCAG 2.1 Level AA compliance
 - Keyboard navigation (grid, toolbar, context menu shortcuts)
 - ARIA roles and attributes (treegrid, row, gridcell, columnheader, dialog)
-- High contrast theme (highcontrast.css — replace tailwind3/material3 imports)
+- Theme support (tailwind3, material, material3, bootstrap5, fluent, fabric, highcontrast) via npm theme packages
 - Screen reader support (NVDA, JAWS, VoiceOver) — taskbarAriaLabel customization via queryTaskbarInfo
 - Focus management and autoFocusTasks
 
@@ -323,7 +334,7 @@ Use this skill when the user needs to:
 - Access instance via `this.$refs.gantt` (Options API) — `ref="gantt"` on `<ejs-gantt>`
 - **Column:** `autoFitColumns(fieldNames?)`, `getGanttColumns()`, `getGridColumns()`, `refreshColumns()`, `reorderColumns(from, to)`
 - **Task editing:** `cancelEdit()`, `changeTaskMode(data)`, `convertToMilestone(id)`, `deleteRecord(taskDetail)`, `updateRecordByIndex(index, data)`, `updateTaskId(currentId, newId)`
-- **Row expand/collapse:** `collapseByIndex(index)`, `expandByIndex(index)`
+- **Row expand/collapse:** `expandByID()`, `expandByIndex()`, `collapseByID()`, `collapseByIndex()`
 - **Split/Merge:** `splitTask(taskId, splitDate)`, `mergeTask(taskId, segmentIndexes)`
 - **Predecessor:** `removePredecessor(id)`
 - **Querying:** `getRecordByID(id)`, `getRecordByIndex()`, `getTaskByUniqueID(id)`, `getTaskInfo(taskId)`, `getCurrentViewData()`, `getExpandedRecords(records)`, `getCriticalTasks()`
@@ -408,18 +419,7 @@ const taskFields = {
 </script>
 
 <style>
-@import "../node_modules/@syncfusion/ej2-base/styles/tailwind3.css";
-@import "../node_modules/@syncfusion/ej2-buttons/styles/tailwind3.css";
-@import "../node_modules/@syncfusion/ej2-calendars/styles/tailwind3.css";
-@import "../node_modules/@syncfusion/ej2-dropdowns/styles/tailwind3.css";
-@import "../node_modules/@syncfusion/ej2-inputs/styles/tailwind3.css";
-@import "../node_modules/@syncfusion/ej2-navigations/styles/tailwind3.css";
-@import "../node_modules/@syncfusion/ej2-popups/styles/tailwind3.css";
-@import "../node_modules/@syncfusion/ej2-splitbuttons/styles/tailwind3.css";
-@import "../node_modules/@syncfusion/ej2-layouts/styles/tailwind3.css";
-@import "../node_modules/@syncfusion/ej2-grids/styles/tailwind3.css";
-@import "../node_modules/@syncfusion/ej2-treegrid/styles/tailwind3.css";
-@import "../node_modules/@syncfusion/ej2-vue-gantt/styles/tailwind3.css";
+@import "../node_modules/@syncfusion/ej2-tailwind3-theme/styles/gantt/index.css";
 </style>
 ```
 
@@ -511,4 +511,6 @@ taskFields: { id: 'TaskID', name: 'TaskName', startDate: 'StartDate', duration: 
 | `projectEndDate` | Date | Explicit project end |
 | `enableVirtualization` | Boolean | Virtual row rendering for large data |
 | `enableCriticalPath` | Boolean | Highlights critical path tasks |
+| `baselineTemplate` | function/string | Custom baseline rendering for planned schedules and advanced baseline layouts |
+| `enableInfiniteTimelineScroll` | boolean | Enable infinite horizontal timeline scrolling by extending the visible range as the user navigates |
 

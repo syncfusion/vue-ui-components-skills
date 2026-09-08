@@ -12,6 +12,7 @@
 - [Year View](#year-view)
 - [Agenda View](#agenda-view)
 - [Timeline Views](#timeline-views)
+- [Max Event Stack](#max-event-stack)
 - [View Navigation](#view-navigation)
 
 ## Overview
@@ -150,6 +151,7 @@ provide('schedule', [Week, Month]);
 | `allowVirtualScrolling` | boolean | Enable virtual scrolling | Agenda, Timeline views |
 | `headerRows` | array | Custom header rows | Timeline views only |
 | `group` | object | Resource grouping options | All views |
+| `maxEventStack` | number | Limits the number of events displayed per row; excess events are shown as `+N more` | Day, Week, WorkWeek (with timescale enabled) |
 
 ## Day View
 
@@ -575,6 +577,49 @@ const headerRows = [
 provide('schedule', [TimelineMonth]);
 </script>
 ```
+
+## Max Event Stack
+
+The `maxEventStack` view property limits how many events are rendered inside a single day cell. When the count exceeds the limit, the remaining events are collapsed into a `+N more` indicator. This keeps the cell layout compact and is especially useful when many overlapping or concurrent events exist in Day, Week, or WorkWeek views.
+
+> **Note:** The `maxEventStack` property is only applicable to **Day**, **Week**, and **WorkWeek** views, and only when the `timeScale` option is enabled.
+
+### Setting a Static Limit per View
+
+Apply a fixed limit to each eligible view through the `e-view` directive:
+
+```vue
+<template>
+  <ejs-schedule
+    :selectedDate="selectedDate"
+    :eventSettings="eventSettings">
+    <e-views>
+      <e-view option="Day" :maxEventStack="2"></e-view>
+      <e-view option="Week" :maxEventStack="3"></e-view>
+      <e-view option="WorkWeek" :maxEventStack="2"></e-view>
+    </e-views>
+  </ejs-schedule>
+</template>
+
+<script setup>
+import { provide } from "vue";
+import { Day, Week, WorkWeek } from '@syncfusion/ej2-vue-schedule';
+
+const selectedDate = new Date(2024, 0, 15);
+const eventSettings = {
+  dataSource: [
+    { Id: 1, Subject: 'Standup',     StartTime: new Date(2024, 0, 15, 9, 0),  EndTime: new Date(2024, 0, 15, 9, 30) },
+    { Id: 2, Subject: 'Design Sync', StartTime: new Date(2024, 0, 15, 10, 0), EndTime: new Date(2024, 0, 15, 11, 0) },
+    { Id: 3, Subject: 'Code Review', StartTime: new Date(2024, 0, 15, 10, 30),EndTime: new Date(2024, 0, 15, 11, 30) },
+    { Id: 4, Subject: 'Lunch',       StartTime: new Date(2024, 0, 15, 12, 0),EndTime: new Date(2024, 0, 15, 13, 0) }
+  ]
+};
+
+provide('schedule', [Day, Week, WorkWeek]);
+</script>
+```
+
+Setting `maxEventStack` to `0` (zero) removes the limit and shows all events. Any positive integer collapses overflow events into a `+N more` indicator.
 
 ## View Navigation
 

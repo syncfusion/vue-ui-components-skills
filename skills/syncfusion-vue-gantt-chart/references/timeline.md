@@ -8,6 +8,14 @@
 - [Timeline Unit Size](#timeline-unit-size)
 - [Zooming](#zooming)
 - [Fit to Project](#fit-to-project)
+- [Timeline View Modes](#timeline-view-modes)
+- [Fixed View Date Range](#fixed-view-date-range)
+- [Week Start Day](#week-start-day)
+- [Auto-Update Timescale](#auto-update-timescale)
+- [Timeline Cell Tooltip](#timeline-cell-tooltip)
+- [Show / Hide Weekends](#show--hide-weekends)
+- [Timeline Cell Template](#timeline-cell-template)
+- [Infinite Timeline Scrolling](#infinite-timeline-scrolling)
 
 ## Timeline Overview
 
@@ -256,6 +264,117 @@ const timelineSettings = {
   topTier:  { unit: 'Week', format: 'dd/MM/yyyy' },
   bottomTier: { unit: 'Day', count: 1 },
   timelineUnitSize: 100
+};
+</script>
+```
+
+## Infinite Timeline Scrolling
+
+The `enableInfiniteTimelineScroll` property enables infinite horizontal scrolling in the Gantt Chart timeline by dynamically extending the visible timeline range as the user navigates. Set `enableInfiniteTimelineScroll` to **true** to enable this behavior.
+
+### Key Behaviors
+
+- When `enableInfiniteTimelineScroll` is enabled, the timeline automatically extends in the **forward direction** as the user scrolls using the horizontal scrollbar or clicks the forward scroll arrow.
+- In the **backward direction**, the timeline extends only when the user clicks the backward scroll arrow. Scrolling or dragging the scrollbar backward does not trigger timeline extension.
+- Infinite scrolling extends only the **visible timeline range** and does not modify the `projectStartDate` and `projectEndDate`.
+- This feature enables exploration of long project schedules without manually updating the timeline range.
+
+### Basic Setup
+
+```vue
+<template>
+  <ejs-gantt 
+    :enableInfiniteTimelineScroll="true"
+    :dataSource="data"
+    :taskFields="taskFields"
+    :timelineSettings="timelineSettings"
+    ...
+  ></ejs-gantt>
+</template>
+
+<script setup>
+const data = [
+  { TaskID: 1, TaskName: 'Project initiation', StartDate: new Date('12/29/2025'), Duration: 4, Progress: 30 },
+  { TaskID: 2, TaskName: 'Identify objectives', StartDate: new Date('01/02/2026'), Duration: 4, Progress: 50 }
+];
+
+const taskFields = {
+  id: 'TaskID',
+  name: 'TaskName',
+  startDate: 'StartDate',
+  duration: 'Duration',
+  progress: 'Progress'
+};
+
+const timelineSettings = {
+  viewStartDate: new Date('12/29/2025'),
+  viewEndDate: new Date('04/27/2026')
+};
+</script>
+```
+
+### Full Example with Options API
+
+```vue
+<template>
+  <div>
+    <ejs-gantt 
+      :enableInfiniteTimelineScroll="true"
+      :dataSource="data"
+      :taskFields="taskFields"
+      :timelineSettings="timelineSettings"
+      :labelSettings="labelSettings"
+      :splitterSettings="splitterSettings"
+      :height="height"
+      :columns="columns"
+    ></ejs-gantt>
+  </div>
+</template>
+
+<script>
+import { GanttComponent } from '@syncfusion/ej2-vue-gantt';
+
+export default {
+  name: 'App',
+  components: {
+    'ejs-gantt': GanttComponent
+  },
+  data() {
+    return {
+      data: [
+        { TaskID: 1, TaskName: 'Project planning', StartDate: new Date('12/29/2025'), Duration: 5, Progress: 30, ParentID: null },
+        { TaskID: 2, TaskName: 'Phase 1', StartDate: new Date('01/03/2026'), Duration: 4, Progress: 50, ParentID: 1 },
+        { TaskID: 3, TaskName: 'Phase 2', StartDate: new Date('01/07/2026'), Duration: 5, Progress: 40, ParentID: 1 }
+      ],
+      height: '430px',
+      taskFields: {
+        id: 'TaskID',
+        name: 'TaskName',
+        startDate: 'StartDate',
+        duration: 'Duration',
+        progress: 'Progress',
+        parentID: 'ParentID'
+      },
+      splitterSettings: {
+        columnIndex: 3
+      },
+      timelineSettings: {
+        viewStartDate: new Date('12/29/2025'),
+        viewEndDate: new Date('04/27/2026')
+      },
+      labelSettings: {
+        leftLabel: 'TaskID',
+        rightLabel: 'TaskName'
+      },
+      columns: [
+        { field: 'TaskID', headerText: 'Task ID', width: 80 },
+        { field: 'TaskName', headerText: 'Task Name', width: 200 },
+        { field: 'StartDate', headerText: 'Start Date', width: 120 },
+        { field: 'Duration', headerText: 'Duration', width: 100 },
+        { field: 'Progress', headerText: 'Progress', width: 100 }
+      ]
+    };
+  }
 };
 </script>
 ```

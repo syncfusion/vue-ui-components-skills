@@ -6,9 +6,11 @@ Methods not covered in any other reference file. Use as a supplement for program
 - [autoFitColumns](#autofitcolumns)
 - [cancelEdit](#canceledit)
 - [changeTaskMode](#changetaskmode)
+- [collapseByID](#collapsebyid)
 - [collapseByIndex](#collapsebyindex)
 - [convertToMilestone](#converttomilestone)
 - [deleteRecord](#deleterecord)
+- [expandByID](#expandbyid)
 - [expandByIndex](#expandbyindex)
 - [getCriticalTasks](#getcriticaltasks)
 - [getCurrentViewData](#getcurrentviewdata)
@@ -106,6 +108,21 @@ if (record) {
 
 ---
 
+## collapseByID
+
+Collapses a parent row by its task ID.
+
+| Parameter | Type | Description |
+|---|---|---|
+| `id` | `string \| number \| string[] \| number[]` | Task ID(s) to collapse. |
+
+```javascript
+this.$refs.gantt.collapseByID('2');
+this.$refs.gantt.collapseByID([1, 3, 5]);
+```
+
+---
+
 ## collapseByIndex
 
 Collapses a parent row at the given zero-based row index. **Parameter:** `index` - `number`
@@ -143,6 +160,21 @@ this.$refs.gantt.deleteRecord(record);   // IGanttData reference
 ```
 
 > Requires `editSettings.allowDeleting: true` and `Edit` module injected.
+
+---
+
+## expandByID
+
+Expands one or more parent rows by task ID.
+
+| Parameter | Type | Description |
+|---|---|---|
+| `id` | `string \| number \| string[] \| number[]` | Task ID(s) to expand. |
+
+```javascript
+this.$refs.gantt.expandByID('2');
+this.$refs.gantt.expandByID([1, 3, 5]);
+```
 
 ---
 

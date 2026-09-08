@@ -38,7 +38,7 @@ The Syncfusion Vue Scheduler is a feature-rich calendar and scheduling component
 
 ## Documentation and Navigation Guide
 
-Complete coverage of Syncfusion Vue Scheduler with 14 comprehensive reference files covering all aspects of scheduler implementation.
+Complete coverage of Syncfusion Vue Scheduler with 17 comprehensive reference files covering all aspects of scheduler implementation.
 
 ### Getting Started
 📄 **Read:** [references/getting-started.md](references/getting-started.md)
@@ -55,17 +55,21 @@ Complete coverage of Syncfusion Vue Scheduler with 14 comprehensive reference fi
 - Event fields and custom field mapping
 - Recurrence rules and patterns (FREQ, INTERVAL, COUNT, UNTIL, BYDAY, etc.)
 - Recurrence exceptions and editing individual occurrences vs. series
-- Preventing overlapping events with overlap detection
 - Drag and drop with dragStart/drag/dragStop events
 - Resizing events with resize controls
 - Inline appointment editing
-- Readonly events and preventing creation
-- Appointment filtering and sorting
-- Selection and deletion operations
-- Tooltip and custom styling per event
-- Differentiating past events and disabling past dates
-- Max events per row configuration
 - Event retrieval methods (getEventDetails, getCurrentViewEvents, getEvents)
+
+### Appointment Behavior and Validation
+📄 **Read:** [references/appointment-behavior-and-validation.md](references/appointment-behavior-and-validation.md)
+- Setting minimum appointment height
+- Blocking dates and times
+- Readonly events and restricting event creation
+- Differentiating past events and disabling past dates
+- Appointments occupying entire cells and limiting displayed events
+- Tooltip and filtering operations
+- Appointment selection and deleting multiple appointments via Delete key
+- Preventing overlaps and validating recurrence rules
 
 ### Views and Navigation (Display Modes)
 📄 **Read:** [references/views.md](references/views.md)
@@ -81,6 +85,7 @@ Complete coverage of Syncfusion Vue Scheduler with 14 comprehensive reference fi
 - Virtual scrolling in Agenda and Timeline views
 - Week number display
 - Agenda days count and hideEmptyAgendaDays
+- Limit overlapping events with `maxEventStack`
 
 ### Data Binding (Local and Remote)
 📄 **Read:** [references/data-binding.md](references/data-binding.md)
@@ -107,6 +112,9 @@ Complete coverage of Syncfusion Vue Scheduler with 14 comprehensive reference fi
 - One-to-one resource grouping (byGroupID: false)
 - Shared events across resources with allowGroupEdit
 - Vertical vs. Timeline resource view implementation
+
+### Resource Customization
+📄 **Read:** [references/resource-customization.md](references/resource-customization.md)
 - Custom working hours per resource
 - Custom working days per resource
 - Resource header templates with customization
@@ -205,6 +213,7 @@ Complete coverage of Syncfusion Vue Scheduler with 14 comprehensive reference fi
 📄 **Read:** [references/localization-accessibility.md](references/localization-accessibility.md)
 - Locale configuration and language translation (en, fr, de, ja, etc.)
 - L10n class for custom text translation
+- Date and time formatting with `dateFormat` and `timeFormat` (12/24-hour, ISO, locale-aware)
 - RTL (right-to-left) support for Arabic, Hebrew
 - WCAG 2.0 compliance level AA
 - Keyboard shortcuts (Tab, Enter, Space, Delete, Ctrl+A, etc.)
@@ -226,6 +235,13 @@ Complete coverage of Syncfusion Vue Scheduler with 14 comprehensive reference fi
 - Tooltip on event hover
 - Inline editing support
 - Responsive adaptive UI
+
+### Recurrence Editor and Calendar Modes
+📄 **Read:** [references/recurrence-editor-calendar-modes.md](references/recurrence-editor-calendar-modes.md)
+- Recurrence editor and recurrence date generation
+- Gregorian and Islamic calendar modes
+- Working days, hours, and custom time ranges
+- Scheduler styling and theming
 - Performance optimization tips
 - Best practices for production use
 

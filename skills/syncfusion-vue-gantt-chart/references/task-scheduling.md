@@ -17,7 +17,6 @@ Configure how the Gantt Chart calculates and displays task dates, durations.
   - [Per-day working hours (weekWorkingTime)](#per-day-working-hours-weekworkingtime)
   - [Non-working days / Weekend](#non-working-days--weekend)
   - [Include weekends as working days](#include-weekends-as-working-days)
-- [Baselines](#baselines)
 
 ## Scheduling Modes
 
@@ -269,26 +268,4 @@ Set `includeWeekend: true` to count Saturday and Sunday in task duration calcula
 
 > To show/hide weekends in the timeline header, use `timelineSettings.showWeekend`.
 
-## Baselines
 
-Render baseline bars to compare planned vs actual dates:
-
-```vue
-<ejs-gantt :renderBaseline="true" baselineColor="red" ...></ejs-gantt>
-```
-
-Map baseline fields in `taskFields`:
-```js
-const taskFields = {
-  // ... standard fields
-  baselineStartDate: 'BaselineStartDate',
-  baselineEndDate: 'BaselineEndDate',
-  baselineDuration: "BaselineDuration",
-};
-```
-
-Data example:
-```js
-{ TaskID: 2, TaskName: 'Design', StartDate: new Date('04/05/2019'), Duration: 3,
-  BaselineStartDate: new Date('04/04/2019'), BaselineEndDate: new Date('04/08/2019'), BaselineDuration: '5' }
-```
