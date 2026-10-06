@@ -307,6 +307,275 @@ const selectionSettings = {
 | `'Default'` | Clicking a row also toggles its checkbox |
 | `'ResetOnRowClick'` | Clicking a row clears all other checkboxes and selects only that row |
 
+## Hierarchy Checkbox Mode
+
+Hierarchy checkbox mode controls how checkbox selection behaves within the parent-child hierarchy of tasks. The `hierarchyMode` property defines how parent, child, and sibling checkboxes interact when selected.
+
+### Enable Hierarchy Checkbox Selection
+
+Hierarchy checkbox mode works in conjunction with checkbox selection. Enable it by setting the `hierarchyMode` property in `selectionSettings`:
+
+```vue
+<template>
+  <ejs-gantt
+    :dataSource="data"
+    :taskFields="taskFields"
+    :columns="columns"
+    :selectionSettings="selectionSettings"
+    height="450px"
+  ></ejs-gantt>
+</template>
+
+<script setup>
+import { provide } from 'vue';
+import { Selection } from '@syncfusion/ej2-vue-gantt';
+provide('gantt', [Selection]);
+
+const columns = [
+  { field: 'CheckBox', headerText: '', showCheckbox: true, width: 70, allowFiltering: false },
+  { field: 'TaskName', headerText: 'Task Name', width: 250 },
+  { field: 'StartDate', headerText: 'Start Date', width: 100, format: 'yMd' },
+  { field: 'Progress', headerText: 'Progress', width: 80 }
+];
+
+const selectionSettings = {
+  type: 'Multiple',
+  mode: 'Row',
+  hierarchyMode: 'Hierarchy'  // Enable hierarchy checkbox mode
+};
+
+const data = [
+  { TaskID: 1, TaskName: 'Project', StartDate: new Date('04/02/2024'), Progress: 0, subtasks: [
+    { TaskID: 2, TaskName: 'Phase 1', StartDate: new Date('04/02/2024'), Progress: 50, subtasks: [
+      { TaskID: 3, TaskName: 'Design', StartDate: new Date('04/02/2024'), Progress: 50 },
+      { TaskID: 4, TaskName: 'Prototype', StartDate: new Date('04/05/2024'), Progress: 50 }
+    ]},
+    { TaskID: 5, TaskName: 'Phase 2', StartDate: new Date('04/15/2024'), Progress: 0 }
+  ]}
+];
+
+const taskFields = {
+  id: 'TaskID',
+  name: 'TaskName',
+  child: 'subtasks'
+};
+</script>
+```
+
+### Hierarchy Checkbox Mode Values
+
+The `hierarchyMode` property accepts three values that control selection propagation:
+
+| Value | Default | Description |
+|---|---|---|
+| `'Self'` | — | Selects only the clicked record; independent selection |
+| `'Hierarchy'` | ✓ Yes | Propagates selection through parent-child hierarchy |
+| `'FilteredHierarchy'` | — | Propagates selection only to records visible in the current filtered/searched view |
+
+### Mode Behavior
+
+#### Self Mode
+
+- Selects only the current record when its checkbox is clicked
+- Parent selection does **not** affect child records
+- Child selection does **not** affect parent or sibling records
+- Useful for independent task selection where parent and children are unrelated
+
+```vue
+<script setup>
+const selectionSettings = {
+  type: 'Multiple',
+  hierarchyMode: 'Self'  // No propagation
+};
+</script>
+```
+
+**Selection Example (Self Mode):**
+```
+Project (Unchecked)
+├─ Phase 1 (Checked)      ← Selecting Phase 1 does NOT check Project or children
+│  ├─ Design (Unchecked)
+│  └─ Prototype (Unchecked)
+└─ Phase 2 (Unchecked)
+```
+
+#### Hierarchy Mode (Default)
+
+- Selecting a **parent** record checks all its descendant records
+- Selecting a **child** record updates ancestor selection state according to hierarchy rules
+- Collapsed descendants are still included because selection is based on the data hierarchy, not only on visible rows
+- Useful for "select all related tasks" scenarios
+
+```vue
+<script setup>
+const selectionSettings = {
+  type: 'Multiple',
+  hierarchyMode: 'Hierarchy'  // Full hierarchy propagation
+};
+</script>
+```
+
+**Selection Example (Hierarchy Mode):**
+```
+Project (Unchecked)
+├─ Phase 1 (Check this)    ← Checking Phase 1 automatically:
+│  ├─ Design (Auto-checked)  - Checks all children
+│  └─ Prototype (Auto-checked)
+└─ Phase 2 (Unchecked)
+
+---OR---
+
+Project (Check this)        ← Checking Project automatically:
+├─ Phase 1 (Auto-checked)    - Checks all descendants
+│  ├─ Design (Auto-checked)
+│  └─ Prototype (Auto-checked)
+└─ Phase 2 (Auto-checked)
+```
+
+**Partial Selection:**
+If some children are checked and others are not, the parent shows an indeterminate state (half-checked).
+
+#### FilteredHierarchy Mode
+
+- Behaves like `Hierarchy` for the visible filtered set
+- Selection propagates only to records currently visible after filtering or searching
+- Hidden records remain unchanged (neither selected nor deselected)
+- Useful when users need selection to respect the current filtered context
+
+```vue
+<script setup>
+const selectionSettings = {
+  type: 'Multiple',
+  hierarchyMode: 'FilteredHierarchy'  // Filtered hierarchy propagation
+};
+</script>
+```
+
+**Selection Example (FilteredHierarchy Mode with Filter Active):**
+```
+All Tasks:                    After filtering (Progress >= 50%):
+✓ Project                     ✓ Project
+├─ Phase 1                    ├─ Phase 1
+│  ├─ Design (50%)            │  ├─ Design (50%)
+│  └─ Prototype (50%)         │  └─ Prototype (50%)
+└─ Phase 2 (0%)               (Phase 2 hidden — 0% progress)
+
+Checking "Design" in filtered view:
+- Design checked
+- Phase 1 indeterminate (only 1/2 children visible and checked)
+- Project indeterminate
+- Phase 2 remains unchanged (not visible, not affected)
+```
+
+### Selection Propagation Rules
+
+| Interaction | Self | Hierarchy | FilteredHierarchy |
+|---|---|---|---|
+| Check parent | Select parent only | Select parent + all descendants | Select parent + visible descendants |
+| Check child | Select child only | Select child + update parent state | Select child + update parent state (visible only) |
+| Uncheck parent | Deselect parent only | Deselect parent + all descendants | Deselect parent + visible descendants |
+| Uncheck child | Deselect child only | Deselect child + update parent state | Deselect child + update parent state (visible only) |
+
+### Interaction with Other Features
+
+#### Virtual Scrolling
+
+Hierarchy checkbox mode works correctly with virtual scrolling. Selection state is maintained across scrolled rows:
+
+```vue
+<ejs-gantt
+  :enableVirtualization="true"
+  :selectionSettings="{ type: 'Multiple', hierarchyMode: 'Hierarchy' }"
+  ...
+></ejs-gantt>
+```
+
+When a parent with many children is selected while virtualizing, all children (both visible and off-screen) are selected.
+
+#### Paging
+
+On paginated data, hierarchy selection propagates within each page. Parent-child relationships span pages correctly.
+
+#### Filtering
+
+- **Hierarchy Mode** — unfiltered records retain selection state; filtered records follow hierarchy rules
+- **FilteredHierarchy Mode** — only visible records are affected; hidden records are untouched
+
+#### Sorting
+
+Hierarchy checkbox mode is independent of sorting. Parent-child relationships are preserved, and selection propagation follows the data hierarchy, not the displayed sort order.
+
+#### Collapsed/Expanded Rows
+
+Selection propagates to collapsed descendants automatically. When a parent is selected, all its children are checked regardless of expand/collapse state. Expanding a parent later shows all children checked.
+
+### Example: Hierarchy Mode with Filtering
+
+```vue
+<template>
+  <ejs-gantt
+    :dataSource="data"
+    :taskFields="taskFields"
+    :columns="columns"
+    :allowFiltering="true"
+    :selectionSettings="selectionSettings"
+    @rowSelecting="onRowSelecting"
+    height="450px"
+  ></ejs-gantt>
+</template>
+
+<script setup>
+import { provide } from 'vue';
+import { Filter, Selection } from '@syncfusion/ej2-vue-gantt';
+provide('gantt', [Filter, Selection]);
+
+const columns = [
+  { field: 'CheckBox', headerText: '', showCheckbox: true, width: 70, allowFiltering: false },
+  { field: 'TaskName', headerText: 'Task', width: 200 },
+  { field: 'Progress', headerText: 'Progress', width: 100 }
+];
+
+const selectionSettings = {
+  type: 'Multiple',
+  hierarchyMode: 'FilteredHierarchy'
+};
+
+const data = [
+  { TaskID: 1, TaskName: 'Project', Progress: 45, subtasks: [
+    { TaskID: 2, TaskName: 'Phase 1', Progress: 50, subtasks: [
+      { TaskID: 3, TaskName: 'Design', Progress: 100 },
+      { TaskID: 4, TaskName: 'Review', Progress: 50 }
+    ]},
+    { TaskID: 5, TaskName: 'Phase 2', Progress: 0 }
+  ]}
+];
+
+const taskFields = {
+  id: 'TaskID',
+  name: 'TaskName',
+  child: 'subtasks'
+};
+
+function onRowSelecting(args) {
+  console.log('Selecting:', args.data.TaskName);
+}
+</script>
+```
+
+### Best Practices
+
+1. **Choose the Right Mode** — Use `Self` for independent selections, `Hierarchy` for "select all related", `FilteredHierarchy` when filters are active.
+
+2. **Document Mode Choice** — Inform users how selection propagates in your application.
+
+3. **Test with Filters** — If your Gantt supports filtering, test both `Hierarchy` and `FilteredHierarchy` modes to ensure correct behavior.
+
+4. **Consider User Expectations** — Power users expect `Hierarchy` mode; casual users may prefer `Self` mode.
+
+5. **Combine with Events** — Use `rowSelecting` event to add custom logic on top of hierarchy modes.
+
+---
+
 ## Touch Interaction
 
 On touch devices:

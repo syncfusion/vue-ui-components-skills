@@ -29,6 +29,83 @@ Define relationships between tasks so that the Gantt Chart enforces sequencing a
 
 `FS` is the most common — use it as the default when no type is specified.
 
+### Restrict Allowed Dependency Types
+
+Use `allowedDependencyTypes` to restrict which dependency types are permitted within the Gantt component. Dependency types that are not included in the configured array are not allowed during dependency creation or editing.
+
+```vue
+<template>
+  <ejs-gantt
+    :dataSource="data"
+    :taskFields="taskFields"
+    :allowedDependencyTypes="['FS', 'SS']"
+    :editSettings="editSettings"
+    height="450px"
+  ></ejs-gantt>
+</template>
+
+<script setup>
+import { provide } from 'vue';
+import { GanttComponent as EjsGantt, Edit } from '@syncfusion/ej2-vue-gantt';
+provide('gantt', [Edit]);
+
+const editSettings = { allowTaskbarEditing: true };
+
+const taskFields = {
+  id: 'TaskID',
+  name: 'TaskName',
+  startDate: 'StartDate',
+  duration: 'Duration',
+  dependency: 'Predecessor'
+};
+
+const data = [
+  { TaskID: 1, TaskName: 'Design', StartDate: new Date('04/02/2024'), Duration: 3 },
+  { TaskID: 2, TaskName: 'Review', StartDate: new Date('04/02/2024'), Duration: 2, Predecessor: '1FS' }, // FS allowed
+  { TaskID: 3, TaskName: 'Approval', StartDate: new Date('04/02/2024'), Duration: 1, Predecessor: '2SS' } // SS allowed
+];
+</script>
+```
+
+**Default Behavior:**
+- If `allowedDependencyTypes` is **not set**, all four types (FS, SS, FF, SF) are allowed
+- If `allowedDependencyTypes` **is set**, only specified types are permitted
+
+**Validation Scope:**
+- **Data Loading** — Dependencies with disallowed types are ignored or not rendered
+- **Dialog Editing** — Dependency type dropdown shows only allowed types
+- **Taskbar Editing** — Users can only draw dependencies of allowed types
+- **Predecessor Validation** — Disallowed types trigger validation errors
+
+| Array Value | Behavior |
+|---|---|
+| `[]` | No dependencies allowed (dependency feature disabled) |
+| `['FS']` | Only Finish-to-Start allowed |
+| `['FS', 'SS']` | FS and SS allowed; FF and SF not allowed |
+| Not set | All types (FS, SS, FF, SF) allowed (default) |
+
+#### Example: Restrict to FS and SS
+
+```vue
+<ejs-gantt :allowedDependencyTypes="['FS', 'SS']" ...></ejs-gantt>
+```
+
+#### Example: FS-only Project
+
+```vue
+<ejs-gantt :allowedDependencyTypes="['FS']" ...></ejs-gantt>
+```
+
+This is typical for sequential projects where tasks must complete in order.
+
+#### Example: Enable All Types (Explicit)
+
+```vue
+<ejs-gantt :allowedDependencyTypes="['FS', 'SS', 'FF', 'SF']" ...></ejs-gantt>
+```
+
+---
+
 ## Defining Predecessors
 
 Map a string field to `taskFields.dependency`. The format is `"{TaskID}{Type}"` or `"{TaskID}{Type}+{lag}"`.

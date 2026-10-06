@@ -171,22 +171,6 @@ export default {
 
 ## CSS Imports and Theming
 
-### Import Theme CSS
-
-Add the Syncfusion theme CSS to your main Vue file or component:
-
-```vue
-<style>
-/* Material theme */
-@import '@syncfusion/ej2-vue-charts/styles/material.css';
-
-/* Alternative themes available: */
-/* @import '@syncfusion/ej2-vue-charts/styles/bootstrap.css'; */
-/* @import '@syncfusion/ej2-vue-charts/styles/fabric.css'; */
-/* @import '@syncfusion/ej2-vue-charts/styles/highcontrast.css'; */
-</style>
-```
-
 ### Supported Themes
 - **material** - Material Design theme (default)
 - **bootstrap** - Bootstrap theme

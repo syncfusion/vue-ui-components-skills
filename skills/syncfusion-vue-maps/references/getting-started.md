@@ -172,8 +172,7 @@ components: {
         visible: true,
         valuePath: 'Country'
     };
-</script>fusion/ej2-vue-maps/styles/material.css';
-</style>
+</script>
 ```
 
 ## First Map Implementation
@@ -395,8 +394,6 @@ export default {
 </script>
 
 <style scoped>
-@import '@syncfusion/ej2-vue-maps/styles/material.css';
-
 .map-demo {
   width: 100%;
   height: 100vh;

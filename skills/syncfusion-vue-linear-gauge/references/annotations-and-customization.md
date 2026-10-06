@@ -21,7 +21,6 @@
   - [Custom Theme with CSS Variables](#custom-theme-with-css-variables)
   - [Component-Specific CSS](#component-specific-css)
 - [Theme Integration](#theme-integration)
-  - [Using Built-in Themes](#using-built-in-themes)
   - [Theme Override](#theme-override)
 - [Dynamic Styling](#dynamic-styling)
   - [Conditional Pointer Color](#conditional-pointer-color)
@@ -395,24 +394,6 @@ Linear Gauge generates SVG elements with predictable class names:
 ```
 
 ## Theme Integration
-
-### Using Built-in Themes
-
-The component includes several themes:
-
-```javascript
-// Material (default)
-import '@syncfusion/ej2-vue-gauges/styles/material.css';
-
-// Bootstrap
-import '@syncfusion/ej2-vue-gauges/styles/bootstrap.css';
-
-// Fluent
-import '@syncfusion/ej2-vue-gauges/styles/fluent.css';
-
-// Tailwind
-import '@syncfusion/ej2-vue-gauges/styles/tailwind.css';
-```
 
 ### Theme Override
 

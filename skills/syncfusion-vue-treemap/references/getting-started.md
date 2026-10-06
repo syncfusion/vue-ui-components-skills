@@ -192,14 +192,6 @@ This renders rectangles sized proportionally by the `Count` value and labeled wi
 
 Include Syncfusion CSS styles in your main app file or component:
 
-### Global CSS Import (in main.js or App.vue)
-
-```javascript
-// main.js
-import '@syncfusion/ej2-base/styles/material.css';
-import '@syncfusion/ej2-treemap/styles/material.css';
-```
-
 ### Theme Options
 
 Replace `material.css` with your preferred theme:
@@ -209,15 +201,6 @@ Replace `material.css` with your preferred theme:
 - `fabric.css` - Fabric theme
 - `highcontrast.css` - High contrast theme
 - `tailwind.css` - Tailwind theme
-
-### Per-Component Import
-
-```vue
-<style scoped>
-@import '@syncfusion/ej2-base/styles/material.css';
-@import '@syncfusion/ej2-treemap/styles/material.css';
-</style>
-```
 
 ## Module Injection
 

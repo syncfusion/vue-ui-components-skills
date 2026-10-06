@@ -7,7 +7,6 @@
   - [Per-Series Colors](#per-series-colors)
   - [Preset Palettes](#preset-palettes)
 - [Predefined Themes](#predefined-themes)
-  - [Theme Setup](#theme-setup)
   - [Available Themes](#available-themes)
   - [Switching Themes Dynamically](#switching-themes-dynamically)
 - [CSS Customization](#css-customization)
@@ -93,19 +92,6 @@ const palettes = ['#0D6EFD', '#6C757D', '#198754', '#FFC107', '#DC3545'];
 ## Predefined Themes
 
 Syncfusion includes predefined themes for quick styling:
-
-### Theme Setup
-
-```vue
-// Import theme CSS in main.js (Vue 3)
-import '@syncfusion/ej2-vue-charts/styles/material.css';  // Material (default)
-// OR
-import '@syncfusion/ej2-vue-charts/styles/bootstrap5.css'; // Bootstrap 5
-// OR
-import '@syncfusion/ej2-vue-charts/styles/tailwind.css';   // Tailwind
-// OR
-import '@syncfusion/ej2-vue-charts/styles/fluent.css';     // Fluent
-```
 
 ### Available Themes
 

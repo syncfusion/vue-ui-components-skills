@@ -8,7 +8,6 @@
 - [Vue 3 Setup](#vue-3-setup)
 - [Vue 2 Setup](#vue-2-setup)
 - [CSS and Themes](#css-and-themes)
-  - [Import Default Theme](#import-default-theme)
   - [Available Themes](#available-themes)
 - [Basic Component](#basic-component)
 - [Adding Your First Pointer](#adding-your-first-pointer)
@@ -126,23 +125,6 @@ export default {
 
 ## CSS and Themes
 
-### Import Default Theme
-
-Add the required CSS in your main application file or component:
-
-```javascript
-// main.js
-import '@syncfusion/ej2-vue-gauges/styles/material.css';
-```
-
-Or in your component's `<style>` block:
-
-```vue
-<style>
-@import '@syncfusion/ej2-vue-gauges/styles/material.css';
-</style>
-```
-
 ### Available Themes
 
 Syncfusion provides several built-in themes:
@@ -154,11 +136,6 @@ Syncfusion provides several built-in themes:
 - `highcontrast.css` - High contrast theme for accessibility
 - `tailwind.css` - Tailwind CSS theme
 - `fluent.css` - Microsoft Fluent theme
-
-```javascript
-// Example: Using Bootstrap theme
-import '@syncfusion/ej2-vue-gauges/styles/bootstrap.css';
-```
 
 ## Basic Component
 

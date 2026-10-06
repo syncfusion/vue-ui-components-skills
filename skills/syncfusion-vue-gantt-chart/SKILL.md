@@ -15,17 +15,18 @@ A project management component that renders a Microsoft Project-like interface f
 Use this skill when the user needs to:
 - **Set up the Gantt Chart** in a Vue 2 (Vue CLI) or Vue 3 (Vite) project
 - **Bind data** — local arrays, self-referential data, or remote DataManager sources
-- **Schedule tasks** — auto/manual modes, duration, baselines, unscheduled tasks, work calendar
-- **Manage task dependencies** — FS, FF, SS, SF predecessor types, connector lines
-- **Edit tasks** — cell editing, dialog editing, taskbar drag/resize, adding/deleting rows, indent/outdent
+- **Schedule tasks** — auto/manual modes, duration units (day, hour, minute, week, month), baselines, unscheduled tasks, work calendar
+- **Manage task dependencies** — FS, FF, SS, SF predecessor types with restriction control, connector lines
+- **Edit tasks** — cell editing, dialog editing, taskbar drag/resize, taskbar draw for unscheduled tasks, adding/deleting rows, indent/outdent
 - **Work with resources** — assign resources, resource view, multi-taskbar view
-- **Configure columns** — reorder, resize, freeze, span, templates, WBS, checkbox
+- **Configure columns** — reorder, resize, freeze, span, templates, WBS, serial number, checkbox
 - **Customize the timeline** — top/bottom tiers, zooming, time units (hour to decade), infinite scrolling
 - **Filter and sort** — column menu filter, Excel-like filter, toolbar search, sorting
-- **Select rows or cells** — row/cell selection, selection events
+- **Select rows or cells** — row/cell selection with hierarchy checkbox modes, selection events
 - **Use the toolbar** — built-in items (Add, Edit, Delete, Search, ExpandAll…) and custom items
 - **Customize taskbars and labels** — templates, data markers/indicators, tooltips (taskbar / connector line / baseline / timeline), label settings
 - **Add event markers and holidays** — project milestone lines, non-working days
+- **Manage calendars** — project calendar with working hours/holidays, task-specific calendars for custom scheduling
 - **Export** — Excel (single/multiple Gantt, custom data) and PDF (headers, footers, custom)
 - **Control layout** — splitter position, loading animation, state persistence
 - **Undo / Redo** actions in the Gantt
@@ -90,15 +91,26 @@ Use this skill when the user needs to:
 - `validateManualTasksOnLinking: true` — enforce predecessor dates even in Manual mode
 - Custom mode: per-task scheduling via `taskFields.manual` boolean field (`true` = manual)
 - `taskFields` mapping (id, name, startDate, endDate, duration, durationUnit, progress, parentID, dependency, work, type, notes, etc.)
-- Global duration unit (`durationUnit` — `day`, `hour`, `minute`; default `day`)
+- Global duration unit (`durationUnit` — `day`, `hour`, `minute`, `week`, `month`; default `day`)
 - Map per-task duration unit via `taskFields.durationUnit` data field
-- Inline duration unit in duration string: `'3days'`, `'12hours'`, `'1800minutes'`
+- Inline duration unit in duration string: `'3days'`, `'12hours'`, `'1800minutes'`, `'2weeks'`, `'3months'`
+- Week and month duration units with configurable days per week/month (`daysPerWeek`, `daysPerMonth`)
 - Unscheduled task types: start-only, end-only, duration-only, milestone (`duration: 0`)
 - `allowUnscheduledTasks: false` auto-fills missing dates with duration=1 + project start
 - Working time range (`dayWorkingTime` with `from`/`to` — inject `DayMarkers`)
 - Per-day working hours (`weekWorkingTime` — overrides `dayWorkingTime` for listed days; unlisted days fall back to `dayWorkingTime`)
 - Non-working days: `workWeek` array + `highlightWeekends`
 - `includeWeekend: true` to count weekends in duration calculations
+
+### Calendar Settings
+📄 **Read:** [references/calendar-settings.md](references/calendar-settings.md)
+- Project calendar (`calendarSettings.projectCalendar`) — default working hours and holidays for all tasks
+- Task calendars (`calendarSettings.taskCalendar`) — custom calendars for specific tasks via `taskFields.calendarId`
+- Working time configuration (from/to times per day) and calendar exceptions
+- Holiday definitions and non-working day management
+- Interaction with global working time settings (`dayWorkingTime`, `weekWorkingTime`)
+- Impact on duration calculation, scheduling, and dependencies
+- Assignment of task calendars to tasks for team-specific or region-specific scheduling
 
 ### Baseline
 📄 **Read:** [references/baseline.md](references/baseline.md)
@@ -126,6 +138,8 @@ Use this skill when the user needs to:
 ### Task Dependencies
 📄 **Read:** [references/task-dependencies.md](references/task-dependencies.md)
 - Predecessor types: FS, SS, FF, SF — format `"{ID}{Type}"` e.g. `"2FS"`, `"3SS"`
+- Restrict allowed dependency types via `allowedDependencyTypes` property (array of allowed types)
+- Dependency type validation during parsing, dialog editing, and taskbar editing
 - Lag/lead with unit suffix: `"2FS+2days"`, `"4FF+960m"`, `"7SS+16h"`, `"3FS-1days"`
 - Multiple predecessors comma-separated: `"2FS,3FF"`
 - `taskFields.dependency` — maps predecessor string field
@@ -169,6 +183,17 @@ Use this skill when the user needs to:
 - Server-side CRUD with `UrlAdaptor` + `batchUrl` (`added`/`changed`/`deleted` collections)
 - `updateRecordByID()`, `addRecord()`, `deleteRecord()`, `indent()`, `outdent()`
 
+### Taskbar Draw
+📄 **Read:** [references/taskbar-draw.md](references/taskbar-draw.md)
+- Enable taskbar draw (`allowTaskbarDraw: true` in `editSettings`) — create/schedule unscheduled tasks via timeline drag
+- Automatic calculation of start date, end date, and duration from drawn taskbar
+- Draw interaction respects working time, holidays, weekends, and task calendars
+- Scheduling output with generated fields (StartDate, EndDate, Duration)
+- Prerequisites and related settings for proper task scheduling
+- Partial data handling (fully unscheduled, partially scheduled, already scheduled)
+- Interaction with dependencies and task types (parent, milestones, split tasks)
+- Best practices for combining with editing and calendar integration
+
 ### Resources
 📄 **Read:** [references/resources.md](references/resources.md)
 - Defining resource collection and `resourceFields`
@@ -186,6 +211,7 @@ Use this skill when the user needs to:
 - Column menu
 - Column templates
 - WBS (work breakdown structure) column
+- Serial number column — auto-incremented display column with behavior during sorting, filtering, virtualization, and paging
 - Responsive columns
 - Checkbox selection column
 
@@ -238,7 +264,10 @@ Use this skill when the user needs to:
 - Full events table (rowSelecting, rowSelected, rowDeselecting, rowDeselected, cellSelecting, cellSelected, cellDeselected)
 - Prevent row selection via `rowSelecting` (`args.cancel = true`)
 - Prevent cell selection via `cellSelecting` (`args.cancel = true`)
-- Checkbox selection with `checkboxMode` options
+- Checkbox selection with `checkboxMode` options and hierarchy modes
+- Hierarchy checkbox modes: `'Self'` (independent), `'Hierarchy'` (propagate through tree), `'FilteredHierarchy'` (propagate within filtered view)
+- Selection state propagation through parent-child relationships
+- Checkbox selection with collapsed/expanded records
 - Touch interaction (single tap + multi-select popup)
 
 ### Toolbar

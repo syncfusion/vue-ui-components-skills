@@ -312,11 +312,6 @@ export default {
 }
 </script>
 
-<style>
-@import '../node_modules/@syncfusion/ej2-base/styles/material.css';
-@import '../node_modules/@syncfusion/ej2-charts/styles/material.css';
-@import '../node_modules/@syncfusion/ej2-vue-charts/styles/material.css';
-</style>
 ```
 
 **Complete Vue 3 Example:**
@@ -359,11 +354,6 @@ provide('bulletChart', [BulletTooltip])
 const data = ref([{ value: 270, target: 250 }])
 </script>
 
-<style>
-@import '../node_modules/@syncfusion/ej2-base/styles/material.css';
-@import '../node_modules/@syncfusion/ej2-charts/styles/material.css';
-@import '../node_modules/@syncfusion/ej2-vue-charts/styles/material.css';
-</style>
 ```
 
 ## Verify the Chart
@@ -395,17 +385,9 @@ Navigate to `http://localhost:8080` (Vue 2) or `http://localhost:5173` (Vite)
 **Problem:** Chart appears blank or missing
 
 **Solutions:**
-1. **Verify CSS imports** - Ensure all Syncfusion CSS files are imported in your component or main.js
-2. **Check data source** - Confirm `dataSource` contains valid data
-3. **Check console** - Look for JavaScript errors in browser DevTools
 
-```vue
-<style scoped>
-@import '../node_modules/@syncfusion/ej2-base/styles/material.css';
-@import '../node_modules/@syncfusion/ej2-charts/styles/material.css';
-@import '../node_modules/@syncfusion/ej2-vue-charts/styles/material.css';
-</style>
-```
+1. **Check data source** - Confirm `dataSource` contains valid data
+2. **Check console** - Look for JavaScript errors in browser DevTools
 
 ### Tooltip Not Working
 
@@ -438,19 +420,6 @@ provide: {
 1. **Check Vue version**: `npm list vue`
 2. **Check Syncfusion version**: `npm list @syncfusion/ej2-vue-charts`
 3. **Reinstall both**: `npm install vue@latest @syncfusion/ej2-vue-charts@latest`
-
-### CSS Not Applied
-
-**Problem:** Chart renders but styling looks incorrect
-
-**Solutions:**
-1. **Use correct theme** - Ensure you import the right theme (material, bootstrap, fabric, etc.)
-2. **Check import order** - Import base styles first, then component styles
-3. **Try different theme**:
-```vue
-@import '../node_modules/@syncfusion/ej2-base/styles/bootstrap.css';
-@import '../node_modules/@syncfusion/ej2-charts/styles/bootstrap.css';
-```
 
 ---
 

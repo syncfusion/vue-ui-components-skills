@@ -11,32 +11,6 @@
 
 ## Theming
 
-### Available Themes
-
-Syncfusion provides multiple built-in themes:
-
-```vue
-<style>
-/* Material theme (default) */
-@import '@syncfusion/ej2-vue-charts/styles/material.css';
-
-/* Alternative themes */
-/* @import '@syncfusion/ej2-vue-charts/styles/bootstrap.css'; */
-/* @import '@syncfusion/ej2-vue-charts/styles/fabric.css'; */
-/* @import '@syncfusion/ej2-vue-charts/styles/highcontrast.css'; */
-/* @import '@syncfusion/ej2-vue-charts/styles/tailwind.css'; */
-</style>
-```
-
-### Importing Specific Themes
-
-```vue
-<script>
-// In main.js
-import '@syncfusion/ej2-vue-charts/styles/bootstrap.css';
-</script>
-```
-
 ### Theme Switching
 
 Dynamically change themes:

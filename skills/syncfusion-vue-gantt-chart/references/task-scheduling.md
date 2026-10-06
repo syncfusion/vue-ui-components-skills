@@ -95,7 +95,15 @@ The default duration unit is `day`. Change it globally or per-task.
 <ejs-gantt durationUnit="hour" :taskFields="taskFields" ...></ejs-gantt>
 ```
 
-Supported values: `day`, `hour`, `minute`.
+Supported values: `day`, `hour`, `minute`, `week`, `month`.
+
+| Unit | Use Case | Conversion |
+|---|---|---|
+| `day` | General planning, task-level work | Single calendar/working day |
+| `hour` | Detailed task management | Single working hour (within daily working time) |
+| `minute` | Short-duration tasks | Single minute |
+| `week` | Sprint planning, phase duration | Converted using `daysPerWeek` (default: 5) |
+| `month` | Long-duration phases, roadmap | Converted using `daysPerMonth` (default: 20) |
 
 ### Map per-task duration unit from data source
 
@@ -128,9 +136,141 @@ You can also embed the unit directly in the duration string value (no space betw
 { TaskID: 2, Duration: '3days' }
 { TaskID: 3, Duration: '12hours' }
 { TaskID: 4, Duration: '1800minutes' }
+{ TaskID: 5, Duration: '2weeks' }
+{ TaskID: 6, Duration: '3months' }
 ```
 
 > The edit type of the duration column in Gantt is `string` to support duration values with embedded units.
+
+### Week and Month Duration Units
+
+The `week` and `month` duration units provide convenient ways to express longer durations. These units are converted to working days using configurable conversion factors.
+
+#### Configure daysPerWeek and daysPerMonth
+
+`daysPerWeek` specifies how many working days constitute one week, directly impacting how week-based durations are calculated. For example, if `daysPerWeek` is 5 (default), then 1 week equals 5 working days.
+
+`daysPerMonth` specifies how many working days constitute one month, affecting how month-based durations are converted to actual working days for scheduling calculations. For example, if `daysPerMonth` is 20 (default), then 1 month equals 20 working days.
+
+```vue
+<template>
+  <ejs-gantt
+    :dataSource="data"
+    :taskFields="taskFields"
+    :daysPerWeek="5"
+    :daysPerMonth="20"
+    durationUnit="day"
+    height="450px"
+  ></ejs-gantt>
+</template>
+
+<script setup>
+import { provide } from 'vue';
+import { GanttComponent as EjsGantt } from '@syncfusion/ej2-vue-gantt';
+
+const data = [
+  { TaskID: 1, TaskName: 'Sprint 1', StartDate: new Date('04/02/2024'), Duration: 2, DurationUnit: 'week' },  // 10 working days
+  { TaskID: 2, TaskName: 'Phase 1', StartDate: new Date('04/16/2024'), Duration: 3, DurationUnit: 'month' }, // 60 working days
+  { TaskID: 3, TaskName: 'Review', StartDate: new Date('07/15/2024'), Duration: 1, DurationUnit: 'week' }   // 5 working days
+];
+
+const taskFields = {
+  id: 'TaskID',
+  name: 'TaskName',
+  startDate: 'StartDate',
+  duration: 'Duration',
+  durationUnit: 'DurationUnit'
+};
+</script>
+```
+
+#### Default Values and Configuration
+
+| Property | Default | Purpose |
+|---|---|---|
+| `daysPerWeek` | 5 | Working days in one week (adjustable for different work schedules) |
+| `daysPerMonth` | 20 | Working days in one month (adjusted for projects with varying hours/workload) |
+
+Both can be customized per-project based on your organization's work schedule:
+
+```vue
+<ejs-gantt
+  :daysPerWeek="6"        <!-- 6-day work week -->
+  :daysPerMonth="26"      <!-- 26 working days per month -->
+  ...
+></ejs-gantt>
+```
+
+#### Duration Calculation Example
+
+**Project Settings:**
+- `daysPerWeek: 5` (Monday–Friday)
+- `daysPerMonth: 20` (standard)
+- `dayWorkingTime: [{ from: 9, to: 17 }]` (8 hours/day)
+
+**Task Example:**
+```js
+{
+  TaskID: 1,
+  TaskName: 'Design Sprint',
+  Duration: 2,           // 2 weeks
+  DurationUnit: 'week',  // = 2 * 5 = 10 working days
+  StartDate: new Date('04/02/2024') // Monday
+}
+```
+
+**Calculated End Date:**
+- Start: Monday, April 2
+- Duration: 10 working days (2 weeks)
+- Working days: Mon-Fri (5 days) + Mon-Fri (5 days)
+- Calculated End: Friday, April 12
+
+#### Impact on Task Editing
+
+When editing tasks with week/month durations:
+
+1. **Cell Editing** — Input the duration + unit (e.g., `'3weeks'`, `'2months'`)
+2. **Dialog Editing** — Duration field accepts inline unit syntax
+3. **Taskbar Editing** — Draws the exact span based on calculated working days
+4. **Dependency Offsets** — Offsets respect the duration unit conversion
+
+#### Interaction with Calendars
+
+Week and month durations work seamlessly with project and task calendars:
+
+```vue
+<script setup>
+const calendarSettings = {
+  projectCalendar: {
+    workingTime: [{ from: 9, to: 17 }],
+    holidays: [from: new Date('2024-07-04'), to: new Date('2024-07-04'), label: 'Holiday 1' ]  // July 4th holiday
+  }
+};
+
+const data = [
+  {
+    TaskID: 1,
+    TaskName: 'Project Phase',
+    Duration: 1,           // 1 month
+    DurationUnit: 'month', // = 20 working days (default daysPerMonth)
+    StartDate: new Date('2024-06-28')
+    // With July 4 as holiday, actual end date adjusts accordingly
+  }
+];
+</script>
+```
+
+#### Best Practices
+
+1. **Choose Appropriate Units** — Use `week` for sprint-based planning, `month` for phase-level planning, `day` for detailed schedules.
+
+2. **Set Realistic Conversion Factors** — Ensure `daysPerWeek` and `daysPerMonth` reflect your actual work schedule.
+
+3. **Document Your Assumptions** — Let stakeholders know your week/month definitions (e.g., "1 week = 5 working days").
+
+4. **Test Edge Cases** — Verify duration calculations across holiday boundaries and when using task calendars.
+
+5. **Consistency in Data** — Decide on a project-wide duration unit strategy. Mixing units in the same project is valid but can be confusing.
 
 ## Unscheduled Tasks
 

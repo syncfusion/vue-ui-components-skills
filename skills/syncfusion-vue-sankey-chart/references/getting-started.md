@@ -47,14 +47,6 @@ To use the Syncfusion Vue Sankey Diagram, install `@syncfusion/ej2-vue-charts` a
 
 ### Step 3: Import CSS Theme
 
-Add the base and charts CSS files in `main.js`, `main.ts`, or your root component. Syncfusion’s Vue guidance explicitly recommends importing the required theme styles for the components you use. 
-
-```javascript
-// main.js or main.ts
-import '@syncfusion/ej2-base/styles/material.css';
-import '@syncfusion/ej2-charts/styles/material.css';
-```
-
 **Available themes:** Syncfusion lists built-in themes such as Material, Bootstrap, Fabric, Tailwind CSS, and Material 3 for Vue components, including Sankey support. 
 
 - `material.css` 
@@ -532,11 +524,10 @@ npm install
 ### Issue: Diagram not rendering (blank container)
 
 **Check:**
-1. CSS imported? Add the required Syncfusion theme CSS files. Syncfusion explicitly requires importing the appropriate styles. 
-2. Modules provided? If you enabled optional features such as legends, inject the corresponding module through `provide`. The official Sankey sample shows this for `SankeyLegend`. 
-3. Data exists? Verify that the node and link collections are not empty. A Sankey Diagram requires connected nodes and links. 
-4. IDs unique? Every node `id` must be unique, and every link `source-id` / `target-id` must point to existing node IDs. 
-5. Template syntax correct? Use `<e-sankey-nodes>`, `<e-sankey-links>`, `source-id`, and `target-id` in Vue templates. 
+1. Modules provided? If you enabled optional features such as legends, inject the corresponding module through `provide`. The official Sankey sample shows this for `SankeyLegend`. 
+2. Data exists? Verify that the node and link collections are not empty. A Sankey Diagram requires connected nodes and links. 
+3. IDs unique? Every node `id` must be unique, and every link `source-id` / `target-id` must point to existing node IDs. 
+4. Template syntax correct? Use `<e-sankey-nodes>`, `<e-sankey-links>`, `source-id`, and `target-id` in Vue templates. 
 
 ### Issue: "Unknown custom element 'ejs-sankey'"
 

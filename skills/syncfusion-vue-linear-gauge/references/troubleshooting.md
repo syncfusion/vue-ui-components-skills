@@ -17,7 +17,6 @@
   - [Pointer Color Not Applying](#pointer-color-not-applying)
   - [Labels Not Visible](#labels-not-visible)
   - [Custom CSS Not Applied](#custom-css-not-applied)
-  - [Theme Not Applying](#theme-not-applying)
 - [Event Handling Problems](#event-handling-problems)
   - [Events Not Firing](#events-not-firing)
   - [Drag Events Not Working](#drag-events-not-working)
@@ -97,12 +96,8 @@ npm install @syncfusion/ej2-vue-gauges@20.0.0
 **Problem:** Component renders but gauge is invisible
 
 **Solutions:**
-1. Check CSS imports:
-```javascript
-import '@syncfusion/ej2-vue-gauges/styles/material.css';
-```
 
-2. Verify container has dimensions:
+1. Verify container has dimensions:
 ```css
 .gauge-container {
   width: 400px;
@@ -110,7 +105,7 @@ import '@syncfusion/ej2-vue-gauges/styles/material.css';
 }
 ```
 
-3. Check browser console for errors
+2. Check browser console for errors
 
 ### Blank or Empty Gauge
 
@@ -292,21 +287,6 @@ labelStyle: {
 .e-lineargauge .e-axis-line {
   stroke: red !important;
 }
-```
-
-### Theme Not Applying
-
-**Problem:** Selected theme doesn't change appearance
-
-**Solution:** Verify theme import:
-
-```javascript
-// Wrong - theme not imported
-<ejs-lineargauge :axes="axes"></ejs-lineargauge>
-
-// Correct - import theme first
-import '@syncfusion/ej2-vue-gauges/styles/bootstrap.css';
-<ejs-lineargauge :axes="axes"></ejs-lineargauge>
 ```
 
 ## Event Handling Problems
