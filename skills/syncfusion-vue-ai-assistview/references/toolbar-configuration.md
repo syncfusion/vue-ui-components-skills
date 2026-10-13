@@ -98,6 +98,94 @@ Center - Align to center
 Right  - Align to right
 ```
 
+### Setting Alignment
+
+Use the `align` property on any `ToolbarItemModel` to control where the item is rendered within the toolbar. The default value is `Left`. The available values are `Left`, `Center`, and `Right`.
+
+**Composition API (~/src/App.vue)**
+
+```vue
+<template>
+  <div id='container' style="height: 350px; width: 650px; margin: 0 auto;">
+    <br>
+    <ejs-aiassistview id='aiAssistView' :toolbar-settings="toolbarSettings" :prompt-request="onPromptRequest" ref="aiassist"></ejs-aiassistview>
+  </div>
+</template>
+
+<script setup>
+import { AIAssistViewComponent as EjsAiassistview } from "@syncfusion/ej2-vue-interactive-chat";
+import { ref } from "vue";
+
+let aiassist = ref(null);
+
+const toolbarSettings = {
+  items: [ { iconCss: 'e-icons e-refresh', align: 'Right' } ]
+};
+
+const onPromptRequest = (args) => {
+  setTimeout(() => {
+    let defaultResponse = 'For real-time prompt processing, connect the AIAssistView component to your preferred AI service, such as OpenAI or Azure Cognitive Services. Ensure you obtain the necessary API credentials to authenticate and enable seamless integration.';
+    aiassist.value.addPromptResponse(defaultResponse);
+  }, 1000);
+};
+</script>
+
+<style>
+@import "../node_modules/@syncfusion/ej2-base/styles/tailwind3.css";
+@import "../node_modules/@syncfusion/ej2-inputs/styles/tailwind3.css";
+@import "../node_modules/@syncfusion/ej2-navigations/styles/tailwind3.css";
+@import "../node_modules/@syncfusion/ej2-notifications/styles/tailwind3.css";
+@import "../node_modules/@syncfusion/ej2-layouts/styles/tailwind3.css";
+@import "../node_modules/@syncfusion/ej2-interactive-chat/styles/tailwind3.css";
+</style>
+```
+
+**Options API (~/src/App.vue)**
+
+```vue
+<template>
+  <div id='container' style="height: 350px; width: 650px; margin: 0 auto;">
+    <br>
+    <ejs-aiassistview id='aiAssistView' :toolbar-settings="toolbarSettings" :prompt-request="onPromptRequest" ref="aiassist"></ejs-aiassistview>
+  </div>
+</template>
+<script>
+import { AIAssistViewComponent } from "@syncfusion/ej2-vue-interactive-chat";
+
+export default {
+  components: {
+    'ejs-aiassistview': AIAssistViewComponent
+  },
+  data: function () {
+    return {
+      toolbarSettings: {
+        items: [ { iconCss: 'e-icons e-refresh', align: 'Right' } ]
+      }
+    }
+  },
+  methods: {
+    onPromptRequest: function (args) {
+      setTimeout(() => {
+        let defaultAiassist = this.$refs.aiassist.ej2Instances;
+        let defaultResponse = 'For real-time prompt processing, connect the AI AssistView component to your preferred AI service, such as OpenAI or Azure Cognitive Services. Ensure you obtain the necessary API credentials to authenticate and enable seamless integration.';
+        defaultAiassist.addPromptResponse(defaultResponse);
+      }, 1000);
+    }
+  }
+}
+</script>
+<style>
+@import "../node_modules/@syncfusion/ej2-base/styles/tailwind3.css";
+@import "../node_modules/@syncfusion/ej2-inputs/styles/tailwind3.css";
+@import "../node_modules/@syncfusion/ej2-navigations/styles/tailwind3.css";
+@import "../node_modules/@syncfusion/ej2-notifications/styles/tailwind3.css";
+@import "../node_modules/@syncfusion/ej2-layouts/styles/tailwind3.css";
+@import "../node_modules/@syncfusion/ej2-interactive-chat/styles/tailwind3.css";
+</style>
+```
+
+> The `align` property works the same way on every toolbar (`toolbarSettings`, `promptToolbarSettings`, `responseToolbarSettings`, and `footerToolbarSettings`).
+
 ## Prompt Toolbar
 
 The prompt toolbar displays actions associated with user prompts.

@@ -397,6 +397,7 @@ const togglePersistence = () => {
 - [Common Workflows](#common-workflows)
 - [Edge Cases and Error Handling](#edge-cases-and-error-handling)
 - [Best Practices](#best-practices)
+- [Voice Input with Speech-to-Text](#voice-input-with-speech-to-text)
 
 ## Positioning with relateTo
 
@@ -981,6 +982,149 @@ const getOrFetchResponse = async (prompt) => {
   const response = await fetchFromAI(prompt);
   responseCache.set(prompt, response);
   return response;
+};
+</script>
+```
+
+## Voice Input with Speech-to-Text
+
+The Inline AI Assist component supports voice-driven prompts through the browser's Web Speech API. Enable the feature with `speechToTextSettings` and bind the recognition lifecycle events to drive UI feedback.
+
+For full configuration details (language, button, tooltip, browser support), see [speech-to-text.md](speech-to-text.md). The patterns below focus on integration with the existing component APIs.
+
+### Pattern: Voice-Driven Summarization
+
+Combine Speech-to-Text with `relate-to` to dictate a prompt that summarizes a `contenteditable` region.
+
+```vue
+<template>
+  <div style="height: 400px; width: 700px; margin: 0 auto;">
+    <br />
+    <div id="editableText" contenteditable="true"
+         style="min-height:120px; border:1px solid #ccc; padding:8px; margin-top:8px;">
+      Paste or type the text you want summarized here.
+    </div>
+    <button id="summarizeBtn" @click="showPopup" style="margin-top:8px;">
+      Summarize
+    </button>
+    <p>Status: <strong>{{ status }}</strong></p>
+
+    <ejs-inlineaiassist
+      relate-to="#summarizeBtn"
+      popup-width="500px"
+      :prompt-request="onPromptRequest"
+      :response-settings="responseSettings"
+      :speech-to-text-settings="speechToTextSettings"
+      ref="inlineAiAssist">
+    </ejs-inlineaiassist>
+  </div>
+</template>
+
+<script setup>
+import { InlineAIAssistComponent as EjsInlineaiassist } from '@syncfusion/ej2-vue-interactive-chat';
+import { ref } from 'vue';
+
+const inlineAiAssist = ref(null);
+const status = ref('Idle');
+
+const speechToTextSettings = {
+  enable: true,
+  lang: 'en-US',
+  allowInterimResults: true,
+  onStart: (args) => { status.value = 'Listening (' + (args.listeningState || '') + ')'; },
+  onStop: (args) => { status.value = 'Stopped (' + (args.listeningState || '') + ')'; },
+  transcriptChanged: (args) => {
+    const text = args.text || args.value || args.transcript || '';
+    if (text) status.value = 'Heard: ' + text;
+  },
+  onError: (args) => { status.value = 'Error: ' + ((args && (args.error || args.errorMessage)) || 'recognition failed'); }
+};
+
+const responseSettings = {
+  itemSelect: (args) => {
+    if (args.command.label === 'Accept') {
+      const editable = document.getElementById('editableText');
+      const prompts = inlineAiAssist.value?.prompts;
+      if (editable && prompts && prompts.length) {
+        editable.innerHTML = '<p>' + prompts[prompts.length - 1].response + '</p>';
+      }
+      inlineAiAssist.value?.hidePopup();
+    } else if (args.command.label === 'Discard') {
+      inlineAiAssist.value?.hidePopup();
+    }
+  }
+};
+
+const onPromptRequest = () => {
+  setTimeout(() => {
+    const defaultResponse = 'For real-time prompt processing, connect the Inline AI Assist component to your preferred AI service, such as OpenAI or Azure Cognitive Services. Ensure you obtain the necessary API credentials to authenticate and enable seamless integration.';
+    inlineAiAssist.value?.addResponse(defaultResponse);
+  }, 1000);
+};
+
+const showPopup = () => {
+  inlineAiAssist.value?.showPopup();
+};
+</script>
+```
+
+### Pattern: Feature Detection with Graceful Fallback
+
+Always guard the Speech-to-Text feature behind a browser-support check. If unsupported, hide the microphone affordance or fall back to text input only.
+
+```vue
+<script setup>
+import { ref, onMounted } from 'vue';
+
+const isSpeechSupported = ref(false);
+
+onMounted(() => {
+  isSpeechSupported.value =
+    typeof window !== 'undefined' &&
+    (window.SpeechRecognition || window.webkitSpeechRecognition);
+});
+
+const speechToTextSettings = {
+  enable: isSpeechSupported.value,
+  lang: 'en-US'
+};
+</script>
+
+<template>
+  <div>
+    <p v-if="!isSpeechSupported">
+      Voice input is not supported in this browser. Use the text input instead.
+    </p>
+    <ejs-inlineaiassist
+      :speech-to-text-settings="speechToTextSettings"
+      :prompt-request="onPromptRequest"
+      ref="inlineAiAssist">
+    </ejs-inlineaiassist>
+  </div>
+</template>
+```
+
+### Pattern: Push Final Transcript into the Editor
+
+Use `transcriptChanged` with `isFinal` to copy the final voice result into a target `contenteditable` element on stop.
+
+```vue
+<script setup>
+import { ref } from 'vue';
+
+const inlineAiAssist = ref(null);
+
+const speechToTextSettings = {
+  enable: true,
+  allowInterimResults: false, // only emit final transcripts
+  onStop: () => {
+    const prompts = inlineAiAssist.value?.prompts || [];
+    const last = prompts[prompts.length - 1];
+    if (last && last.response) {
+      const editor = document.getElementById('editableText');
+      if (editor) editor.innerText = last.response;
+    }
+  }
 };
 </script>
 ```

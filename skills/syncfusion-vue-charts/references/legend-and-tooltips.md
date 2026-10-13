@@ -20,6 +20,7 @@
   - [Shared Tooltip (Multiple Series)](#shared-tooltip-multiple-series)
   - [Tooltip Format](#tooltip-format)
   - [Example: Custom Format](#example-custom-format)
+  - [Inline Tooltip Formatting](#inline-tooltip-formatting)
 - [Tooltip Templates](#tooltip-templates)
   - [Custom Tooltip Template](#custom-tooltip-template)
   - [Tooltip with Images or Icons](#tooltip-with-images-or-icons)
@@ -283,7 +284,53 @@ const tooltipSettings = {
 };
 </script>
 ```
+### Inline Tooltip Formatting
 
+The tooltip content can be formatted directly within the `format` property by adding DateTime or number format specifiers to supported tooltip tokens. This allows you to customize how point and series values are displayed without using events.
+
+A format specifier can be applied to a tooltip token by adding a colon (`:`) followed by the required format.
+
+For example:
+
+```vue
+const tooltipSettings = {
+  enable: true,
+  format:
+    '${series.name}<br>' +
+    '${point.x:MMM yyyy} : ${point.y:n2}<br>' +
+    'Opacity: ${series.opacity}'
+};
+```
+
+In the above example, `point.x` is displayed in month-year format, `point.y` is displayed with two decimal places, and `series.opacity` displays the opacity value applied to the series.
+
+Inline formatting can be applied to the following tooltip tokens:
+
+- `point.x` - Specifies the x-value of the data point, such as DateTime or category values.
+- `point.y` - Specifies the numeric y-value of the data point.
+- `series.name` - Specifies the name assigned to the series.
+- `series.type` - Specifies the rendering type of the series, such as `Column`, `Bar`, `Line`, or `StackingColumn`.
+- `series.opacity` - Specifies the opacity value applied to the series.
+
+> **Important:** The availability of point-specific tokens depends on the values configured in the data source and the chart series type. The `series.name` and `series.type` tokens return string values, so DateTime or number formatting is not applied to these tokens.
+
+The following format types are supported:
+
+**DateTime formats:**
+
+- `MMM yyyy` - Displays the abbreviated month and four-digit year.
+- `MM:yy` - Displays the two-digit month and year.
+- `dd MMM` - Displays the two-digit day and abbreviated month.
+
+**Number formats:**
+
+- `n2` - Number with two decimal places.
+- `n0` - Number without decimal places.
+- `c2` - Currency format.
+- `p1` - Percentage format.
+- `e1` - Exponential notation.
+
+If the specified format does not match the resolved value type, the original value is displayed.
 ---
 
 ## Tooltip Templates
@@ -416,6 +463,53 @@ const primaryYAxis = {
 ```
 
 ---
+
+### Raw Datasource Record in `tooltipRender`
+
+The complete datasource record is available only through the `tooltipRender` event as `args.data.rawData`. It is not a tooltip-format token.
+
+```vue
+<template>
+  <ejs-chart id="raw-data-tooltip-chart" :primaryXAxis="primaryXAxis" :primaryYAxis="primaryYAxis"
+    :tooltip="tooltip" :tooltipRender="tooltipRender" title="HiloOpenClose Raw Data Tooltip">
+    <e-series-collection>
+      <e-series :dataSource="chartData" type="HiloOpenClose" xName="x" open="open" high="high"
+        low="low" close="close" name="Price">
+      </e-series>
+    </e-series-collection>
+  </ejs-chart>
+</template>
+
+<script setup lang="ts">
+import { provide } from 'vue';
+import {
+  Category, ChartComponent as EjsChart, HiloOpenCloseSeries, SeriesCollectionDirective as ESeriesCollection,
+  SeriesDirective as ESeries, Tooltip
+} from '@syncfusion/ej2-vue-charts';
+
+provide('chart', [Category, HiloOpenCloseSeries, Tooltip]);
+
+interface HiloOpenCloseData { x: string; open: number; high: number; low: number; close: number; }
+const chartData: HiloOpenCloseData[] = [
+  { x: 'Jan', open: 120, high: 160, low: 100, close: 140 },
+  { x: 'Feb', open: 150, high: 190, low: 130, close: 170 },
+  { x: 'Mar', open: 130, high: 170, low: 110, close: 150 },
+  { x: 'Apr', open: 160, high: 180, low: 120, close: 140 },
+  { x: 'May', open: 150, high: 170, low: 110, close: 130 }
+];
+const primaryXAxis: Object = { valueType: 'Category', title: 'Month' };
+const primaryYAxis: Object = { title: 'Price', minimum: 80, maximum: 200, interval: 20 };
+const tooltip: Object = { enable: true };
+const tooltipRender = (args: any): void => {
+  if (!args.data || !args.data.rawData) return;
+  const rawData: HiloOpenCloseData = args.data.rawData as HiloOpenCloseData;
+  args.headerText = `<b>${rawData.x}</b>`;
+  args.text = [`Open: ${rawData.open}`, `High: ${rawData.high}`, `Low: ${rawData.low}`, `Close: ${rawData.close}`];
+};
+</script>
+```
+
+Use fields such as `args.data.rawData.x` and `args.data.rawData.high`. Do not generate `${point.data.<field>}` for this feature.
 
 ## Customization
 

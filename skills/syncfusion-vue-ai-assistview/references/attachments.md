@@ -877,6 +877,140 @@ const onUploadFailure = (args) => {
 
 ---
 
+### attachmentRemoving Event
+
+Triggered when an attachment is being removed from the upload queue — fires **before** the file is detached from the prompt, so you can confirm with the user, cancel the removal, or log the action.
+
+**Event Type:** `EmitType<RemovingEventArgs>`
+
+**Event Arguments (RemovingEventArgs):**
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `cancel` | `boolean` | Defines whether the current action can be prevented. |
+| `currentRequest` | `XMLHttpRequest` | Returns the XMLHttpRequest instance that is associated with the remove action. |
+| `customFormData` | `{ [key: string]: Object }[]` | Defines the additional data with key and value pair format that will be submitted to the remove action. |
+| `event` | `MouseEvent \| TouchEvent \| KeyboardEventArgs` | Returns the original event arguments. |
+| `filesData` | [FileInfo[]](https://ej2.syncfusion.com/documentation/api/uploader/fileinfo) | Returns the list of files' details that will be removed. |
+| `postRawFile` | `boolean` | Defines whether the selected raw file is sent to the server remove action. Set `true` to send the raw file, or `false` to send only the file name. |
+
+**Basic Implementation (Composition API):**
+
+```vue
+<template>
+   <div id="container" style="height: 350px; width: 650px; margin: 0 auto;">
+    <br />
+    <ejs-aiassistview id="aiAssistView" ref="aiassist" :attachmentRemoving="attachmentRemoving" :promptRequest="onPromptRequest" :enableAttachments="true" :attachmentSettings="attachmentSettings"
+    ></ejs-aiassistview>
+  </div>
+</template>
+
+<script setup>
+import { ref } from 'vue';
+import { enableRipple } from '@syncfusion/ej2-base';
+import { AIAssistViewComponent as EjsAiassistview } from '@syncfusion/ej2-vue-interactive-chat';
+
+enableRipple(true);
+
+const aiassist = ref(null);
+
+const attachmentSettings = {
+  saveUrl: 'https://services.syncfusion.com/js/production/api/FileUploader/Save',
+  removeUrl: 'https://services.syncfusion.com/js/production/api/FileUploader/Remove'
+};
+
+const onPromptRequest = () => {
+  setTimeout(() => {
+    const aiAssistInstance = aiassist.value?.ej2Instances;
+    const defaultResponse =
+      'For real-time prompt processing, connect the AIAssistView component to your preferred AI service, such as OpenAI or Azure Cognitive Services. Ensure you obtain the necessary API credentials to authenticate and enable seamless integration.';
+    aiAssistInstance.addPromptResponse(defaultResponse);
+  }, 1000);
+};
+
+const attachmentRemoving = () => {
+  // Your required action here
+};
+</script>
+
+<style>
+@import "../../node_modules/@syncfusion/ej2-base/styles/tailwind3.css";
+@import "../../node_modules/@syncfusion/ej2-popups/styles/tailwind3.css";
+@import "../../node_modules/@syncfusion/ej2-buttons/styles/tailwind3.css";
+@import "../../node_modules/@syncfusion/ej2-inputs/styles/tailwind3.css";
+@import "../../node_modules/@syncfusion/ej2-interactive-chat/styles/tailwind3.css";
+</style>
+```
+
+**Basic Implementation (Options API):**
+
+```vue
+<template>
+  <div id="container" style="height: 350px; width: 650px; margin: 0 auto;">
+    <br />
+    <ejs-aiassistview id="aiAssistView" ref="aiassist" :attachmentRemoving="attachmentRemoving" :promptRequest="onPromptRequest" :enableAttachments="true" :attachmentSettings="attachmentSettings"
+    ></ejs-aiassistview>
+  </div>
+</template>
+
+<script>
+import { enableRipple } from '@syncfusion/ej2-base';
+import { AIAssistViewComponent } from '@syncfusion/ej2-vue-interactive-chat';
+
+enableRipple(true);
+
+export default {
+  components: {
+    'ejs-aiassistview': AIAssistViewComponent
+  },
+  data() {
+    return {
+      attachmentSettings: {
+        saveUrl: 'https://services.syncfusion.com/js/production/api/FileUploader/Save',
+        removeUrl: 'https://services.syncfusion.com/js/production/api/FileUploader/Remove'
+      }
+    };
+  },
+  methods: {
+    onPromptRequest() {
+      setTimeout(() => {
+        const aiAssistInstance = this.$refs.aiassist.ej2Instances;
+        const defaultResponse =
+          'For real-time prompt processing, connect the AIAssistView component to your preferred AI service, such as OpenAI or Azure Cognitive Services. Ensure you obtain the necessary API credentials to authenticate and enable seamless integration.';
+        aiAssistInstance.addPromptResponse(defaultResponse);
+      }, 1000);
+    },
+    attachmentRemoving() {
+      // your code will be here
+    }
+  }
+};
+</script>
+
+<style>
+@import "../../node_modules/@syncfusion/ej2-base/styles/tailwind3.css";
+@import "../../node_modules/@syncfusion/ej2-popups/styles/tailwind3.css";
+@import "../../node_modules/@syncfusion/ej2-buttons/styles/tailwind3.css";
+@import "../../node_modules/@syncfusion/ej2-inputs/styles/tailwind3.css";
+@import "../../node_modules/@syncfusion/ej2-interactive-chat/styles/tailwind3.css";
+</style>
+```
+
+**Cancel the Removal:**
+
+```javascript
+const attachmentRemoving = (args) => {
+  const file = args.filesData[0];
+  if (file.size > 5 * 1024 * 1024) {
+    // Keep large attachments so users don't lose them by accident
+    args.cancel = true;
+    console.log('Removal blocked: file exceeds 5 MB');
+  }
+};
+```
+
+---
+
 ### attachmentRemoved Event
 
 Triggered when an attachment is removed from the upload queue.

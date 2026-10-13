@@ -98,7 +98,22 @@ provide("chart", [ColumnSeries, Category]);
 - Child Directives
 - Modules
 - Common Usage Patterns
+- WebMCP properties, settings, event, method, and required Vue providers
+- Axis `Rotate45WithTrim` and `Rotate90WithTrim`
+- Data-label relocation and `SmartLabelSettingsModel`
+- Tooltip `args.data.rawData` behavior
 - Additional Resources
+
+### WebMCP and AI Agent Integration
+📄 **Read:** [references/webmcp.md](references/webmcp.md)
+
+- Enable WebMCP with `:enableWebMcp="true"`
+- Configure `webMcpSettings.name`, `tools`, and `exposedTo`
+- Import and provide every available Chart feature module, including `WebMcpChart`, so WebMCP can change series types and enable features without additional setup
+- Register all built-ins by omitting `tools`
+- Handle execution with `beforeWebMcpToolExecute`
+- Retrieve tools with `getWebMcpTools()` only for diagnostics or direct execution
+- Avoid manual registration buttons, `registerWebMcpTools()`, and fabricated model-context behavior
 
 ### Getting Started
 📄 **Read:** [references/getting-started.md](references/getting-started.md)
@@ -214,6 +229,34 @@ chartInstance.refresh();
 
 **Recommendation:** Start with Vue 3 for new projects. Vue 2 support is maintained but reached end-of-life in Dec 2023.
 
+## WebMCP Quick Reference
+
+```ts
+provide('chart', [
+  AccumulationDistributionIndicator, AreaSeries, AtrIndicator, BarSeries, BollingerBands,
+  BoxAndWhiskerSeries, BubbleSeries, CandleSeries, Category, ChartAnnotation, ColumnSeries,
+  Crosshair, DataEditing, DataLabel, DateTime, DateTimeCategory, EmaIndicator, ErrorBar,
+  Export, Highlight, HiloOpenCloseSeries, HiloSeries, HistogramSeries, Legend, LineSeries,
+  Logarithmic, MacdIndicator, MomentumIndicator, MultiColoredAreaSeries,
+  MultiColoredLineSeries, MultiLevelLabel, ParetoSeries, PolarSeries, RadarSeries,
+  RangeAreaSeries, RangeColumnSeries, RangeStepAreaSeries, RsiIndicator, ScatterSeries,
+  ScrollBar, Selection, SmaIndicator, SplineAreaSeries, SplineRangeAreaSeries, SplineSeries,
+  StackingArea100Series, StackingAreaSeries, StackingBar100Series, StackingBarSeries,
+  StackingColumn100Series, StackingColumnSeries, StackingLine100Series,
+  StackingLineSeries, StackingStepAreaSeries, StepAreaSeries, StepLineSeries,
+  StochasticIndicator, StripLine, TmaIndicator, Tooltip, Trendlines, WaterfallSeries,
+  WebMcpChart, Zoom
+]);
+
+const webMcpSettings: Object = {
+  name: 'featureTourChart',
+  tools: ['inspectChart', 'getSeriesData', 'getChartAxes'],
+  exposedTo: ['assistant']
+};
+```
+
+Use a stable Chart ID, set `:enableWebMcp="true"`, and bind `:webMcpSettings="webMcpSettings"`. Registration is automatic. Preserve the complete import and provider list even when the initial chart uses only one series type.
+
 ## Quick API Reference
 
 ### Essential Component Properties
@@ -312,6 +355,8 @@ chart.hideCrosshair();                // Hide crosshair
 ```
 
 For complete API reference, see: **[API Reference](references/api-reference.md)**
+
+For WebMCP sample-generation guidance, see: **[WebMCP Reference](references/webmcp.md)**
 
 ## Next Steps
 

@@ -8,6 +8,7 @@ This guide covers template-related properties and customization options for the 
 - [Prompt Item Template](#prompt-item-template)
 - [Prompt Suggestion Item Template](#prompt-suggestion-item-template)
 - [Response Item Template](#response-item-template)
+- [Response Animation Template](#response-animation-template)
 - [Toolbar Settings](#toolbar-settings)
 - [Views Configuration](#views-configuration)
 - [Best Practices](#best-practices)
@@ -400,6 +401,228 @@ const onPromptRequest = (args) => {
 
 
 ---
+
+## Response Animation Template
+
+The `responseAnimationTemplate` property shows a custom loading indicator or animation while the AI AssistView is generating a response. The animation template replaces the response slot during the request and is removed automatically once the response is added.
+
+> Use this template together with `promptRequest` (and a small delay in `addPromptResponse`) to display a branded loader while waiting for the AI service.
+
+### Basic Response Animation Template (Composition API)
+
+```vue
+<template>
+  <div id='container' style="height: 350px; width: 650px; margin: 0 auto;">
+    <br>
+    <ejs-aiassistview id='aiAssistView' responseAnimationTemplate="responseAnimationTemplate" ref="aiassist" :prompt-request="onPromptRequest">
+      <template v-slot:responseAnimationTemplate="">
+        <div class="assistview-loading-status">
+          <div class="assistview-grid-icon">
+            <span></span><span></span><span></span>
+            <span></span><span></span><span></span>
+            <span></span><span></span><span></span>
+          </div>
+          <span class="assistview-loading-label">Generating</span>
+        </div>
+      </template>
+    </ejs-aiassistview>
+  </div>
+</template>
+
+<script setup>
+import { AIAssistViewComponent as EjsAiassistview } from "@syncfusion/ej2-vue-interactive-chat";
+import { ref } from "vue";
+
+let aiassist = ref(null);
+
+const onPromptRequest = (args) => {
+  setTimeout(() => {
+    let defaultResponse = 'For real-time prompt processing, connect the AIAssistView component to your preferred AI service, such as OpenAI or Azure Cognitive Services. Ensure you obtain the necessary API credentials to authenticate and enable seamless integration.';
+    aiassist.value.addPromptResponse(defaultResponse);
+  }, 2000);
+};
+</script>
+
+<style>
+@import "../node_modules/@syncfusion/ej2-base/styles/tailwind3.css";
+@import "../node_modules/@syncfusion/ej2-inputs/styles/tailwind3.css";
+@import "../node_modules/@syncfusion/ej2-navigations/styles/tailwind3.css";
+@import "../node_modules/@syncfusion/ej2-notifications/styles/tailwind3.css";
+@import "../node_modules/@syncfusion/ej2-layouts/styles/tailwind3.css";
+@import "../node_modules/@syncfusion/ej2-interactive-chat/styles/tailwind3.css";
+
+#aiAssistView .e-view-container {
+  margin: auto;
+}
+
+.assistview-loading-status {
+  display: flex;
+  gap: 10px;
+  color: #666;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.assistview-grid-icon {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.assistview-grid-icon span {
+  width: 4px;
+  height: 4px;
+  background: #8a8a8a;
+  border-radius: 1px;
+  opacity: 0.25;
+  animation: assistview-pulse 1.8s ease-in-out infinite;
+}
+
+.assistview-grid-icon span:nth-child(1) { animation-delay: 0s; }
+.assistview-grid-icon span:nth-child(2) { animation-delay: 0.1s; }
+.assistview-grid-icon span:nth-child(3) { animation-delay: 0.2s; }
+.assistview-grid-icon span:nth-child(4) { animation-delay: 0.3s; }
+.assistview-grid-icon span:nth-child(5) { animation-delay: 0.4s; }
+.assistview-grid-icon span:nth-child(6) { animation-delay: 0.5s; }
+.assistview-grid-icon span:nth-child(7) { animation-delay: 0.6s; }
+.assistview-grid-icon span:nth-child(8) { animation-delay: 0.7s; }
+.assistview-grid-icon span:nth-child(9) { animation-delay: 0.8s; }
+
+@keyframes assistview-pulse {
+  0%,
+  100% {
+    opacity: 0.25;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+</style>
+```
+
+### Basic Response Animation Template (Options API)
+
+```vue
+<template>
+  <div id='container' style="height: 350px; width: 650px; margin: 0 auto;">
+    <br>
+    <ejs-aiassistview id='aiAssistView' responseAnimationTemplate="responseAnimationTemplate" ref="aiassist" :prompt-request="onPromptRequest">
+      <template v-slot:responseAnimationTemplate="">
+        <div class="assistview-loading-status">
+          <div class="assistview-grid-icon">
+            <span></span><span></span><span></span>
+            <span></span><span></span><span></span>
+            <span></span><span></span><span></span>
+          </div>
+          <span class="assistview-loading-label">Generating</span>
+        </div>
+      </template>
+    </ejs-aiassistview>
+  </div>
+</template>
+<script>
+import { AIAssistViewComponent } from "@syncfusion/ej2-vue-interactive-chat";
+
+export default {
+  components: {
+    'ejs-aiassistview': AIAssistViewComponent
+  },
+  data: function () {
+    return {
+    }
+  },
+  methods: {
+    onPromptRequest: function (args) {
+      setTimeout(() => {
+        let defaultAiassist = this.$refs.aiassist.ej2Instances;
+        let defaultResponse = 'For real-time prompt processing, connect the AIAssistView component to your preferred AI service, such as OpenAI or Azure Cognitive Services. Ensure you obtain the necessary API credentials to authenticate and enable seamless integration.';
+        defaultAiassist.addPromptResponse(defaultResponse);
+      }, 2000);
+    }
+  }
+}
+</script>
+<style>
+@import "../node_modules/@syncfusion/ej2-base/styles/tailwind3.css";
+@import "../node_modules/@syncfusion/ej2-inputs/styles/tailwind3.css";
+@import "../node_modules/@syncfusion/ej2-navigations/styles/tailwind3.css";
+@import "../node_modules/@syncfusion/ej2-notifications/styles/tailwind3.css";
+@import "../node_modules/@syncfusion/ej2-layouts/styles/tailwind3.css";
+@import "../node_modules/@syncfusion/ej2-interactive-chat/styles/tailwind3.css";
+
+#aiAssistView .e-view-container {
+  margin: auto;
+}
+
+.assistview-loading-status {
+  display: flex;
+  gap: 10px;
+  color: #666;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.assistview-grid-icon {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.assistview-grid-icon span {
+  width: 4px;
+  height: 4px;
+  background: #8a8a8a;
+  border-radius: 1px;
+  opacity: 0.25;
+  animation: assistview-pulse 1.8s ease-in-out infinite;
+}
+
+.assistview-grid-icon span:nth-child(1) { animation-delay: 0s; }
+.assistview-grid-icon span:nth-child(2) { animation-delay: 0.1s; }
+.assistview-grid-icon span:nth-child(3) { animation-delay: 0.2s; }
+.assistview-grid-icon span:nth-child(4) { animation-delay: 0.3s; }
+.assistview-grid-icon span:nth-child(5) { animation-delay: 0.4s; }
+.assistview-grid-icon span:nth-child(6) { animation-delay: 0.5s; }
+.assistview-grid-icon span:nth-child(7) { animation-delay: 0.6s; }
+.assistview-grid-icon span:nth-child(8) { animation-delay: 0.7s; }
+.assistview-grid-icon span:nth-child(9) { animation-delay: 0.8s; }
+
+@keyframes assistview-pulse {
+  0%,
+  100% {
+    opacity: 0.25;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+</style>
+```
+
+### When the Template Is Shown / Hidden
+
+- **Shown** as soon as a prompt is submitted and `addPromptResponse` (or `executePrompt`) has not yet been called.
+- **Hidden** the moment a response is added via `addPromptResponse(response, true)`.
+- **Hidden** if the turn is canceled through `cancelPrompt()`, `failPrompt()`, or the `Stop responding` button.
+
+> Streamed responses that call `addPromptResponse(response, false)` keep the animation visible until the final `addPromptResponse(response, true)` is invoked. See [streaming-responses.md](./streaming-responses.md) for the full streaming pattern.
+
+### Best Practices
+
+- **Match your brand** — replace the grid icon and `Generating` label with your product's tone, colors, and copy.
+- **Provide accessible text** — include meaningful `aria-label` text (for example `Generating response...`) so screen readers announce the state.
+- **Keep the animation short** — long animations increase perceived latency; combine with streaming to start replacing the template with content as soon as the first chunk arrives.
+- **Avoid blocking JS** — use CSS keyframes (as shown above) rather than JS-driven animation timers so the loader doesn't compete with the AI request.
 
 ## Toolbar Settings
 

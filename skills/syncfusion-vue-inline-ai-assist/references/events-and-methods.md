@@ -5,12 +5,17 @@
 - [Events](#events)
   - [created Event](#created-event)
   - [promptRequest Event](#promptrequest-event)
+  - [open Event](#open-event)
+  - [close Event](#close-event)
+  - [Speech-to-Text Events](#speech-to-text-events)
   - [Additional Events](#additional-events)
 - [Public Methods](#public-methods)
   - [addResponse() Method](#addresponse-method)
   - [showPopup() Method](#showpopup-method)
   - [hidePopup() Method](#hidepopup-method)
   - [getPrompt() Method](#getprompt-method)
+  - [showCommandPopup() Method](#showcommandpopup-method)
+  - [hideCommandPopup() Method](#hidecommandpopup-method)
   - [Additional Methods](#additional-methods)
 - [Complete Examples](#complete-examples)
 - [Troubleshooting](#troubleshooting)
@@ -330,6 +335,151 @@ const onPromptRequest = () => {
 };
 </script>
 ```
+
+### Speech-to-Text Events
+
+When `speechToTextSettings.enable` is `true`, the Inline AI Assist component emits dedicated events for the speech recognition lifecycle. These events are configured inside the `speechToTextSettings` object (not as root-level events).
+
+| Event | Triggered when |
+|-------|----------------|
+| `onStart` | Recognition starts (the user activates the microphone button). |
+| `onStop` | Recognition stops (the user deactivates the microphone or recognition times out). |
+| `transcriptChanged` | The transcript updates — fires for both interim (partial) and final results. |
+| `onError` | A recognition error occurs (e.g., no microphone, permission denied, network). |
+
+#### onStart Event
+
+Fires when speech recognition begins. Use this to update UI state (e.g., show a "Listening…" indicator).
+
+```vue
+<script setup>
+const speechToTextSettings = {
+  enable: true,
+  onStart: (args) => {
+    console.log('Listening state:', args.listeningState);
+    // e.g., isRecording.value = true;
+  }
+};
+</script>
+```
+
+#### onStop Event
+
+Fires when speech recognition stops. Use this to reset UI state and finalize the captured transcript.
+
+```vue
+<script setup>
+const speechToTextSettings = {
+  enable: true,
+  onStop: (args) => {
+    console.log('Listening state:', args.listeningState);
+    // e.g., isRecording.value = false;
+  }
+};
+</script>
+```
+
+#### transcriptChanged Event
+
+Fires whenever the recognized transcript changes. With `allowInterimResults: true`, this fires frequently with partial results; with it `false`, it fires once with the final transcript.
+
+The event argument exposes the latest text via `args.text`, `args.value`, or `args.transcript`, and a boolean flag `args.isFinal` indicating whether the result is final.
+
+```vue
+<script setup>
+const speechToTextSettings = {
+  enable: true,
+  allowInterimResults: true,
+  transcriptChanged: (args) => {
+    const text = args.text || args.value || args.transcript || '';
+    const isFinal = args.isFinal || args.final || false;
+    console.log('Transcript:', text, '| isFinal:', isFinal);
+    // transcriptText.value = text;
+  }
+};
+</script>
+```
+
+#### onError Event
+
+Fires when a speech recognition error occurs. Inspect `args.error` or `args.errorMessage` for details, and show a user-friendly fallback (e.g., a text-only input).
+
+```vue
+<script setup>
+const speechToTextSettings = {
+  enable: true,
+  onError: (args) => {
+    const message = (args && (args.error || args.errorMessage)) || 'Speech recognition failed';
+    console.error('Speech error:', message);
+    // errorText.value = message;
+  }
+};
+</script>
+```
+
+#### Complete Speech-to-Text Events Example
+
+```vue
+<template>
+  <div style="height: 400px; width: 700px; margin: 0 auto;">
+    <br />
+    <button @click="showPopup">Open Assistant</button>
+    <p>Status: <strong>{{ status }}</strong></p>
+    <p>Transcript: <em>{{ transcript }}</em></p>
+    <p v-if="error" style="color: red;">{{ error }}</p>
+
+    <ejs-inlineaiassist
+      relate-to="#btn"
+      :speech-to-text-settings="speechToTextSettings"
+      :prompt-request="onPromptRequest"
+      ref="inlineAiAssist">
+    </ejs-inlineaiassist>
+  </div>
+</template>
+
+<script setup>
+import { InlineAIAssistComponent as EjsInlineaiassist } from '@syncfusion/ej2-vue-interactive-chat';
+import { ref } from 'vue';
+
+const inlineAiAssist = ref(null);
+
+const status = ref('Idle');
+const transcript = ref('');
+const error = ref('');
+
+const speechToTextSettings = {
+  enable: true,
+  allowInterimResults: true,
+  onStart: (args) => {
+    error.value = '';
+    status.value = 'Listening (' + (args.listeningState || '') + ')';
+  },
+  onStop: (args) => {
+    status.value = 'Stopped (' + (args.listeningState || '') + ')';
+  },
+  transcriptChanged: (args) => {
+    const text = args.text || args.value || args.transcript || '';
+    transcript.value = text;
+  },
+  onError: (args) => {
+    error.value = (args && (args.error || args.errorMessage)) || 'Speech recognition failed';
+    status.value = 'Error';
+  }
+};
+
+const onPromptRequest = () => {
+  setTimeout(() => {
+    inlineAiAssist.value?.addResponse('Response for: ' + transcript.value);
+  }, 1000);
+};
+
+const showPopup = () => {
+  inlineAiAssist.value?.showPopup();
+};
+</script>
+```
+
+> For a full configuration walkthrough (including `lang`, `buttonSettings`, and `tooltipSettings`), see [speech-to-text.md](speech-to-text.md).
 
 ### Additional Events
 

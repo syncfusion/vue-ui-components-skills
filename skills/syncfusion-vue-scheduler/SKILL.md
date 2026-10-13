@@ -23,12 +23,18 @@ Use this skill when the user needs to:
 - Create interactive calendars with CRUD operations
 - Support multiple timezones in scheduling applications
 - Export/import calendar data (ICS format)
+- Integrate WebMCP agent-driven scheduling using Scheduler WebMCP tools
+- Reserve pre- and post-event time around appointments (preparation, recovery, transition)
+- Customize the current time indicator (label, previous dates, stacking order)
 
 ## Component Overview
 
 The Syncfusion Vue Scheduler is a feature-rich calendar and scheduling component that supports:
 - **Multiple Views**: Day, Week, Work Week, Month, Year, Agenda, Timeline views
 - **Event Management**: Normal, all-day, spanned, and recurring events with exceptions
+- **Event Buffer**: Pre- and post-event reserved time (preparation, recovery, transition) with custom buffer template
+- **WebMCP Integration**: Agent-driven scheduling via `enableWebMcp` and `webMcpSettings` with built-in WebMCP tools
+- **Custom Current Time Indicator**: Configurable current time line with custom label, previous-dates range, and stacking order
 - **Resource Scheduling**: Single and multiple resource grouping with custom templates
 - **Drag & Drop**: Move and resize events across time slots and resources
 - **Data Binding**: Local and remote data sources with field mapping
@@ -38,7 +44,7 @@ The Syncfusion Vue Scheduler is a feature-rich calendar and scheduling component
 
 ## Documentation and Navigation Guide
 
-Complete coverage of Syncfusion Vue Scheduler with 17 comprehensive reference files covering all aspects of scheduler implementation.
+Complete coverage of Syncfusion Vue Scheduler with 20 comprehensive reference files covering all aspects of scheduler implementation.
 
 ### Getting Started
 📄 **Read:** [references/getting-started.md](references/getting-started.md)
@@ -236,6 +242,12 @@ Complete coverage of Syncfusion Vue Scheduler with 17 comprehensive reference fi
 - Inline editing support
 - Responsive adaptive UI
 
+### WebMCP Integration
+📄 **Read:** [references/webmcp-integration.md](references/webmcp-integration.md)
+- Enable Scheduler WebMCP tool registration using `enableWebMcp`
+- Configure tool selection, prefixing, and exposure via `webMcpSettings`
+- Control tool execution via `beforeWebMcpToolExecute`
+
 ### Recurrence Editor and Calendar Modes
 📄 **Read:** [references/recurrence-editor-calendar-modes.md](references/recurrence-editor-calendar-modes.md)
 - Recurrence editor and recurrence date generation
@@ -244,6 +256,24 @@ Complete coverage of Syncfusion Vue Scheduler with 17 comprehensive reference fi
 - Scheduler styling and theming
 - Performance optimization tips
 - Best practices for production use
+
+### Event Buffer
+📄 **Read:** [references/EventBuffer.md](references/EventBuffer.md)
+- Reserving pre- and post-event time (preparation, recovery, transition) on every appointment
+- `eventSettings.enableBuffer` activation and `bufferBefore` / `bufferAfter` field mapping
+- Custom `bufferTemplate` slot for rendering the buffer pill (icon, label, duration)
+- Buffer-aware overlap detection with `allowOverlap=false` and `dragStop` validation
+- Buffer support in Day, Week, WorkWeek, TimelineDay, TimelineWeek, and TimelineWorkWeek views
+- When to use and when not to use EventBuffer; constraints, validation, and best practices
+
+### Custom Current Time Indicator
+📄 **Read:** [references/CustomCurrentTimeIndicator.md](references/CustomCurrentTimeIndicator.md)
+- `showTimeIndicator` master toggle and `currentTimeIndicatorSettings` behavior object
+- Custom label with the current time (`showTime`), previous-dates range (`showPreviousDates`)
+- Stacking order between the indicator and appointment cells (`onTop`)
+- Support in Day, Week, WorkWeek, TimelineDay, TimelineWeek, and TimelineWorkWeek views
+- Reactive runtime toggles via `ref` and `computed` for settings panels
+- When to use and when not to use; constraints, validation, and best practices
 
 ## Quick Start Example
 
@@ -387,6 +417,120 @@ provide('schedule', [TimelineViews, TimelineMonth]);
 </script>
 ```
 
+### Event Buffer
+
+```vue
+<template>
+  <ejs-schedule
+    :selectedDate="selectedDate"
+    :currentView="currentView"
+    :allowOverlap="false"
+    :eventSettings="eventSettings">
+    <e-views>
+      <e-view option="Day"></e-view>
+      <e-view option="TimelineDay"></e-view>
+      <e-view option="TimelineWeek"></e-view>
+    </e-views>
+
+    <template v-slot:bufferTemplate="{ data }">
+      <span class="buffer-duration">
+        {{ data.bufferType === 'before'
+            ? data.data.bufferBefore
+            : data.data.bufferAfter }} min
+      </span>
+    </template>
+  </ejs-schedule>
+</template>
+
+<script setup>
+import { provide } from "vue";
+import {
+  ScheduleComponent as EjsSchedule,
+  ViewDirective as EView,
+  ViewsDirective as EViews,
+  Day,
+  TimelineViews
+} from '@syncfusion/ej2-vue-schedule';
+
+const eventSettings = {
+  enableBuffer: true,
+  dataSource: [
+    {
+      Id: 1,
+      Subject: 'Knee Replacement',
+      StartTime: new Date(2024, 0, 15, 9, 0),
+      EndTime: new Date(2024, 0, 15, 10, 30),
+      IsAllDay: false,
+      bufferBefore: 30, // 30 minutes preparation
+      bufferAfter: 45   // 45 minutes recovery
+    }
+  ],
+  bufferTemplate: 'bufferTemplate',
+  fields: {
+    bufferBefore: { name: 'bufferBefore' },
+    bufferAfter: { name: 'bufferAfter' }
+  }
+};
+
+provide('schedule', [Day, TimelineViews]);
+</script>
+```
+
+### Custom Current Time Indicator
+
+```vue
+<template>
+  <ejs-schedule
+    width="100%"
+    height="550px"
+    :selectedDate="currentDate"
+    currentView="TimelineWeek"
+    :showTimeIndicator="showTimeIndicator"
+    :currentTimeIndicatorSettings="currentTimeIndicatorSettings"
+    :timeScale="{ enable: true }"
+    :eventSettings="eventSettings">
+    <e-views>
+      <e-view option="Day"></e-view>
+      <e-view option="Week"></e-view>
+      <e-view option="WorkWeek"></e-view>
+      <e-view option="TimelineDay"></e-view>
+      <e-view option="TimelineWeek"></e-view>
+      <e-view option="TimelineWorkWeek"></e-view>
+    </e-views>
+  </ejs-schedule>
+</template>
+
+<script setup>
+import { ref, computed, provide } from "vue";
+import {
+  ScheduleComponent as EjsSchedule,
+  ViewsDirective as EViews,
+  ViewDirective as EView,
+  Day,
+  Week,
+  WorkWeek,
+  TimelineViews
+} from '@syncfusion/ej2-vue-schedule';
+
+const currentDate = new Date();
+
+const showTimeIndicator = ref(true);
+const showTime = ref(true);
+const showPreviousDates = ref(true);
+const onTop = ref(true);
+
+const currentTimeIndicatorSettings = computed(() => ({
+  showTime: showTime.value,
+  showPreviousDates: showPreviousDates.value,
+  onTop: onTop.value
+}));
+
+const eventSettings = { dataSource: [] };
+
+provide('schedule', [Day, Week, WorkWeek, TimelineViews]);
+</script>
+```
+
 ## Key Props and Events
 
 ### Essential Properties
@@ -458,14 +602,7 @@ npm install @syncfusion/ej2-vue-schedule --save
 Import required CSS themes:
 
 ```javascript
-import '@syncfusion/ej2-base/styles/material3.css';
-import '@syncfusion/ej2-buttons/styles/material3.css';
-import '@syncfusion/ej2-calendars/styles/material3.css';
-import '@syncfusion/ej2-dropdowns/styles/material3.css';
-import '@syncfusion/ej2-inputs/styles/material3.css';
-import '@syncfusion/ej2-navigations/styles/material3.css';
-import '@syncfusion/ej2-popups/styles/material3.css';
-import '@syncfusion/ej2-vue-schedule/styles/material3.css';
+import "@syncfusion/ej2-material3-theme/styles/schedule/index.css";
 ```
 
 ## Module Injection
@@ -501,6 +638,7 @@ provide('schedule', [Day, Week, Month, Agenda, DragAndDrop]);
 8. **Accessibility**: Enable keyboard navigation and provide proper ARIA labels
 9. **Responsive**: Use CSS media queries to adjust scheduler for mobile devices
 10. **State Management**: Use state persistence to save user preferences
+11. **Custom Current Time Indicator**: Use `currentTimeIndicatorSettings` for behavior (label, previous dates, stacking order) and CSS for visual styling; do not treat the settings object as a style API
 
 ## Troubleshooting
 
@@ -519,3 +657,7 @@ provide('schedule', [Day, Week, Month, Agenda, DragAndDrop]);
 **Data not loading from server**: Verify CORS settings, DataManager adaptor configuration, and network requests in browser DevTools.
 
 **Recurring events not generating occurrences**: Check RecurrenceRule syntax (FREQ, INTERVAL, COUNT, UNTIL parameters) and verify rule is valid.
+
+**Buffer pills not rendering**: Confirm `eventSettings.enableBuffer` is `true`, the `bufferBefore` and `bufferAfter` fields are mapped under `eventSettings.fields`, and the events carry numeric values for those fields.
+
+**Current time indicator not visible**: Confirm `showTimeIndicator` is `true`, the active view has a time axis (Day, Week, WorkWeek, TimelineDay, TimelineWeek, TimelineWorkWeek), and `timeScale.enable` is set to `true`. The indicator does not render in Month, Year, or Agenda views.

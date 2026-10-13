@@ -13,7 +13,7 @@
 
 The AI AssistView component provides three essential methods for programmatic control:
 
-1. **addPromptResponse** - Add responses to user prompts
+1. **addPromptResponse** - Add responses to user prompts (optionally with telemetry data)
 2. **executePrompt** - Programmatically trigger a prompt
 3. **scrollToBottom** - Scroll the view to show the latest message
 
@@ -26,7 +26,11 @@ Adds a response to the last prompt or appends a new prompt-response data in the 
 ### Signature
 
 ```typescript
-addPromptResponse(outputResponse: string | Object, isFinalUpdate?: boolean): void
+addPromptResponse(
+  outputResponse: string | Object,
+  isFinalUpdate?: boolean,
+  telemetryData?: TelemetryData
+): void
 ```
 
 ### Parameters
@@ -35,6 +39,7 @@ addPromptResponse(outputResponse: string | Object, isFinalUpdate?: boolean): voi
 |-----------|------|----------|-------------|
 | `outputResponse` | `string` \| `Object` | No | The response to be added. Can be a string representing the response or an object containing both the prompt and the response. |
 | `isFinalUpdate` | `boolean` | Yes | Indicates whether this response is the final one, to hide the stop response button. |
+| `telemetryData` | `TelemetryData` | Yes | Model and token usage data merged into the telemetry report. Only applies when `telemetrySettings.enable` is `true`. See [telemetry.md](./telemetry.md) for details. |
 
 ### Behavior
 
@@ -46,6 +51,10 @@ addPromptResponse(outputResponse: string | Object, isFinalUpdate?: boolean): voi
 - Can update an existing prompt's response if the prompt matches
 - Can append a new prompt-response pair to the conversation
 - Object structure: `{ prompt: string, response: string }`
+
+**When `telemetryData` is supplied:**
+- Merges the supplied model/token values into the telemetry report for the current turn
+- Custom `customAttributes` are surfaced as their own rows in the tooltip
 
 ### Basic Usage
 
@@ -141,6 +150,25 @@ const onPromptRequest = async (args) => {
   }
 };
 ```
+
+### Passing Telemetry Data
+
+When telemetry is enabled, you can pass the third `telemetryData` argument to merge model/token values into the report.
+
+```javascript
+const onPromptRequest = async (args) => {
+  const response = await fetchAIResponse(args.prompt);
+
+  aiassist.value.addPromptResponse(response, true, {
+    model: 'gpt-4o',
+    inputTokens: 128,
+    outputTokens: 512,
+    customAttributes: { region: 'us-east-1', tenant: 'acme' }
+  });
+};
+```
+
+> See [telemetry.md](./telemetry.md) for the full `TelemetryData` shape, `metrics` filtering, and the `beforeReport` event.
 
 ### Adding Multiple Responses
 

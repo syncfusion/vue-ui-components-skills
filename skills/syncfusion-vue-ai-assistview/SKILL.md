@@ -1,6 +1,6 @@
 ---
 name: syncfusion-vue-ai-assistview
-description: Implement the Syncfusion Vue AI AssistView component. Use this skill whenever the user needs to create conversational AI interfaces, chatbots, prompt-response systems, or integrate AI services like OpenAI, Gemini, or Claude into Vue applications. Includes setup, prompt management, suggestions, customization, event handling, templates, markdown responses, AI service integration, chain of thoughts visualization, generative UI with dynamic tools, text-to-speech audio conversion.
+description: Implement the Syncfusion Vue AI AssistView component. Use this skill whenever the user needs to create conversational AI interfaces, chatbots, prompt-response systems, or integrate AI services like OpenAI, Gemini, or Claude into Vue applications. Includes setup, prompt management, suggestions, customization, event handling, templates, markdown responses, AI service integration, chain of thoughts visualization, generative UI with dynamic tools, text-to-speech audio conversion, telemetry tracking for AI metrics (duration, tokens, tool calls), and mentions in the prompt editor.
 metadata:
   author: "Syncfusion Inc"
   version: "34.1.29"
@@ -20,6 +20,8 @@ The AI AssistView component provides:
 - **Markdown rendering** for formatted AI responses
 - **Event system** for handling prompts and responses
 - **Template support** for custom banner and layout designs
+- **Telemetry tracking** for AI interaction metrics (duration, tokens, tool calls, model info)
+- **Mentions in the prompt editor** for referencing configured items (agents, commands, etc.)
 - **Theme integration** with Syncfusion's material, bootstrap, and tailwind themes
 
 ## Navigation Guide
@@ -60,7 +62,7 @@ Choose the reference that matches your task:
 
 ### Handling Events
 📄 **Read:** [references/events.md](references/events.md)
-- All 7 component events (created, promptRequest, promptChanged, beforeAttachmentUpload, attachmentUploadSuccess, attachmentUploadFailure, attachmentRemoved, attachmentClick)
+- All 9 component events (created, promptRequest, promptChanged, beforeAttachmentUpload, attachmentUploadSuccess, attachmentUploadFailure, attachmentRemoving, attachmentRemoved, attachmentClick, mentionSelect)
 - Processing prompts asynchronously with `addPromptResponse`
 - Implementing custom event handlers
 - Managing event arguments and properties
@@ -78,10 +80,12 @@ Choose the reference that matches your task:
 
 ### Templates and Customization
 📄 **Read:** [references/templates-and-customization.md](references/templates-and-customization.md)
+- Custom banner templates with `bannerTemplate`
 - Custom footer templates with `footerTemplate`
 - Customizing prompt items with `promptItemTemplate`
 - Styling suggestion items with `promptSuggestionItemTemplate`
 - Customizing response items with `responseItemTemplate`
+- Customizing the response loader with `responseAnimationTemplate`
 - Configuring prompt toolbar with `promptToolbarSettings`
 - Configuring response toolbar with `responseToolbarSettings`
 - Setting up multiple views with `views` property
@@ -166,8 +170,7 @@ Choose the reference that matches your task:
 - Enable file upload with `enableAttachments` property
 - Configure `attachmentSettings` (saveUrl, removeUrl, file restrictions)
 - File validation (allowedFileTypes, maxFileSize, maximumCount)
-- Attachment events (beforeUpload, uploadSuccess, uploadFailure, removed, click)
-- Working with attached files in prompts
+- Attachment events (beforeUpload, uploadSuccess, uploadFailure, removing, removed, click)- Working with attached files in prompts
 - Custom attachment templates (attachmentTemplate)
 - Upload security and best practices
 
@@ -187,6 +190,7 @@ Choose the reference that matches your task:
 - Configure footer toolbar with `footerToolbarSettings`
 - ToolbarItemModel properties (text, icon, align, tooltip, etc.)
 - Toolbar positioning (Bottom, Inline)
+- Setting toolbar item alignment with `align` (`Left` / `Center` / `Right`)
 - Common toolbar actions and patterns
 
 ### Streaming Responses
@@ -197,6 +201,22 @@ Choose the reference that matches your task:
 - Integration with OpenAI and other APIs
 - Stream error handling
 - User-controlled streaming speed
+
+### Telemetry & AI Metrics
+📄 **Read:** [references/telemetry.md](references/telemetry.md)
+- Enabling telemetry with `telemetrySettings.enable`
+- Configuring captured metrics with `telemetrySettings.metrics`
+- Intercepting reports with `telemetrySettings.beforeReport`
+- Passing model/token data via `addPromptResponse(response, isFinal, telemetryData)`
+- Surfacing custom key/value pairs through `customAttributes`
+- Telemetry button behavior, duration formatting, and regenerate flow
+
+### Mentions in the Prompt Editor
+📄 **Read:** [references/mentions.md](references/mentions.md)
+- Configuring the `mentions` property (trigger char, data source, fields, query, filter, templates, popup size)
+- Hooking the `mentionSelect` event for custom actions
+- Using `displayTemplate` / `itemTemplate` / `noRecordsTemplate` to customize rendering
+- Switching `showMentionChar` for `@`-style vs `/`-style command mentions
 
 ### Header, Locale & Sizing
 📄 **Read:** [references/header-locale-sizing.md](references/header-locale-sizing.md)

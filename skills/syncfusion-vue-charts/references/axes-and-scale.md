@@ -512,6 +512,28 @@ const xAxis = {
 };
 ```
 
+#### Configuration Location and Supported Actions
+
+Place `labelIntersectAction` directly in `primaryXAxis`, `primaryYAxis`, or an additional axis object. It is separate from `marker.dataLabel.labelIntersectAction`.
+
+```ts
+const primaryXAxis: Object = {
+  valueType: 'Category',
+  labelIntersectAction: 'Rotate45WithTrim',
+  maximumLabelWidth: 90
+};
+```
+
+- `None` leaves labels unchanged.
+- `Hide` hides colliding labels.
+- `Trim` adds an ellipsis to intersecting labels.
+- `Wrap` uses multiple lines.
+- `MultipleRows` moves horizontal-axis labels into additional rows.
+- `Rotate45` and `Rotate90` rotate intersecting labels.
+- `Rotate45WithTrim` and `Rotate90WithTrim` rotate and trim labels within `maximumLabelWidth`.
+
+Use `labelRotation` only for a fixed angle independent of collision detection. Do not nest `labelIntersectAction` under a `label` object.
+
 ### Label Position
 
 By default, axis labels are positioned `Outside` (away from the axis line). Use `labelPosition` to place them `Inside` the chart area to optimize space.
@@ -564,6 +586,64 @@ const xAxis = {
 ```
 
 ---
+
+#### Rotation with Trimming
+
+The axis `labelIntersectAction` also supports:
+
+- `Rotate45WithTrim`: Rotates intersecting labels by 45 degrees and trims text that exceeds the available bounds.
+- `Rotate90WithTrim`: Rotates intersecting labels by 90 degrees and trims text that exceeds the available bounds.
+
+##### Complete `Rotate45WithTrim` Vue sample
+
+```vue
+<template>
+  <ejs-chart id="rotate45-with-trim-chart" :primaryXAxis="primaryXAxis" :primaryYAxis="primaryYAxis"
+    :tooltip="tooltip" :legendSettings="legendSettings" title="Department Revenue">
+    <e-series-collection>
+      <e-series :dataSource="chartData" type="Column" xName="department" yName="revenue" name="Revenue">
+      </e-series>
+    </e-series-collection>
+  </ejs-chart>
+</template>
+
+<script setup lang="ts">
+import { provide } from 'vue';
+import {
+  Category, ChartComponent as EjsChart, ColumnSeries, Legend, SeriesCollectionDirective as ESeriesCollection,
+  SeriesDirective as ESeries, Tooltip
+} from '@syncfusion/ej2-vue-charts';
+
+provide('chart', [Category, ColumnSeries, Legend, Tooltip]);
+
+const chartData: Object[] = [
+  { department: 'Consumer Electronics and Accessories', revenue: 72 },
+  { department: 'Home Furniture and Interior Products', revenue: 58 },
+  { department: 'Sports Equipment and Outdoor Recreation', revenue: 64 },
+  { department: 'Personal Care and Beauty Products', revenue: 49 },
+  { department: 'Books, Education and Office Supplies', revenue: 55 }
+];
+const primaryXAxis: Object = {
+  valueType: 'Category', title: 'Department', labelIntersectAction: 'Rotate45WithTrim',
+  maximumLabelWidth: 90, majorGridLines: { width: 0 }
+};
+const primaryYAxis: Object = { title: 'Revenue', minimum: 0, maximum: 80, interval: 20, labelFormat: '${value}M' };
+const tooltip: Object = { enable: true, format: '${point.x}: ${point.y}M' };
+const legendSettings: Object = { visible: false };
+</script>
+```
+
+For the 90-degree variant, use the same complete component and change only:
+
+```ts
+const primaryXAxis: Object = {
+  valueType: 'Category',
+  title: 'Department',
+  labelIntersectAction: 'Rotate90WithTrim',
+  maximumLabelWidth: 100,
+  majorGridLines: { width: 0 }
+};
+```
 
 ## Label Formatting and Rotation
 
@@ -651,6 +731,70 @@ const axisLabelRender = (args) => {
 ---
 
 ## Axis Customization
+
+### Axis Scrollbar
+
+Use `ScrollBar` for Chart scrollbars and `Zoom` when the scrollbar participates in zooming or panning. Also provide the rendered series module and the module required by the axis value type.
+
+`zoomSettings.enableScrollbar` enables the standard zoom scrollbar. `axis.scrollbarSettings` controls axis-specific appearance, placement, lazy-load range, and zoom behavior.
+
+```vue
+<template>
+  <ejs-chart id="scrollbar-chart" :primaryXAxis="primaryXAxis" :primaryYAxis="primaryYAxis"
+    :zoomSettings="zoomSettings" :scrollStart="scrollStart" :scrollChanged="scrollChanged"
+    :scrollEnd="scrollEnd">
+    <e-series-collection>
+      <e-series :dataSource="chartData" type="Line" xName="month" yName="sales"></e-series>
+    </e-series-collection>
+  </ejs-chart>
+</template>
+
+<script setup lang="ts">
+import { provide } from 'vue';
+import {
+  Category, ChartComponent, LineSeries, ScrollBar, SeriesCollectionDirective, SeriesDirective, Zoom
+} from '@syncfusion/ej2-vue-charts';
+
+defineOptions({ components: {
+  'ejs-chart': ChartComponent,
+  'e-series-collection': SeriesCollectionDirective,
+  'e-series': SeriesDirective
+} });
+provide('chart', [Category, LineSeries, ScrollBar, Zoom]);
+
+const chartData: Object[] = [
+  { month: 'Jan', sales: 35 }, { month: 'Feb', sales: 28 }, { month: 'Mar', sales: 34 },
+  { month: 'Apr', sales: 32 }, { month: 'May', sales: 40 }, { month: 'Jun', sales: 32 },
+  { month: 'Jul', sales: 35 }, { month: 'Aug', sales: 55 }, { month: 'Sep', sales: 38 }
+];
+const primaryXAxis: Object = {
+  valueType: 'Category', zoomFactor: 0.5, zoomPosition: 0,
+  scrollbarSettings: {
+    enable: true, height: 16, enableZoom: true, position: 'PlaceNextToAxisLine',
+    scrollbarRadius: 4, trackRadius: 4, scrollbarColor: '#6B7280',
+    trackColor: '#E5E7EB', gripColor: '#FFFFFF'
+  }
+};
+const primaryYAxis: Object = { minimum: 0, maximum: 60, interval: 10 };
+const zoomSettings: Object = {
+  enableScrollbar: true, enableSelectionZooming: true, enableMouseWheelZooming: true,
+  enablePan: true, mode: 'X'
+};
+const scrollStart = (args: Object): void => console.log('Scroll started', args);
+const scrollChanged = (args: Object): void => console.log('Scroll changed', args);
+const scrollEnd = (args: Object): void => console.log('Scroll ended', args);
+</script>
+```
+
+- `enable` enables an axis scrollbar for lazy loading.
+- `pointsLength` supplies the complete logical point count for numeric or logarithmic lazy loading.
+- `range` supplies the complete DateTime minimum and maximum.
+- `height` controls thickness. Use `12` or greater for the grip-circle visual and grab cursor.
+- `enableZoom: true` enables resize handles, arrows, and wheel zoom. `false` is pan-only.
+- `position` uses `Top`/`Bottom` for horizontal axes, `Left`/`Right` for vertical axes, or `PlaceNextToAxisLine`.
+- `scrollbarColor`, `trackColor`, `gripColor`, `scrollbarRadius`, and `trackRadius` control appearance.
+
+For DateTime lazy loading, configure `scrollbarSettings.range` and provide `DateTime`. For numeric or logarithmic lazy loading, configure `pointsLength`. Use `scrollStart`, `scrollChanged`, and `scrollEnd` for interaction start, continuous range changes, and final lazy-load handling.
 
 ### Axis Title
 

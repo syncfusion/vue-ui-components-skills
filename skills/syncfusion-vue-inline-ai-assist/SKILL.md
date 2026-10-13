@@ -1,6 +1,6 @@
 ---
 name: syncfusion-vue-inline-ai-assist
-description: Implement the Syncfusion Vue Inline AI Assist component for AI-powered text processing. Use this skill when implementing inline AI assistance, prompt-response interactions, custom command popups, response actions, event handling, or when you need to integrate AI-powered features directly into Vue applications for text editing, summarization, or content manipulation workflows.
+description: Implement the Syncfusion Vue Inline AI Assist component for AI-powered text processing. Use this skill when implementing inline AI assistance, prompt-response interactions, custom command popups, response actions, voice input (speech-to-text), event handling, or when you need to integrate AI-powered features directly into Vue applications for text editing, summarization, or content manipulation workflows.
 metadata:
   author: "Syncfusion Inc"
   version: "34.1.29"
@@ -37,6 +37,13 @@ The **Inline AI Assist** component is a powerful Syncfusion Vue control designed
 📄 **Read:** [references/inline-toolbar-settings.md](references/inline-toolbar-settings.md)
 - Configure inline toolbar items, position (`toolbarPosition`), and behavior
 - Handle toolbar item clicks via the `itemClick` event to perform response or editor actions
+
+### Speech-to-Text
+📄 **Read:** [references/speech-to-text.md](references/speech-to-text.md)
+- Enable voice input via the browser's Web Speech API using `speechToTextSettings`
+- Configure language (`lang`), interim results (`allowInterimResults`), button, and tooltip settings
+- Handle recognition lifecycle events: `onStart`, `onStop`, `transcriptChanged`, `onError`
+- Check browser compatibility and HTTPS requirements
 
 ### Response Settings & Actions
 📄 **Read:** [references/response-settings.md](references/response-settings.md)

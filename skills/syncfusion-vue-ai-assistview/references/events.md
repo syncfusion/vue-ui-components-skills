@@ -4,6 +4,8 @@
 - [Component Lifecycle Events](#component-lifecycle-events)
 - [Prompt Interaction Events](#prompt-interaction-events)
 - [Attachment Events](#attachment-events)
+- [Telemetry Events](#telemetry-events)
+- [Mention Events](#mention-events)
 - [Event Arguments](#event-arguments)
 - [Async Event Handling](#async-event-handling)
 - [Event Patterns](#event-patterns)
@@ -430,6 +432,133 @@ const onAttachmentRemoved = (args) => {
 };
 ```
 
+### AttachmentRemoving Event
+
+The `attachmentRemoving` event is triggered when an attached file is being removed in the AI AssistView. It fires before the file is detached from the prompt, which makes it the right place to confirm with the user, cancel the removal, or log the operation.
+
+#### Composition API (~/src/App.vue)
+
+```vue
+<template>
+   <div id="container" style="height: 350px; width: 650px; margin: 0 auto;">
+    <br />
+    <ejs-aiassistview id="aiAssistView" ref="aiassist" :attachmentRemoving="attachmentRemoving" :promptRequest="onPromptRequest" :enableAttachments="true" :attachmentSettings="attachmentSettings"
+    ></ejs-aiassistview>
+  </div>
+</template>
+
+<script setup>
+import { ref } from 'vue';
+import { enableRipple } from '@syncfusion/ej2-base';
+import { AIAssistViewComponent as EjsAiassistview } from '@syncfusion/ej2-vue-interactive-chat';
+
+enableRipple(true);
+
+const aiassist = ref(null);
+
+const attachmentSettings = {
+  saveUrl: 'https://services.syncfusion.com/js/production/api/FileUploader/Save',
+  removeUrl: 'https://services.syncfusion.com/js/production/api/FileUploader/Remove'
+};
+
+// Prompt request handler
+const onPromptRequest = () => {
+  setTimeout(() => {
+    const aiAssistInstance = aiassist.value?.ej2Instances;
+    const defaultResponse =
+      'For real-time prompt processing, connect the AIAssistView component to your preferred AI service, such as OpenAI or Azure Cognitive Services. Ensure you obtain the necessary API credentials to authenticate and enable seamless integration.';
+    aiAssistInstance.addPromptResponse(defaultResponse);
+  }, 1000);
+};
+
+const attachmentRemoving = () => {
+  // Your required action here
+};
+</script>
+
+<style>
+@import "../../node_modules/@syncfusion/ej2-base/styles/tailwind3.css";
+@import "../../node_modules/@syncfusion/ej2-popups/styles/tailwind3.css";
+@import "../../node_modules/@syncfusion/ej2-buttons/styles/tailwind3.css";
+@import "../../node_modules/@syncfusion/ej2-inputs/styles/tailwind3.css";
+@import "../../node_modules/@syncfusion/ej2-interactive-chat/styles/tailwind3.css";
+
+</style>
+```
+
+#### Options API (~/src/App.vue)
+
+```vue
+<template>
+  <div id="container" style="height: 350px; width: 650px; margin: 0 auto;">
+    <br />
+    <ejs-aiassistview id="aiAssistView" ref="aiassist" :attachmentRemoving="attachmentRemoving" :promptRequest="onPromptRequest" :enableAttachments="true" :attachmentSettings="attachmentSettings"
+    ></ejs-aiassistview>
+  </div>
+</template>
+
+<script>
+import { enableRipple } from '@syncfusion/ej2-base';
+import { AIAssistViewComponent } from '@syncfusion/ej2-vue-interactive-chat';
+
+enableRipple(true);
+
+export default {
+  components: {
+    'ejs-aiassistview': AIAssistViewComponent
+  },
+  data() {
+    return {
+      attachmentSettings: {
+        saveUrl: 'https://services.syncfusion.com/js/production/api/FileUploader/Save',
+        removeUrl: 'https://services.syncfusion.com/js/production/api/FileUploader/Remove'
+      }
+    };
+  },
+  methods: {
+    onPromptRequest() {
+      setTimeout(() => {
+        const aiAssistInstance = this.$refs.aiassist.ej2Instances;
+        const defaultResponse =
+          'For real-time prompt processing, connect the AIAssistView component to your preferred AI service, such as OpenAI or Azure Cognitive Services. Ensure you obtain the necessary API credentials to authenticate and enable seamless integration.';
+        aiAssistInstance.addPromptResponse(defaultResponse);
+      }, 1000);
+    },
+   attachmentRemoving() {
+      // your code will be here
+    }
+  }
+};
+</script>
+
+<style>
+@import "../../node_modules/@syncfusion/ej2-base/styles/tailwind3.css";
+@import "../../node_modules/@syncfusion/ej2-popups/styles/tailwind3.css";
+@import "../../node_modules/@syncfusion/ej2-buttons/styles/tailwind3.css";
+@import "../../node_modules/@syncfusion/ej2-inputs/styles/tailwind3.css";
+@import "../../node_modules/@syncfusion/ej2-interactive-chat/styles/tailwind3.css";
+</style>
+```
+
+#### Event Arguments
+
+The `attachmentRemoving` callback receives an `args` object with the file metadata and a `cancel` flag. Set `args.cancel = true` to stop the removal.
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `cancel` | `boolean` | Defines whether the current action can be prevented. |
+| `currentRequest` | `XMLHttpRequest` | Returns the XMLHttpRequest instance that is associated with the remove action. |
+| `customFormData` | `{ [key: string]: Object }[]` | Defines the additional data with key and value pair format that will be submitted to the remove action. |
+| `event` | `MouseEvent \| TouchEvent \| KeyboardEventArgs` | Returns the original event arguments. |
+| `filesData` | [FileInfo[]](https://ej2.syncfusion.com/documentation/api/uploader/fileinfo) | Returns the list of files' details that will be removed. |
+| `postRawFile` | `boolean` | Defines whether the selected raw file is sent to the server remove action. Set `true` to send the raw file, or `false` to send only the file name. |
+
+#### Use Cases
+
+- Confirm with the user before deleting an attachment (set `args.cancel = true` and prompt for confirmation).
+- Block the removal of attachments larger than a threshold.
+- Audit/log every file removal action.
+
 ### AttachmentClick Event
 
 The `attachmentClick` event is triggered when an attached file is clicked in the AI AssistView.
@@ -441,6 +570,166 @@ const onAttachmentClick = (args) => {
   window.open(args.url, '_blank');
 };
 ```
+
+## Telemetry Events
+
+The `beforeReport` callback is configured through the `telemetrySettings` option rather than a top-level component event. It is invoked before every telemetry report is delivered, so you can inspect, modify, or suppress the report.
+
+### beforeReport Callback
+
+**When It Fires:**
+- After a turn completes (response finalized) or is canceled
+- Before the telemetry tooltip is rendered
+
+**Callback Signature:**
+
+```typescript
+beforeReport?: (report: TelemetryReport) => TelemetryReport | null
+```
+
+**Basic Implementation:**
+
+```vue
+<template>
+  <ejs-aiassistview
+    ref="aiassist"
+    :telemetry-settings="telemetrySettings"
+    :prompt-request="onPromptRequest"
+  />
+</template>
+
+<script setup>
+import { ref } from "vue";
+import { AIAssistViewComponent as EjsAiassistview } from "@syncfusion/ej2-vue-interactive-chat";
+
+const aiassist = ref(null);
+
+const telemetrySettings = {
+  enable: true,
+  // Invoked before every report is delivered. Return the report (modified or not)
+  // to deliver it, or null to suppress the report entirely.
+  beforeReport: (report) => {
+    report.customAttributes = { region: 'us-east-1', tenant: 'acme', beta: true };
+    return report;
+  }
+};
+
+const onPromptRequest = (args) => {
+  setTimeout(() => {
+    aiassist.value.addPromptResponse('Response to: ' + args.prompt);
+  }, 1000);
+};
+</script>
+```
+
+**Suppressing a Report:**
+
+```javascript
+const telemetrySettings = {
+  enable: true,
+  beforeReport: (report) => {
+    // Skip telemetry for canceled test responses.
+    if (report.status === 'canceled') {
+      return null;
+    }
+    return report;
+  }
+};
+```
+
+> See [telemetry.md](./telemetry.md) for the full `TelemetryReport` shape, supported metrics, and the `metrics` filter.
+
+## Mention Events
+
+### MentionSelect Event
+
+The `mentionSelect` event is triggered when a user selects an item from the mention suggestion popup. Use this event to access the selected mention data and perform custom actions such as analytics tracking or updating a side panel.
+
+**When It Fires:**
+- After a popup item is selected (mouse click or keyboard Enter)
+- Before the mention is inserted into the prompt editor
+
+**Basic Implementation (Composition API):**
+
+```vue
+<template>
+  <ejs-aiassistview
+    ref="aiassist"
+    :mentions="mentions"
+    :mention-select="onMentionSelect"
+    :prompt-request="onPromptRequest"
+  />
+</template>
+
+<script setup>
+import { ref } from "vue";
+import { AIAssistViewComponent as EjsAiassistview } from "@syncfusion/ej2-vue-interactive-chat";
+
+const aiassist = ref(null);
+
+const mentions = [
+  {
+    mentionChar: '@',
+    dataSource: [
+      { id: 'TechSupport', name: 'TechSupport' },
+      { id: 'HRAssistant', name: 'HRAssistant' }
+    ],
+    fields: { text: 'name', value: 'id' }
+  }
+];
+
+const onMentionSelect = (args) => {
+  console.log('Selected mention:', args.itemData);
+
+  // Example: log analytics for the selection
+  if (args && args.itemData) {
+    console.log('Mention id:', args.itemData.id, 'text:', args.text);
+  }
+};
+
+const onPromptRequest = (args) => {
+  setTimeout(() => {
+    aiassist.value.addPromptResponse('Response: ' + args.prompt);
+  }, 1000);
+};
+</script>
+```
+
+**Basic Implementation (Options API):**
+
+```javascript
+data() {
+  return {
+    mentions: [
+      {
+        mentionChar: '@',
+        dataSource: [
+          { id: 'TechSupport', name: 'TechSupport' },
+          { id: 'HRAssistant', name: 'HRAssistant' }
+        ],
+        fields: { text: 'name', value: 'id' }
+      }
+    ]
+  };
+},
+methods: {
+  onMentionSelect(args) {
+    console.log('Selected mention:', args.itemData);
+  }
+}
+```
+
+**Event Arguments:**
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `cancel` | `boolean` | Specifies whether the mention selection should be canceled. Set to `true` to prevent the default selection action. |
+| `event` | `Event` | Specifies the original event that triggered the mention selection. Provides access to the underlying browser event details. |
+| `isInteracted` | `boolean` | Specifies whether the selection was initiated through user interaction. Returns `true` when the action is performed directly by the user. |
+| `itemData` | `FieldSettingsModel` | Specifies the data associated with the selected mention item. Contains the field settings information for the selected mention. |
+| `name` | `string` | Specifies name of the event. |
+
+> See [mentions.md](./mentions.md) for the full `mentions` configuration reference and complete examples.
 
 ## Event Arguments
 
