@@ -1,414 +1,80 @@
-# Getting Started with Vue BlockEditor
+# Getting Started with Vue Block Editor in Vue 3
 
-This guide covers the complete setup process for the Syncfusion Vue BlockEditor component in a Vue 3 project with Vite and Composition API.
+This article provides a step-by-step guide for setting up a [Vite](https://vitejs.dev/) project with a JavaScript environment and integrating the Syncfusion Vue Block Editor component using the [Composition API](https://vuejs.org/guide/introduction.html#composition-api).
 
-## Table of Contents
+The `Composition API` is a new feature introduced in Vue.js 3 that provides an alternative way to organize and reuse component logic. It allows developers to write components as functions that use smaller, reusable functions called composition functions to manage their properties and behavior.
 
-- [Prerequisites](#prerequisites)
-- [Project Setup with Vite](#project-setup-with-vite)
-- [Package Installation](#package-installation)
-- [CSS Theme Configuration](#css-theme-configuration)
-- [Component Registration](#component-registration)
-- [Basic Implementation](#basic-implementation)
-- [First Render Example](#first-render-example)
-- [Running the Application](#running-the-application)
-- [Troubleshooting](#troubleshooting)
+The `Options API` is the traditional way of writing Vue.js components, where the component logic is organized into a series of options that define the component's properties and behavior. These options include data, methods, computed properties, watchers, life cycle hooks, and more.
 
 ## Prerequisites
 
-Before starting, ensure you have:
+This guide uses Vite as the bundler and development environment. Install Node.js 18 or higher before proceeding (check the [Vite documentation](https://vitejs.dev/) for the current minimum supported version).
 
-- **Node.js** (v14.0 or higher) and npm/yarn installed
-- Basic understanding of **Vue 3** and Composition API
-- Familiarity with **Vite** build tool
+## Create a Vue Application
 
-**System Requirements:** Check [Syncfusion Vue System Requirements](https://ej2.syncfusion.com/vue/documentation/system-requirements)
-
-## Project Setup with Vite
-
-### Create a New Vite Project
-
-Use Vite to scaffold a new Vue 3 project:
+To set up a Vue application, run the following command.
 
 ```bash
-npm create vite@latest my-blockeditor-app
+npm create vite@latest my-app -- --template vue
 ```
 
-or with yarn:
+This command prompts you to select project configuration options and scaffolds the project. Select the options shown in the prompt, and confirm that the `my-app` folder is created before continuing.
+
+As Syncfusion packages are not installed yet, the `No` option is selected by default. Then, navigate to the project directory and install the dependencies using the following commands:
 
 ```bash
-yarn create vite my-blockeditor-app
-```
-
-### Configure Project Options
-
-When prompted, select the following:
-
-1. **Project name:** `my-blockeditor-app` (or your preferred name)
-2. **Framework:** Select **Vue**
-3. **Variant:** Select **JavaScript** (or TypeScript if preferred)
-
-### Install Dependencies
-
-Navigate to the project directory and install dependencies:
-
-```bash
-cd my-blockeditor-app
+cd my-app
 npm install
 ```
 
-or with yarn:
+After installation completes, confirm that the dependencies were installed successfully before moving to the next step.
 
-```bash
-cd my-blockeditor-app
-yarn install
-```
+## Adding Syncfusion<sup style="font-size:70%">&reg;</sup> Vue packages
 
-## Package Installation
-
-Install the Syncfusion Vue BlockEditor package:
+All available Essential JS 2 packages are published in the [npmjs.com](https://www.npmjs.com/search?q=ej2-vue) registry. Install the Vue Block Editor component with the following command:
 
 ```bash
 npm install @syncfusion/ej2-vue-blockeditor --save
 ```
 
-or with yarn:
+## Adding CSS reference
+
+Syncfusion provides multiple themes for the Block Editor component. For a complete list of available themes, refer to the [themes topic](https://ej2.syncfusion.com/vue/documentation/appearance/theme#theme-packages).
+
+To apply the [Tailwind 3](https://www.npmjs.com/package/@syncfusion/ej2-tailwind3-theme) theme, install the corresponding theme package by using the following command:
 
 ```bash
-yarn add @syncfusion/ej2-vue-blockeditor
+npm install @syncfusion/ej2-tailwind3-theme --save
 ```
 
-**Package Contents:**
-- Core BlockEditor component
-- All dependencies (ej2-base, ej2-popups, ej2-buttons, etc.)
-- TypeScript definitions
-- CSS themes
-
-## CSS Theme Configuration
-
-The BlockEditor requires CSS imports for the component and its dependencies. Syncfusion provides multiple built-in themes:
-
-- **Material** - Google Material Design
-- **Bootstrap** - Bootstrap 5 theme
-- **Fabric** - Microsoft Fabric theme
-- **Fluent** - Microsoft Fluent Design
-- **Tailwind** - Tailwind CSS theme
-- **Material 3** - Material Design 3
-
-## CSS Imports
-
-Install the theme package that matches your application. This example uses `Tailwind 3`:
-
-```bash
-npm install @syncfusion/ej2-tailwind3-theme
-```
-
-Add the following stylesheet in `src/App.vue`
+Then add the following CSS reference to the **src/App.vue** file:
 
 ```css
-@import '../node_modules/@syncfusion/ej2-tailwind3-theme/styles/blockeditor/index.css';
+@import "../node_modules/@syncfusion/ej2-tailwind3-theme/styles/blockeditor/index.css";
 ```
 
-Replace `tailwind3` with your preferred theme name (`material3`, `bootstrap5`, `fabric`, `fluent2`, etc) install the corresponding package, and use the same theme name in the CSS import path.
+## Adding Block Editor component
 
-## Component Registration
-
-### Composition API Registration (Recommended)
-
-Register the BlockEditor component using Vue 3 Composition API with `<script setup>`:
-
-```vue
-<script setup>
-import { BlockEditorComponent as EjsBlockeditor } from '@syncfusion/ej2-vue-blockeditor';
-</script>
-```
-
-**Key Points:**
-- Use `<script setup>` for cleaner syntax
-- Import as `EjsBlockeditor` for template usage
-- No need for explicit component registration in `<script setup>`
-
-### Options API Registration (Alternative)
-
-If using Options API:
-
-```vue
-<script>
-import { BlockEditorComponent } from '@syncfusion/ej2-vue-blockeditor';
-
-export default {
-  name: 'App',
-  components: {
-    'ejs-blockeditor': BlockEditorComponent
-  }
-};
-</script>
-```
-
-## Basic Implementation
-
-### Minimal BlockEditor Setup
-
-Create a basic BlockEditor with default configuration:
+Now, add the Vue Block Editor component to the **src/App.vue** file using the following sample.
 
 ```vue
 <template>
-  <div class="app-container">
-    <ejs-blockeditor id="blockeditor" />
-  </div>
+    <ejs-blockeditor id="BlockEditor"></ejs-blockeditor>
 </template>
 
 <script setup>
-import { BlockEditorComponent as EjsBlockeditor } from '@syncfusion/ej2-vue-blockeditor';
+    import { BlockEditorComponent as EjsBlockeditor } from "@syncfusion/ej2-vue-blockeditor";
 </script>
 
 <style>
-@import '../node_modules/@syncfusion/ej2-base/styles/material.css';
-@import '../node_modules/@syncfusion/ej2-popups/styles/material.css';
-@import '../node_modules/@syncfusion/ej2-buttons/styles/material.css';
-@import '../node_modules/@syncfusion/ej2-splitbuttons/styles/material.css';
-@import '../node_modules/@syncfusion/ej2-navigations/styles/material.css';
-@import '../node_modules/@syncfusion/ej2-dropdowns/styles/material.css';
-@import '../node_modules/@syncfusion/ej2-inputs/styles/material.css';
-@import '../node_modules/@syncfusion/ej2-blockeditor/styles/material.css';
-
-.app-container {
-  padding: 20px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
+@import "../node_modules/@syncfusion/ej2-tailwind3-theme/styles/blockeditor/index.css";
 </style>
 ```
 
-## First Render Example
+## Run the application
 
-### Complete Working Example
-
-Create a functional BlockEditor with initial content:
-
-```vue
-<template>
-  <div class="editor-container">
-    <h1>Vue BlockEditor Demo</h1>
-    <ejs-blockeditor 
-      ref="blockEditor"
-      :blocks="blocks"
-      :height="'500px'"
-    />
-  </div>
-</template>
-
-<script setup>
-import { ref } from 'vue';
-import { BlockEditorComponent as EjsBlockeditor, ContentType } from '@syncfusion/ej2-vue-blockeditor';
-
-// Reference to BlockEditor instance
-const blockEditor = ref(null);
-
-// Initial blocks data
-const blocks = [
-  {
-    id: 'heading-block',
-    blockType: 'Heading',
-    properties: { level: 1 },
-    content: [
-      {
-        contentType: ContentType.Text,
-        content: 'Welcome to BlockEditor'
-      }
-    ]
-  },
-  {
-    id: 'intro-block',
-    blockType: 'Paragraph',
-    content: [
-      {
-        contentType: ContentType.Text,
-        content: 'The BlockEditor enables users to create, format, and organize content using various block types. Type / to see available commands.'
-      }
-    ]
-  },
-  {
-    id: 'list-block',
-    blockType: 'BulletList',
-    content: [
-      {
-        contentType: ContentType.Text,
-        content: 'Drag blocks to reorder'
-      }
-    ]
-  },
-  {
-    id: 'list-block-2',
-    blockType: 'BulletList',
-    content: [
-      {
-        contentType: ContentType.Text,
-        content: 'Type / for slash commands'
-      }
-    ]
-  },
-  {
-    id: 'list-block-3',
-    blockType: 'BulletList',
-    content: [
-      {
-        contentType: ContentType.Text,
-        content: 'Select text for inline formatting'
-      }
-    ]
-  }
-];
-</script>
-
-<style>
-@import '../node_modules/@syncfusion/ej2-base/styles/material.css';
-@import '../node_modules/@syncfusion/ej2-popups/styles/material.css';
-@import '../node_modules/@syncfusion/ej2-buttons/styles/material.css';
-@import '../node_modules/@syncfusion/ej2-splitbuttons/styles/material.css';
-@import '../node_modules/@syncfusion/ej2-navigations/styles/material.css';
-@import '../node_modules/@syncfusion/ej2-dropdowns/styles/material.css';
-@import '../node_modules/@syncfusion/ej2-inputs/styles/material.css';
-@import '../node_modules/@syncfusion/ej2-blockeditor/styles/material.css';
-
-.editor-container {
-  padding: 40px;
-  max-width: 1000px;
-  margin: 0 auto;
-  background: #f5f5f5;
-  min-height: 100vh;
-}
-
-.editor-container h1 {
-  margin-bottom: 20px;
-  color: #333;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-</style>
-```
-
-## Running the Application
-
-### Development Mode
-
-Start the development server:
+Use the following command to run the application in the browser. The app starts on `http://localhost:5173` by default; if that port is in use, Vite will pick the next free port and print it in the console.
 
 ```bash
 npm run dev
 ```
-
-or with yarn:
-
-```bash
-yarn dev
-```
-
-The application will be available at `http://localhost:5173` (default Vite port).
-
-### Production Build
-
-Build the application for production:
-
-```bash
-npm run build
-```
-
-Preview the production build:
-
-```bash
-npm run preview
-```
-
-## Troubleshooting
-
-### Common Issues and Solutions
-
-#### Issue 1: CSS Not Loading
-
-**Symptoms:** BlockEditor appears unstyled or broken.
-
-**Solutions:**
-- Verify all CSS imports are present and in correct order
-- Check that `node_modules` path is correct in imports
-- Ensure all dependency packages are installed
-- Try importing CSS in `main.js` instead of component
-
-#### Issue 2: Component Not Rendering
-
-**Symptoms:** BlockEditor doesn't appear on page.
-
-**Solutions:**
-- Verify component is properly imported and registered
-- Check browser console for errors
-- Ensure `ejs-blockeditor` tag name matches registration
-- Add explicit `height` prop to make editor visible
-
-```vue
-<ejs-blockeditor :height="'600px'" />
-```
-
-#### Issue 3: TypeScript Errors
-
-**Symptoms:** Type errors with ContentType or BlockType.
-
-**Solutions:**
-- Import enums explicitly:
-```typescript
-import { ContentType, BlockType } from '@syncfusion/ej2-vue-blockeditor';
-```
-
-#### Issue 4: Build Errors
-
-**Symptoms:** Build fails with module resolution errors.
-
-**Solutions:**
-- Clear `node_modules` and reinstall:
-```bash
-rm -rf node_modules package-lock.json
-npm install
-```
-
-- Update Vite configuration if needed in `vite.config.js`:
-```javascript
-export default {
-  optimizeDeps: {
-    include: ['@syncfusion/ej2-vue-blockeditor']
-  }
-};
-```
-
-## Next Steps
-
-1. **Explore Block Types** - Learn about all 14 available block types in `block-types.md`
-2. **Inline Content** - Understand content formatting in `inline-content.md`
-3. **Configure Menus** - Customize interactive menus in `editor-menus.md`
-4. **Add Event Handlers** - Implement reactive behaviors in `events-lifecycle.md`
-5. **Export Data** - Learn data export methods in `methods-api.md`
-
-## Quick Reference
-
-### Package Name
-```bash
-@syncfusion/ej2-vue-blockeditor
-```
-
-### Component Tag
-```vue
-<ejs-blockeditor />
-```
-
-### Import Statement
-```javascript
-import { BlockEditorComponent as EjsBlockeditor, ContentType } from '@syncfusion/ej2-vue-blockeditor';
-```
-
-### Minimum CSS Requirements
-```css
-@import '@syncfusion/ej2-base/styles/material.css';
-@import '@syncfusion/ej2-blockeditor/styles/material.css';
-/* + 6 other dependency CSS files */
-```
-
----
-
-**Ready to build?** Start with this getting-started guide, then explore block types and features in the other reference documents.

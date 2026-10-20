@@ -21,17 +21,18 @@ The Vue BlockEditor component provides:
 - **20+ Methods:** Block CRUD, selection, data export (JSON/HTML), formatting
 - **14 Events:** Block changes, drag/drop, paste, file upload, focus/blur
 - **Advanced Features:** Syntax highlighting, image upload, table editing, undo/redo, keyboard shortcuts
+- **Theme Customization:** Override `--color-sf-*` CSS variables, target CSS classes/IDs, or use Syncfusion Theme Studio for fully customized themes
 
 ## Documentation and Navigation Guide
 
 ### Getting Started & Installation
 📄 **Read:** [references/getting-started.md](references/getting-started.md)
 - Vue 3 + Vite project setup
+- Node.js 18+ prerequisites
 - Package installation (`@syncfusion/ej2-vue-blockeditor`)
-- CSS theme imports (Material, Bootstrap, Fluent, Tailwind)
-- Component registration with Composition API (`<script setup>`)
-- Basic BlockEditor initialization
-- First render example
+- CSS theme imports with Tailwind 3
+- Component registration and basic initialization
+- Running the application
 
 ### Block Types & Structure
 📄 **Read:** [references/block-types.md](references/block-types.md)
@@ -133,17 +134,20 @@ The Vue BlockEditor component provides:
 - Persistence: `enablePersistence`
 - Custom styling: `cssClass`
 - Height/width: `height`, `width`
+- **Theme Customization**: Default CSS override, `--color-sf-*` CSS variables, CSS classes/IDs (`.e-blockeditor`, `.e-active`, `.e-selected`, `.e-list-item`, `.e-dropdownbase`, `.e-table-element`, `#blockeditor_contextmenu`, `#blockeditor_code-ddl_popup`), multi-theme switching example (Slate Light, Sage Green, Dark Pro), and Syncfusion Theme Studio
 
 ### Collaborative Editing
 📄 **Read:** [references/collaborative-editing.md](references/collaborative-editing.md)
 - Real-time collaborative editing with Yjs CRDT framework
+- 6-step quick start guide with WebSocket server setup
 - Yjs providers (y-websocket, y-webrtc, y-indexeddb, Hocuspocus, Liveblocks, PartyKit)
+- Collaboration configuration file with room allocation logic (URL hash-based)
 - `collaborationSettings` configuration (adapter, provider, enableAwareness, versionHistory)
 - User presence and remote cursors with `enableAwareness`
 - User identification with `users` array and `currentUserId`
-- Version history with snapshots, restore, compare, export/import
-- Collaboration-aware undo/redo operations
-- Best practices for development and production deployment
+- Version history with IndexedDB storage, snapshots, restore, compare, export/import
+- Snapshot lifecycle events (`snapshotCreated`, `snapshotRestored`)
+- Version history UI panel example with full implementation code
 
 ### Accessibility & Globalization
 📄 **Read:** [references/accessibility-globalization.md](references/accessibility-globalization.md)
