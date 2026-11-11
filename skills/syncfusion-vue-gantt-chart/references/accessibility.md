@@ -78,22 +78,15 @@ The Gantt chart renders semantic ARIA roles and attributes for assistive technol
 
 ## High Contrast Theme
 
-Use the `highcontrast` theme for users with visual impairments requiring higher color contrast ratios.
+Use the `highcontrast` theme for users with visual impairments requiring higher color contrast ratios. Install the dedicated theme package and import the bundled Gantt stylesheet.
+
+```bash
+npm install @syncfusion/ej2-highcontrast-theme
+```
 
 ```css
 /* In App.vue <style> or main.css — replace tailwind3 with highcontrast */
-@import "../node_modules/@syncfusion/ej2-base/styles/highcontrast.css";
-@import "../node_modules/@syncfusion/ej2-buttons/styles/highcontrast.css";
-@import "../node_modules/@syncfusion/ej2-calendars/styles/highcontrast.css";
-@import "../node_modules/@syncfusion/ej2-dropdowns/styles/highcontrast.css";
-@import "../node_modules/@syncfusion/ej2-inputs/styles/highcontrast.css";
-@import "../node_modules/@syncfusion/ej2-navigations/styles/highcontrast.css";
-@import "../node_modules/@syncfusion/ej2-popups/styles/highcontrast.css";
-@import "../node_modules/@syncfusion/ej2-splitbuttons/styles/highcontrast.css";
-@import "../node_modules/@syncfusion/ej2-layouts/styles/highcontrast.css";
-@import "../node_modules/@syncfusion/ej2-grids/styles/highcontrast.css";
-@import "../node_modules/@syncfusion/ej2-treegrid/styles/highcontrast.css";
-@import "../node_modules/@syncfusion/ej2-vue-gantt/styles/highcontrast.css";
+@import "../node_modules/@syncfusion/ej2-highcontrast-theme/styles/gantt/index.css";
 ```
 
 > The high contrast theme meets WCAG 2.1 Level AA contrast ratio requirements (4.5:1 for normal text, 3:1 for large text). A `highcontrast-light` variant is also available.

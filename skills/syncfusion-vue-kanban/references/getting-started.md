@@ -21,20 +21,23 @@ npm install @syncfusion/ej2-vue-kanban --save
 
 ## CSS Imports
 
-Add the following imports to the `<style>` section of `src/App.vue`. Import order matters — base styles first, then component styles last:
+Install a Syncfusion theme package:
+
+```bash
+npm install @syncfusion/ej2-tailwind3-theme --save
+```
+Add the theme stylesheet to the `<style>` section of `src/App.vue`:
 
 ```css
-@import '../node_modules/@syncfusion/ej2-base/styles/tailwind3.css';
-@import '../node_modules/@syncfusion/ej2-buttons/styles/tailwind3.css';
-@import '../node_modules/@syncfusion/ej2-splitbuttons/styles/tailwind3.css';
-@import '../node_modules/@syncfusion/ej2-inputs/styles/tailwind3.css';
-@import '../node_modules/@syncfusion/ej2-lists/styles/tailwind3.css';
-@import '../node_modules/@syncfusion/ej2-navigations/styles/tailwind3.css';
-@import '../node_modules/@syncfusion/ej2-popups/styles/tailwind3.css';
-@import '../node_modules/@syncfusion/ej2-vue-kanban/styles/tailwind3.css';
+@import '../node_modules/@syncfusion/ej2-tailwind3-theme/styles/kanban/index.css';
 ```
 
-Replace `tailwind3` with any supported theme name: `material`, `bootstrap5`, `fluent`, `fabric`, `material3`.
+To use a different theme, replace `ej2-tailwind3-theme` with any supported Syncfusion theme package:
+
+- `@syncfusion/ej2-material3-theme`
+- `@syncfusion/ej2-bootstrap5-theme`
+- `@syncfusion/ej2-fluent2-theme`
+- `@syncfusion/ej2-highcontrast-theme`
 
 ## Minimal Board
 

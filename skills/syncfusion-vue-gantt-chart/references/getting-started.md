@@ -165,6 +165,7 @@ npm create vite@latest my-gantt-app
 cd my-gantt-app
 npm install
 npm install @syncfusion/ej2-vue-gantt --save
+npm install @syncfusion/ej2-tailwind3-theme --save
 npm run dev
 ```
 
@@ -175,6 +176,7 @@ npm install -g @vue/cli
 vue create my-gantt-app
 cd my-gantt-app
 npm install @syncfusion/ej2-vue-gantt --save
+npm install @syncfusion/ej2-tailwind3-theme --save
 npm run serve
 ```
 
@@ -184,7 +186,7 @@ Wrap the component in `<client-only>` to avoid SSR issues, and import CSS in `qu
 
 ```js
 // boot/syncfusion.js
-import '@syncfusion/ej2-base/styles/material.css';
+@import "@syncfusion/ej2-tailwind3-theme/styles/gantt/index.css";
 // ... other imports
 ```
 

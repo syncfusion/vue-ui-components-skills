@@ -53,6 +53,7 @@ and lets users move items between stages via drag-and-drop.
 
 ```bash
 npm install @syncfusion/ej2-vue-kanban
+npm install @syncfusion/ej2-tailwind3-theme
 ```
 
 ```js
@@ -63,14 +64,7 @@ import { KanbanComponent as EjsKanban, ColumnDirective as EColumn, ColumnsDirect
 **CSS (Tailwind 3 theme — all required imports):**
 
 ```css
-@import '../node_modules/@syncfusion/ej2-base/styles/tailwind3.css';
-@import '../node_modules/@syncfusion/ej2-buttons/styles/tailwind3.css';
-@import '../node_modules/@syncfusion/ej2-layouts/styles/tailwind3.css';
-@import '../node_modules/@syncfusion/ej2-dropdowns/styles/tailwind3.css';
-@import '../node_modules/@syncfusion/ej2-inputs/styles/tailwind3.css';
-@import '../node_modules/@syncfusion/ej2-navigations/styles/tailwind3.css';
-@import '../node_modules/@syncfusion/ej2-popups/styles/tailwind3.css';
-@import '../node_modules/@syncfusion/ej2-vue-kanban/styles/tailwind3.css';
+@import '../node_modules/@syncfusion/ej2-tailwind3-theme/styles/kanban/index.css';
 ```
 
 ---
